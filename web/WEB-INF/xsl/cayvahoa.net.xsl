@@ -12,24 +12,25 @@
     
     <xsl:template match="text()"></xsl:template>
     <xsl:template match="/">
-        <products>
+        <xsl:element name="products">
             <xsl:apply-templates></xsl:apply-templates>
-        </products>
+        </xsl:element>
     </xsl:template>
     <xsl:template match="//div[contains(@class, 'sp-show')]">
-        <product>
-            <name>
+        <xsl:element name="product">
+            <xsl:element name="name">
                 <xsl:value-of select=".//h3"></xsl:value-of>
-            </name>
-            <price>
-                <xsl:value-of select=".//span[contains(@class, 'amount')]"></xsl:value-of>
-            </price>
-            <link>
+            </xsl:element>
+            <xsl:element name="price">
+                <xsl:variable name="price" select=".//span[contains(@class, 'amount')]"></xsl:variable>
+                <xsl:value-of select="translate($price, translate($price, '0123456789', ''), '')"></xsl:value-of>
+            </xsl:element>
+            <xsl:element name="link">
                 <xsl:value-of select="./a/@href"></xsl:value-of>
-            </link>
-            <image>
+            </xsl:element>
+            <xsl:element name="image">
                 <xsl:value-of select=".//img/@data-lazy-src"></xsl:value-of>
-            </image>
-        </product>
+            </xsl:element>
+        </xsl:element>
     </xsl:template>
 </xsl:stylesheet>

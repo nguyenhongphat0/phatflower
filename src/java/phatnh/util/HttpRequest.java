@@ -92,22 +92,4 @@ public class HttpRequest {
     public String toString() {
         return this.result;
     }
-    
-    public static void main(String[] args) throws Exception {
-        String content = new HttpRequest("https://cayvahoa.net/cay-canh/page/2/")
-                .go()
-                .match("<body[\\s\\S]*?>[\\s\\S]*?<\\/body>")
-                .clean("data-rsssl=1")
-                .clean("<br>")
-                .clean("<hr>")
-                .clean("<div class=\"footer row-fluid\">.*")
-                .append("</body>")
-                .declareEntity()
-                .toString();
-        StreamSource src = new StreamSource(new StringReader(content));
-        StreamResult res = new XSLTransform("src/java/phatnh/xsl/cayvahoa.net.xsl")
-                .transform(src)
-                .toStreamResult();
-        
-    }
 }

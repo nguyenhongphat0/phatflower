@@ -6,6 +6,7 @@
 package phatnh.util;
 
 import java.io.File;
+import java.io.StringWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.transform.Transformer;
@@ -28,7 +29,8 @@ public class XSLTransform {
     
     public XSLTransform transform(StreamSource src) {
         try {
-            this.res = new StreamResult(new File("products.xml"));
+            StringWriter writer = new StringWriter();
+            this.res = new StreamResult(writer);
             TransformerFactory tf = TransformerFactory.newInstance();
             Transformer trans = tf.newTransformer(this.xsl);
             trans.transform(src, this.res);
@@ -40,5 +42,10 @@ public class XSLTransform {
     
     public StreamResult toStreamResult() {
         return this.res;
+    }
+    
+    @Override
+    public String toString() {
+        return this.res.getWriter().toString();
     }
 }
