@@ -5,6 +5,7 @@
  */
 package phatnh.util;
 
+import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.transform.Transformer;
@@ -27,7 +28,7 @@ public class XSLTransform {
     
     public XSLTransform transform(StreamSource src) {
         try {
-            this.res = new StreamResult(System.out);
+            this.res = new StreamResult(new File("products.xml"));
             TransformerFactory tf = TransformerFactory.newInstance();
             Transformer trans = tf.newTransformer(this.xsl);
             trans.transform(src, this.res);

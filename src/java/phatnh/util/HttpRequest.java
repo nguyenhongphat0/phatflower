@@ -5,19 +5,12 @@
  */
 package phatnh.util;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.io.StringReader;
-import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.xml.transform.stream.StreamResult;
@@ -75,9 +68,24 @@ public class HttpRequest {
         return this;
     }
     
-    public HttpRequest removeTag(String tag) {
-        String regex = "<" + tag + "[\\s\\S]*?>[\\s\\S]*?<\\/" + tag + ">";
-        return this.clean(regex);
+    public HttpRequest prepend(String s) {
+        this.result = s + this.result;
+        return this;
+    }
+    
+    public HttpRequest append(String s) {
+        this.result += s;
+        return this;
+    }
+
+    public HttpRequest declareEntity() {
+        return this.prepend("<!DOCTYPE document ["
+                + "<!ENTITY nbsp ' '>"
+                + "<!ENTITY ndash '–'>"
+                + "<!ENTITY hellip '…'>"
+                + "<!ENTITY rarr '→'>"
+                + "<!ENTITY larr '←'>"
+                + "]>");
     }
     
     @Override
@@ -86,18 +94,20 @@ public class HttpRequest {
     }
     
     public static void main(String[] args) throws Exception {
-        String content = new HttpRequest("https://cayvahoa.net")
+        String content = new HttpRequest("https://cayvahoa.net/cay-canh/page/2/")
                 .go()
                 .match("<body[\\s\\S]*?>[\\s\\S]*?<\\/body>")
                 .clean("data-rsssl=1")
                 .clean("<br>")
-                .clean("&nbsp;")
+                .clean("<hr>")
                 .clean("<div class=\"footer row-fluid\">.*")
+                .append("</body>")
+                .declareEntity()
                 .toString();
-        content += "</body>";
         StreamSource src = new StreamSource(new StringReader(content));
         StreamResult res = new XSLTransform("src/java/phatnh/xsl/cayvahoa.net.xsl")
                 .transform(src)
                 .toStreamResult();
+        
     }
 }
