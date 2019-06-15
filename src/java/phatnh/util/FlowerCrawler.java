@@ -22,6 +22,7 @@ public class FlowerCrawler {
     private ServletContext context;
     private static final String CAYVAHOA = "https://cayvahoa.net/";
     private static final String VUONCAYVIET = "https://vuoncayviet.com/";
+    private static final String WEBCAYCANH = "https://webcaycanh.com/";
 
     public FlowerCrawler(ServletContext context) {
         this.context = context;
@@ -70,6 +71,28 @@ public class FlowerCrawler {
                 .toString();
         StreamSource src = new StreamSource(new StringReader(content));
         String xml = new XSLTransform(getXSLPath("vuoncayviet.com.xsl"))
+                .transform(src)
+                .toString();
+        ProductParser parser = new ProductParser();
+        XMLUtil.parseString(xml, parser);
+        return parser.getCount();
+    }
+    
+    public int crawlWebCayCanh(String subdomain) {
+        String content = new HttpRequest(WEBCAYCANH + subdomain)
+                .go()
+                .match("<body[\\s\\S]*?>[\\s\\S]*?<\\/body>")
+                .clean("<script[\\s\\S]*?>[\\s\\S]*?<\\/script>")
+                .clean("<input([\\s\\S]*?)/?>")
+                .clean("data-rsssl=1")
+                .clean("<br>")
+                .clean("<hr>")
+                .clean("itemscope")
+                .replace("<img([\\s\\S]*?)/?>", "<img$1\\/>")
+                .declareEntities(context)
+                .toString();
+        StreamSource src = new StreamSource(new StringReader(content));
+        String xml = new XSLTransform(getXSLPath("webcaycanh.com.xsl"))
                 .transform(src)
                 .toString();
         ProductParser parser = new ProductParser();

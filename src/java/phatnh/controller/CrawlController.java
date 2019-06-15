@@ -39,11 +39,14 @@ public class CrawlController extends HttpServlet {
             FlowerCrawler fc = new FlowerCrawler(getServletContext());
             int count = 0;
             switch (domain) {
+                case "cayvahoa.net":
+                    count = fc.crawlCayVaHoa(subdomain);
+                    break;
                 case "vuoncayviet.com":
                     count = fc.crawlVuonCayViet(subdomain);
                     break;
-                case "cayvahoa.net":
-                    count = fc.crawlCayVaHoa(subdomain);
+                case "webcaycanh.com":
+                    count = fc.crawlWebCayCanh(subdomain);
                     break;
             }
             out.println("Đã cào được " + count + " sản phẩm");

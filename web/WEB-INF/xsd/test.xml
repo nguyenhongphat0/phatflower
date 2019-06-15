@@ -1,625 +1,111 @@
-<!DOCTYPE document SYSTEM 'C:\Users\nguyenhongphat0\Desktop\fpt8\xml\phatflower\build\web/WEB-INF/dtd/html-entities.dtd'><body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-    <!-- Load Facebook SDK for JavaScript -->
-    <div id="fb-root">
-    </div>
-    
-    <!-- Your customer chat code -->
-    <div class="fb-customerchat" attribution="setup_tool" page_id="1982988718461339"
-         theme_color="#3daa12" logged_in_greeting="Hi!  Chúng tôi có th? giúp gì cho b?n?"
-         logged_out_greeting="Hi!  Chúng tôi có th? giúp gì cho b?n?">
-    </div>
-    <form name="frmWebsite" method="post" action="./chau-composite.html?ca=chau-composite" id="frmWebsite">
-        <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTU0NTg4MjEzNQ9kFgICAw9kFgYCAQ9kFgYCAQ8WAh4EVGV4dAVLPGkgY2xhc3M9J2ZhIGZhLXBob25lJz48L2k+SG90bGluZTogPGEgaHJlZj0ndGVsOjA5ODU1MDcxNTAnPjA5ODU1MDcxNTA8L2E+ZAIDDxYCHwAFATBkAgcPFgIeB1Zpc2libGVoZAIHD2QWAgIBD2QWBAIBDxYCHwAFNzxhICBocmVmPScvY2h1eWVuLW11Yy9jaGF1LWNhbmguaHRtbCc+Q2jhuq11IGPhuqNuaDwvYT5kAgIPFgIfAAVNIDxzcGFuPjxhICBocmVmPScvY2h1eWVuLW11Yy9jaGF1LWNvbXBvc2l0ZS5odG1sJz5DaOG6rXUgY29tcG9zaXRlPC9hPjwvc3Bhbj5kAgkPZBYCZg9kFgJmD2QWCAIBDxYCHwAFEENo4bqtdSBjb21wb3NpdGVkAgMPFgIfAAXdATxkaXY+VGhp4bq/dCBr4bq/IGNo4bqtdSBjb21wb3NpdGUga2nhu4N1IGTDoW5nIMSRYSBk4bqhbmcsIHNhbmcgdHLhu41uZywgxJHhu5ljIMSRw6FvLiBDaOG6rXUgY29tcG9zaXRlIGPDsyBjaOG6pXQgbMaw4bujbmcgYuG7gW4gYuG7iSwga2jDsyB24buhLCBraMOzIGzhu5dpIHRo4budaSBob+G6t2MgxJHhu5VpIG3DoHUgbcOgIGdpw6EgY+G6oyBy4bqldCBo4bujcCBsw70uPC9kaXY+ZAIFDxYCHgtfIUl0ZW1Db3VudAIGFgwCAQ9kFgJmDxUB1QQ8ZGl2IGNsYXNzPSdwcm9kdWN0Jz48ZGl2IGNsYXNzPSdwaWMtbmV3cyc+PGEgaHJlZj0nL3Nhbi1waGFtL2NoYXUtY29tcG9zaXRlLXRydS12dW9uZy12YXQtY3AwMDIuaHRtbCc+PGltZyBzcmM9Jy4uL2RhdGEvaXRlbXMvOTU4L2NoYXUtY29tcG9zaXRlLXRydS12dW9uZy12YXQtY3AwMDItMS5qcGcnIGFsdD0nY2jhuq11IGNvbXBvc2l0ZSB0cuG7pSB2dcO0bmcgdsOhdCcgLz48L2E+PC9kaXY+PGgzPjxhIGhyZWY9Jy9zYW4tcGhhbS9jaGF1LWNvbXBvc2l0ZS10cnUtdnVvbmctdmF0LWNwMDAyLmh0bWwnPkNo4bqtdSBjb21wb3NpdGUgdHLhu6UgdnXDtG5nIHbDoXQgLSBDUDAwMjwvYT48L2gzPiAgICA8ZGl2IGNsYXNzPSdwcmljZS1wcm9kdWN0Jz4xLDQwMCwwMDAgxJE8L2Rpdj48ZGl2IGNsYXNzPSdjYXJ0LXByb2R1Y3QnPjxhIGhyZWY9Jy92bi9BZGRUb0NhcnQuYXNweD9uPTk1OCZwPTUxOCc+PGkgY2xhc3M9J2ZhIGZhLXNob3BwaW5nLWNhcnQnPjwvaT48L2E+PGEgaHJlZj0nL3Nhbi1waGFtL2NoYXUtY29tcG9zaXRlLXRydS12dW9uZy12YXQtY3AwMDIuaHRtbCc+PGkgY2xhc3M9J2ZhIGZhLWV5ZSc+PC9pPjwvYT48L2Rpdj48L2Rpdj5kAgIPZBYCZg8VAZ0FPGRpdiBjbGFzcz0ncHJvZHVjdCc+PGRpdiBjbGFzcz0ncGljLW5ld3MnPjxhIGhyZWY9Jy9zYW4tcGhhbS9jaGF1LWNvbXBvc2l0ZS10cm9uLWRhdS1kYW4tdmFuLXNvbmctZHVuZy1jcDAwNS5odG1sJz48aW1nIHNyYz0nLi4vZGF0YS9pdGVtcy85NjQvY2hhdS1jb21wb3NpdGUtdHJvbi1kYXUtZGFuLXZhbi1zb25nLWR1bmctY3AwMDUuanBnJyBhbHQ9J2No4bqtdSBjb21wb3NpdGUgdsOibiBzw7NuZyDEkeG7qW5nJyAvPjwvYT48L2Rpdj48aDM+PGEgaHJlZj0nL3Nhbi1waGFtL2NoYXUtY29tcG9zaXRlLXRyb24tZGF1LWRhbi12YW4tc29uZy1kdW5nLWNwMDA1Lmh0bWwnPkNo4bqtdSBjb21wb3NpdGUgdHLDsm4gxJHhuqd1IMSR4bqhbiB2w6JuIHPDs25nIMSR4bupbmcgLSBDUDAwNTwvYT48L2gzPiAgICA8ZGl2IGNsYXNzPSdwcmljZS1wcm9kdWN0Jz4xLDI1MCwwMDAgxJE8L2Rpdj48ZGl2IGNsYXNzPSdjYXJ0LXByb2R1Y3QnPjxhIGhyZWY9Jy92bi9BZGRUb0NhcnQuYXNweD9uPTk2NCZwPTUyMSc+PGkgY2xhc3M9J2ZhIGZhLXNob3BwaW5nLWNhcnQnPjwvaT48L2E+PGEgaHJlZj0nL3Nhbi1waGFtL2NoYXUtY29tcG9zaXRlLXRyb24tZGF1LWRhbi12YW4tc29uZy1kdW5nLWNwMDA1Lmh0bWwnPjxpIGNsYXNzPSdmYSBmYS1leWUnPjwvaT48L2E+PC9kaXY+PC9kaXY+ZAIDD2QWAmYPFQHSBDxkaXYgY2xhc3M9J3Byb2R1Y3QnPjxkaXYgY2xhc3M9J3BpYy1uZXdzJz48YSBocmVmPScvc2FuLXBoYW0vY2hhdS1jb21wb3NpdGUtdHJvbi1kYXUtZGFuLWNwMDA2Lmh0bWwnPjxpbWcgc3JjPScuLi9kYXRhL2l0ZW1zLzk2NS9jaGF1LWNvbXBvc2l0ZS10cm9uLWRhdS1kYW4tY3AwMDYuanBnJyBhbHQ9J2No4bqtdSBjb21wb3NpdGUgdHLDsm4gxJHhuqd1IMSR4bqhbicgLz48L2E+PC9kaXY+PGgzPjxhIGhyZWY9Jy9zYW4tcGhhbS9jaGF1LWNvbXBvc2l0ZS10cm9uLWRhdS1kYW4tY3AwMDYuaHRtbCc+Q2jhuq11IGNvbXBvc2l0ZSB0csOybiDEkeG6p3UgxJHhuqFuLSBDUDAwNjwvYT48L2gzPiAgICA8ZGl2IGNsYXNzPSdwcmljZS1wcm9kdWN0Jz4xLDUwMCwwMDAgxJE8L2Rpdj48ZGl2IGNsYXNzPSdjYXJ0LXByb2R1Y3QnPjxhIGhyZWY9Jy92bi9BZGRUb0NhcnQuYXNweD9uPTk2NSZwPTUyMic+PGkgY2xhc3M9J2ZhIGZhLXNob3BwaW5nLWNhcnQnPjwvaT48L2E+PGEgaHJlZj0nL3Nhbi1waGFtL2NoYXUtY29tcG9zaXRlLXRyb24tZGF1LWRhbi1jcDAwNi5odG1sJz48aSBjbGFzcz0nZmEgZmEtZXllJz48L2k+PC9hPjwvZGl2PjwvZGl2PmQCBA9kFgJmDxUBmAU8ZGl2IGNsYXNzPSdwcm9kdWN0Jz48ZGl2IGNsYXNzPSdwaWMtbmV3cyc+PGEgaHJlZj0nL3Nhbi1waGFtL2NoYXUtY29tcG9zaXRlLWhpbmgtdHJ1bmctdmFuLXNvbmctZHVuZy1jcDAwNC5odG1sJz48aW1nIHNyYz0nLi4vZGF0YS9pdGVtcy85NjIvY2hhdS1jb21wb3NpdGUtaGluaC10cnVuZy12YW4tc29uZy1kdW5nLWNwMDA0LmpwZycgYWx0PSdjaOG6rXUgY29tcG9zaXRlIHbDom4gc8OzbmcgZOG7jWMgbcOgdSDEkeG7jycgLz48L2E+PC9kaXY+PGgzPjxhIGhyZWY9Jy9zYW4tcGhhbS9jaGF1LWNvbXBvc2l0ZS1oaW5oLXRydW5nLXZhbi1zb25nLWR1bmctY3AwMDQuaHRtbCc+Q2jhuq11IGNvbXBvc2l0ZSBow6xuaCB0cuG7qW5nIHbDom4gc8OzbmcgxJHhu6luZyAtIENQMDA0PC9hPjwvaDM+ICAgIDxkaXYgY2xhc3M9J3ByaWNlLXByb2R1Y3QnPjEsMjUwLDAwMCDEkTwvZGl2PjxkaXYgY2xhc3M9J2NhcnQtcHJvZHVjdCc+PGEgaHJlZj0nL3ZuL0FkZFRvQ2FydC5hc3B4P249OTYyJnA9NTIwJz48aSBjbGFzcz0nZmEgZmEtc2hvcHBpbmctY2FydCc+PC9pPjwvYT48YSBocmVmPScvc2FuLXBoYW0vY2hhdS1jb21wb3NpdGUtaGluaC10cnVuZy12YW4tc29uZy1kdW5nLWNwMDA0Lmh0bWwnPjxpIGNsYXNzPSdmYSBmYS1leWUnPjwvaT48L2E+PC9kaXY+PC9kaXY+ZAIFD2QWAmYPFQHxBDxkaXYgY2xhc3M9J3Byb2R1Y3QnPjxkaXYgY2xhc3M9J3BpYy1uZXdzJz48YSBocmVmPScvc2FuLXBoYW0vY2hhdS1jb21wb3NpdGUtaGluaC1seS1taWVuZy12YW5oLWNwMDAzLmh0bWwnPjxpbWcgc3JjPScuLi9kYXRhL2l0ZW1zLzk2MS9DaGF1LWNvbXBvc2l0ZS1oaW5oLWx5LW1pZW5nLXZhbmgtQ1AwMDMuanBnJyBhbHQ9J0No4bqtdSBjb21wb3NpdGUgaMOsbmggbHkgbWnhu4duZyB2w6BuaCcgLz48L2E+PC9kaXY+PGgzPjxhIGhyZWY9Jy9zYW4tcGhhbS9jaGF1LWNvbXBvc2l0ZS1oaW5oLWx5LW1pZW5nLXZhbmgtY3AwMDMuaHRtbCc+Q2jhuq11IGNvbXBvc2l0ZSBow6xuaCBseSBtaeG7h25nIHbDoG5oIC0gQ1AwMDM8L2E+PC9oMz4gICAgPGRpdiBjbGFzcz0ncHJpY2UtcHJvZHVjdCc+Miw3MDAsMDAwIMSRPC9kaXY+PGRpdiBjbGFzcz0nY2FydC1wcm9kdWN0Jz48YSBocmVmPScvdm4vQWRkVG9DYXJ0LmFzcHg/bj05NjEmcD01MTknPjxpIGNsYXNzPSdmYSBmYS1zaG9wcGluZy1jYXJ0Jz48L2k+PC9hPjxhIGhyZWY9Jy9zYW4tcGhhbS9jaGF1LWNvbXBvc2l0ZS1oaW5oLWx5LW1pZW5nLXZhbmgtY3AwMDMuaHRtbCc+PGkgY2xhc3M9J2ZhIGZhLWV5ZSc+PC9pPjwvYT48L2Rpdj48L2Rpdj5kAgYPZBYCZg8VAcAEPGRpdiBjbGFzcz0ncHJvZHVjdCc+PGRpdiBjbGFzcz0ncGljLW5ld3MnPjxhIGhyZWY9Jy9zYW4tcGhhbS9jaGF1LWNvbXBvc2l0ZS1iYXUtdHJvbi1jcDAwMS5odG1sJz48aW1nIHNyYz0nLi4vZGF0YS9pdGVtcy85NTcvY2hhdS1jb21wb3NpdGUtYmF1LXRyb24tY3AwMDEtMi5qcGcnIGFsdD0nY2jhuq11IGNvbXBvc2l0ZSBi4bqndSB0csOybiBtw6B1IHRy4bqvbmcnIC8+PC9hPjwvZGl2PjxoMz48YSBocmVmPScvc2FuLXBoYW0vY2hhdS1jb21wb3NpdGUtYmF1LXRyb24tY3AwMDEuaHRtbCc+Q2jhuq11IGNvbXBvc2l0ZSBi4bqndSB0csOybiAtIENQMDAxPC9hPjwvaDM+ICAgIDxkaXYgY2xhc3M9J3ByaWNlLXByb2R1Y3QnPjU1MCwwMDAgxJE8L2Rpdj48ZGl2IGNsYXNzPSdjYXJ0LXByb2R1Y3QnPjxhIGhyZWY9Jy92bi9BZGRUb0NhcnQuYXNweD9uPTk1NyZwPTUxNyc+PGkgY2xhc3M9J2ZhIGZhLXNob3BwaW5nLWNhcnQnPjwvaT48L2E+PGEgaHJlZj0nL3Nhbi1waGFtL2NoYXUtY29tcG9zaXRlLWJhdS10cm9uLWNwMDAxLmh0bWwnPjxpIGNsYXNzPSdmYSBmYS1leWUnPjwvaT48L2E+PC9kaXY+PC9kaXY+ZAIHDxYCHwFoZGRKV7AunD9qTCHm1+3k8WpiH5EkNw==" />
-
-        <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="4C5320A6" />
-        <input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAALvPD3rcHzWqHvPqcDZeg+j7kgjQUpgfM0zXT3uDDpOtPZr0OxhE3GT88FpmZMuCeJTDwWE" />
-        <div class="top-head">
-        
-            <div class="container">
-                <div class="hotline">
-                    <i class='fa fa-phone'></i>Hotline: <a href='tel:0985507150'>0985507150</a>
-                </div>
-                <div class="cart">
-                    <i class="fa fa-shopping-cart"></i>
-                    <a href="/gio-hang.html">
-                        <b>Gi? hàng
-                            0</b>
-                    </a>
-                </div>
-                <div id="vnTopHeader1_tblLogin" class="login">
-                    <ul/>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-unlock-alt"></i>??ng Nh?p</a>
-                        <ul/>
-                        <li>
-                            <a href="/dang-nhap.html" class="login">
-                                <i class="fa fa-sign-in"></i>??ng Nh?p</a>
-                        </li>
-                        <li>
-                            <a href="#" class="facebook" onclick="loginFb();">
-                                <i class="fa fa-facebook"></i>
-                                Login with Facebook</a>
-                        </li>
-                        <li>
-                            <a href="#" id="customBtn" name="customBtn" class="google">
-                                <i class="fa fa-google">
-                                </i>Login with Google</a>
-                        </li>
-                        <ul/>
-                    </li>
-                    <li>
-                        <a href="/dang-ky-thanh-vien.html">
-                            <i class="fa fa-user-plus"></i>T?o Tài Kho?n</a>
-                    </li>
-                    <ul/>
-                </div>
-    
-            </div>
-
-
-
-
-
-
-        </div>
-        <header>
-            <div class="container">
-     
-      
-                <div class="logo">
-                    <a href="https://vuoncayviet.com/">
-                        <img src="../img/logo.png" alt="V??n Cây Vi?t" />
-                    </a>
-                </div>
-                <div class="widget-head">
-                    V??n Cây Vi?t
-                    <br />
-                    <span>Không Ch? Là Cây C?nh</span>
-                </div>
-                <div class="search-block">
-                    <input name="vnHeader1:vnSearch1:txtKeyword" type="text" id="vnHeader1_vnSearch1_txtKeyword" placeholder="Tìm Ki?m" />
-                    <input id="btnSearch"  src="../img/Search.png" name="btnSearch" type="button" />
-                </div>
-
-     
-            </div>
-        </header>
-    
-        <section class="sub-bg">
-            <div id="link" class="container">    
-      
-                <div class="sub-head">
-                    <a href="https://vuoncayviet.com">
-                        <i class="fa fa-home"></i> Trang ch? </a>
-                    <a  href='/chuyen-muc/chau-canh.html'>Ch?u c?nh</a> 
-                    <span>
-                        <a  href='/chuyen-muc/chau-composite.html'>Ch?u composite</a>
-                    </span>
-                </div>
-            </div>
-        </section>
-        <section class="bg-dark" style="padding-top: 20px">
-            <div class="container">
-       
-                <div class="main-block list-product">
-                    <div class="title">
-                        <h1>
-                            Ch?u composite</h1>
-                    </div>
-                    <div class="detail-content">
-                        <div class="decription">
-                            <div>Thi?t k? ch?u composite ki?u dáng ?a d?ng, sang tr?ng, ??c ?áo. Ch?u composite có ch?t l??ng b?n b?, khó v?, khó l?i th?i ho?c ??i màu mà giá c? r?t h?p lý.</div>
-                        </div>
-                    </div>
-    
-                    <div class="product-block">
-                        <ul/>
-        
-                        <li>
-                            <div class='product'>
-                                <div class='pic-news'>
-                                    <a href='/san-pham/chau-composite-tru-vuong-vat-cp002.html'>
-                                        <img src='../data/items/958/chau-composite-tru-vuong-vat-cp002-1.jpg' alt='ch?u composite tr? vuông vát' />
-                                    </a>
-                                </div>
-                                <h3>
-                                    <a href='/san-pham/chau-composite-tru-vuong-vat-cp002.html'>Ch?u composite tr? vuông vát - CP002</a>
-                                </h3>    
-                                <div class='price-product'>1,400,000 ?</div>
-                                <div class='cart-product'>
-                                    <a href='/vn/AddToCart.aspx?n=958518'>
-                                        <i class='fa fa-shopping-cart'></i>
-                                    </a>
-                                    <a href='/san-pham/chau-composite-tru-vuong-vat-cp002.html'>
-                                        <i class='fa fa-eye'></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-        
-                        <li>
-                            <div class='product'>
-                                <div class='pic-news'>
-                                    <a href='/san-pham/chau-composite-tron-dau-dan-van-song-dung-cp005.html'>
-                                        <img src='../data/items/964/chau-composite-tron-dau-dan-van-song-dung-cp005.jpg' alt='ch?u composite vân sóng ??ng' />
-                                    </a>
-                                </div>
-                                <h3>
-                                    <a href='/san-pham/chau-composite-tron-dau-dan-van-song-dung-cp005.html'>Ch?u composite tròn ??u ??n vân sóng ??ng - CP005</a>
-                                </h3>    
-                                <div class='price-product'>1,250,000 ?</div>
-                                <div class='cart-product'>
-                                    <a href='/vn/AddToCart.aspx?n=964521'>
-                                        <i class='fa fa-shopping-cart'></i>
-                                    </a>
-                                    <a href='/san-pham/chau-composite-tron-dau-dan-van-song-dung-cp005.html'>
-                                        <i class='fa fa-eye'></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-        
-                        <li>
-                            <div class='product'>
-                                <div class='pic-news'>
-                                    <a href='/san-pham/chau-composite-tron-dau-dan-cp006.html'>
-                                        <img src='../data/items/965/chau-composite-tron-dau-dan-cp006.jpg' alt='ch?u composite tròn ??u ??n' />
-                                    </a>
-                                </div>
-                                <h3>
-                                    <a href='/san-pham/chau-composite-tron-dau-dan-cp006.html'>Ch?u composite tròn ??u ??n- CP006</a>
-                                </h3>    
-                                <div class='price-product'>1,500,000 ?</div>
-                                <div class='cart-product'>
-                                    <a href='/vn/AddToCart.aspx?n=965522'>
-                                        <i class='fa fa-shopping-cart'></i>
-                                    </a>
-                                    <a href='/san-pham/chau-composite-tron-dau-dan-cp006.html'>
-                                        <i class='fa fa-eye'></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-        
-                        <li>
-                            <div class='product'>
-                                <div class='pic-news'>
-                                    <a href='/san-pham/chau-composite-hinh-trung-van-song-dung-cp004.html'>
-                                        <img src='../data/items/962/chau-composite-hinh-trung-van-song-dung-cp004.jpg' alt='ch?u composite vân sóng d?c màu ??' />
-                                    </a>
-                                </div>
-                                <h3>
-                                    <a href='/san-pham/chau-composite-hinh-trung-van-song-dung-cp004.html'>Ch?u composite hình tr?ng vân sóng ??ng - CP004</a>
-                                </h3>    
-                                <div class='price-product'>1,250,000 ?</div>
-                                <div class='cart-product'>
-                                    <a href='/vn/AddToCart.aspx?n=962520'>
-                                        <i class='fa fa-shopping-cart'></i>
-                                    </a>
-                                    <a href='/san-pham/chau-composite-hinh-trung-van-song-dung-cp004.html'>
-                                        <i class='fa fa-eye'></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-        
-                        <li>
-                            <div class='product'>
-                                <div class='pic-news'>
-                                    <a href='/san-pham/chau-composite-hinh-ly-mieng-vanh-cp003.html'>
-                                        <img src='../data/items/961/Chau-composite-hinh-ly-mieng-vanh-CP003.jpg' alt='Ch?u composite hình ly mi?ng vành' />
-                                    </a>
-                                </div>
-                                <h3>
-                                    <a href='/san-pham/chau-composite-hinh-ly-mieng-vanh-cp003.html'>Ch?u composite hình ly mi?ng vành - CP003</a>
-                                </h3>    
-                                <div class='price-product'>2,700,000 ?</div>
-                                <div class='cart-product'>
-                                    <a href='/vn/AddToCart.aspx?n=961519'>
-                                        <i class='fa fa-shopping-cart'></i>
-                                    </a>
-                                    <a href='/san-pham/chau-composite-hinh-ly-mieng-vanh-cp003.html'>
-                                        <i class='fa fa-eye'></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-        
-                        <li>
-                            <div class='product'>
-                                <div class='pic-news'>
-                                    <a href='/san-pham/chau-composite-bau-tron-cp001.html'>
-                                        <img src='../data/items/957/chau-composite-bau-tron-cp001-2.jpg' alt='ch?u composite b?u tròn màu tr?ng' />
-                                    </a>
-                                </div>
-                                <h3>
-                                    <a href='/san-pham/chau-composite-bau-tron-cp001.html'>Ch?u composite b?u tròn - CP001</a>
-                                </h3>    
-                                <div class='price-product'>550,000 ?</div>
-                                <div class='cart-product'>
-                                    <a href='/vn/AddToCart.aspx?n=957517'>
-                                        <i class='fa fa-shopping-cart'></i>
-                                    </a>
-                                    <a href='/san-pham/chau-composite-bau-tron-cp001.html'>
-                                        <i class='fa fa-eye'></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-        
-                        <ul/> 
-                    </div>
-        
-    
-                </div>
-                <div class="col-left">
-    
-                    <div class="block-col">
-                        <div class="menu-left">
-        
-                            <div id="accordian">
-                                <ul/>
-    
-                                <li class="active">
-                                    <h3>
-                                        <span class='circle-arrow'>Cây c?nh</span>
-                                    </h3>
-            
-                                    <ul/>
-                
-                                    <li>
-                                        <a href='/chuyen-muc/cay-canh-de-ban.html'>
-                                            <span class='small-arrow'>Cây c?nh ?? bàn</span>
-                                        </a>
-                                    </li>
-                
-                                    <li>
-                                        <a href='/chuyen-muc/cay-thuy-sinh.html'>
-                                            <span class='small-arrow'>Cây thu? sinh</span>
-                                        </a>
-                                    </li>
-                
-                                    <li>
-                                        <a href='/chuyen-muc/sen-da-xuong-rong.html'>
-                                            <span class='small-arrow'>Sen ?á, x??ng r?ng</span>
-                                        </a>
-                                    </li>
-                
-                                    <li>
-                                        <a href='/chuyen-muc/cay-chau-treo.html'>
-                                            <span class='small-arrow'>Cây ch?u treo</span>
-                                        </a>
-                                    </li>
-                
-                                    <li>
-                                        <a href='/chuyen-muc/cay-an-trai.html'>
-                                            <span class='small-arrow'>Cây ?n trái</span>
-                                        </a>
-                                    </li>
-                
-                                    <ul/>
-                
-                                </li>
-    
-                                <li class="active">
-                                    <h3>
-                                        <span class='circle-arrow'>Ch?u c?nh</span>
-                                    </h3>
-            
-                                    <ul/>
-                
-                                    <li>
-                                        <a href='/chuyen-muc/chau-dat-nung.html'>
-                                            <span class='small-arrow'>Ch?u ??t nung</span>
-                                        </a>
-                                    </li>
-                
-                                    <li>
-                                        <a href='/chuyen-muc/chau-da-mai-xi-mang.html'>
-                                            <span class='small-arrow'>Ch?u ?á mài - xi m?ng</span>
-                                        </a>
-                                    </li>
-                
-                                    <li>
-                                        <a href='/chuyen-muc/chau-composite.html'>
-                                            <span class='small-arrow'>Ch?u composite</span>
-                                        </a>
-                                    </li>
-                
-                                    <li>
-                                        <a href='/chuyen-muc/chau-bonsai.html'>
-                                            <span class='small-arrow'>Ch?u Bonsai</span>
-                                        </a>
-                                    </li>
-                
-                                    <li>
-                                        <a href='/chuyen-muc/chau-men-su.html'>
-                                            <span class='small-arrow'>Ch?u men s?</span>
-                                        </a>
-                                    </li>
-                
-                                    <li>
-                                        <a href='/chuyen-muc/chau-nhua-abs.html'>
-                                            <span class='small-arrow'>Ch?u nh?a ABS</span>
-                                        </a>
-                                    </li>
-                
-                                    <ul/>
-                
-                                </li>
-    
-                                <ul/>
-                            </div>
-    
-
-                        </div>
-                    </div>
-                    <div class=" block-col">
-    
-                        <div class="block-col-title">
-                            <h3>
-                                Tin t?c n?i b?t</h3>
-                        </div>
-                        <div class="block-col-content news-col">
-                            <ul/>
-    
-                            <li>
-                                <div class='pic-news'>
-                                    <a href='/tin-tuc/menh-tho-trong-cay-gi-trong-nha-de-thu-hut-tai-loc.html'>
-                                        <img src='../data/items/1090/cay-hop-menh-tho.png' alt='' />
-                                    </a>
-                                </div>
-                                <h6>
-                                    <a href='/tin-tuc/menh-tho-trong-cay-gi-trong-nha-de-thu-hut-tai-loc.html'>M?nh Th? tr?ng cây gì trong nhà ?? thu hút tài l?c?</a>
-                                </h6>M?nh Th? tr?ng c&acirc;y g&igrave; trong nh&agrave; ?? thu h&uacute;t t&agrave;i l?c, h&atilde;y c&ugrave;ng theo d&otilde;i b&agrave;i vi?t sau ?? c&oacute; ?&aacute;p &aacute;n ch&iacute;nh x&aacute;c c&ugrave;ng l?i gi?i ...
-                            </li>
-    
-                            <li>
-                                <div class='pic-news'>
-                                    <a href='/tin-tuc/mua-cay-canh-mini-o-dau-chuyen-gia-tra-loi-cung-ban.html'>
-                                        <img src='../data/items/987/vuoncayviet-2.png' alt='' />
-                                    </a>
-                                </div>
-                                <h6>
-                                    <a href='/tin-tuc/mua-cay-canh-mini-o-dau-chuyen-gia-tra-loi-cung-ban.html'>Mua cây c?nh mini ? ?âu? - Chuyên gia tr? l?i cùng b?n</a>
-                                </h6>Mua c&acirc;y c?nh mini ? ?&acirc;u l&agrave; b&agrave;i to&aacute;n h&oacute;c b&uacute;a m&agrave; nhi?u ng??i tr?ng c&acirc;y c?nh loay hoay ?i t&igrave;m ?&aacute;p &aacute;n. ?? tr? l?i cho c&acirc;u ...
-                            </li>
-    
-                            <li>
-                                <div class='pic-news'>
-                                    <a href='/tin-tuc/mua-cay-phong-thuy-tai-vuon-cay-viet-tai-sao-khong.html'>
-                                        <img src='../data/items/1099/mua-cay-phong-thuy-tai-vuon-cay-viet.jpg' alt='' />
-                                    </a>
-                                </div>
-                                <h6>
-                                    <a href='/tin-tuc/mua-cay-phong-thuy-tai-vuon-cay-viet-tai-sao-khong.html'>Mua cây phong th?y t?i V??n Cây Vi?t - T?i sao không?</a>
-                                </h6>B&agrave;i vi?t kh&ocirc;ng ??a ra cho b?n l&yacute; do t?i sao kh&ocirc;ng n&ecirc;n mua c&acirc;y phong th?y ? V??n C&acirc;y Vi?t, m&agrave; s? gi&uacute;p b?n y&ecirc;n t&acirc;m, th?m ...
-                            </li>
-    
-                            <li>
-                                <div class='pic-news'>
-                                    <a href='/tin-tuc/trong-cay-phong-thuy-phong-khach-nen-quan-tam-dieu-gi.html'>
-                                        <img src='../data/items/1105/cay-Kim-Ngan-duoc-lua-chon-la-cay-phong-thuy-phong-khach-so-mot.png' alt='' />
-                                    </a>
-                                </div>
-                                <h6>
-                                    <a href='/tin-tuc/trong-cay-phong-thuy-phong-khach-nen-quan-tam-dieu-gi.html'>Tr?ng cây phong th?y phòng khách nên quan tâm ?i?u gì?</a>
-                                </h6>Hi?n nay, xu h??ng tr?ng c&acirc;y c?nh trong nh&agrave; ?ang kh&aacute; ph? bi?n ??i v?i m?i ng??i. H? mang thi&ecirc;n nhi&ecirc;n v&agrave;o b?t k? n?i n&agrave;o c&oacute; th? ...
-                            </li>
-    
-                            <li>
-                                <div class='pic-news'>
-                                    <a href='/tin-tuc/nhung-dieu-can-luu-y-khi-chon-cay-canh-trang-tri-cua-hang.html'>
-                                        <img src='../data/items/1116/Nhung-dieu-can-luu-y-khi-cohn-cay-canh-trang-tri-cua-hang-4.jpg' alt='' />
-                                    </a>
-                                </div>
-                                <h6>
-                                    <a href='/tin-tuc/nhung-dieu-can-luu-y-khi-chon-cay-canh-trang-tri-cua-hang.html'>Nh?ng ?i?u c?n l?u ý khi ch?n cây c?nh trang trí c?a hàng</a>
-                                </h6>M?t c?a h&agrave;ng v?i kh&ocirc;ng gian xinh ??p, tr&agrave;n ??y sinh kh&iacute; s? gi&uacute;p kh&aacute;ch h&agrave;ng ???c tho?i m&aacute;i h?n v&agrave; thu h&uacute;t ???c nhi?u ng??i t&igrave;m ??n ...
-                            </li>
-    
-                            <li>
-                                <div class='pic-news'>
-                                    <a href='/tin-tuc/top-5-loai-cay-trong-trong-nha-bep-va-nhung-dieu-can-biet.html'>
-                                        <img src='../data/items/1109/cay-trong-an-duoc-trong-bep.jpg' alt='' />
-                                    </a>
-                                </div>
-                                <h6>
-                                    <a href='/tin-tuc/top-5-loai-cay-trong-trong-nha-bep-va-nhung-dieu-can-biet.html'>Top 5 lo?i cây tr?ng trong nhà b?p và nh?ng ?i?u c?n bi?t</a>
-                                </h6>Mang c&acirc;y c?nh v&agrave;o nh&agrave; b?p ?ang l&agrave; l?a ch?n h&agrave;ng ??u c?a c&aacute;c gia ?&igrave;nh hi?n ??i ng&agrave;y nay. T&aacute;c d?ng c?a c&acirc;y xanh ??i v?i ??i ...
-                            </li>
-    
-                            <li>
-                                <div class='pic-news'>
-                                    <a href='/tin-tuc/trao-luu-su-dung-cay-canh-tang-nguoi-yeu-qua-cac-bo-phim-hot.html'>
-                                        <img src='../data/items/1141/cay-canh-tang-nguoi-yeu.jpg' alt='' />
-                                    </a>
-                                </div>
-                                <h6>
-                                    <a href='/tin-tuc/trao-luu-su-dung-cay-canh-tang-nguoi-yeu-qua-cac-bo-phim-hot.html'>Trào l?u s? d?ng cây c?nh t?ng ng??i yêu qua các b? phim hot</a>
-                                </h6>Th? hi?n t&igrave;nh c?m v?i ng??i y&ecirc;u qua nh?ng m&oacute;n qu&agrave; l&agrave; chuy?n m&agrave; ai c?ng bi?t. Th? nh?ng, ch?n qu&agrave; nh? th? n&agrave;o l&agrave; c? m?t ngh? ...
-                            </li>
-    
-                            <li>
-                                <div class='pic-news'>
-                                    <a href='/tin-tuc/bao-gia-cho-thue-cay-canh-van-phong-tai-tphcm-moi-nhat.html'>
-                                        <img src='../data/items/1161/bang-gia-thue-cay-canh-van-phong-tphcm.png' alt='' />
-                                    </a>
-                                </div>
-                                <h6>
-                                    <a href='/tin-tuc/bao-gia-cho-thue-cay-canh-van-phong-tai-tphcm-moi-nhat.html'>Báo giá cho thuê cây c?nh v?n phòng t?i TPHCM m?i nh?t</a>
-                                </h6>V??n C&acirc;y Vi?t &ndash; ??n v? chuy&ecirc;n cho thu&ecirc; c&acirc;y c?nh v?n ph&ograve;ng, c&acirc;y c?nh n?i &ndash; ngo?i th?t uy t&iacute;n, gi&aacute; c?nh tranh t?i khu v?c TP.HCM. ...
-                            </li>
-    
-                            <li>
-                                <div class='pic-news'>
-                                    <a href='/tin-tuc/tim-cho-mua-cay-kim-ngan-dung-quen-5-dieu-nay.html'>
-                                        <img src='../data/items/956/cay-kim-ngan.png' alt='Tìm ch? mua cây kim ngân: ??ng quên 5 ?i?u này!' />
-                                    </a>
-                                </div>
-                                <h6>
-                                    <a href='/tin-tuc/tim-cho-mua-cay-kim-ngan-dung-quen-5-dieu-nay.html'>??y ?? v? cây Kim ngân: L?i ích, ý ngh?a phong thu?, mua và ch?m sóc ?úng cách</a>
-                                </h6>N?u b?n y&ecirc;u th&iacute;ch c&acirc;y Kim ng&acirc;n v&agrave; coi n&oacute; nh? m?t ng??i b?n lu&ocirc;n b&ecirc;n c?nh m&igrave;nh, ?&acirc;y l&agrave; nh?ng ki?n th?c c?n thi?t gi&uacute;p hi?u r&otilde; ...
-                            </li>
-    
-                            <li>
-                                <div class='pic-news'>
-                                    <a href='/tin-tuc/bi-quyet-lua-chon-cay-canh-trang-tri-quan-cafe.html'>
-                                        <img src='../data/items/1115/cay-canh-trang-tri-quan-coffee.jpg' alt='' />
-                                    </a>
-                                </div>
-                                <h6>
-                                    <a href='/tin-tuc/bi-quyet-lua-chon-cay-canh-trang-tri-quan-cafe.html'>Bí quy?t l?a ch?n cây c?nh trang trí quán cafe</a>
-                                </h6>
-                                ?? thu h&uacute;t kh&aacute;ch h&agrave;ng, nhi?u qu&aacute;n cafe l?n ?&atilde; ??u t? v&agrave;o thi?t k?, trang tr&iacute; sao cho ??c, l? v&agrave; t?o c?m gi&aacute;c tho?i m&aacute;i nh?t. ...
-                            </li>
-    
-                            <ul/>
-                        </div>
-    
-
-                    </div>
-                    <div class="block-col">
-                        <div class="block-col-content link-web">
-        
-                        </div>
-                    </div>
-
-                </div>
-
-
-            </div>
-        </section>
-        <footer>
-            <div class="container">
-  
-                <div class="icon-tinnhiem">
-                    <a href="http://online.gov.vn/HomePage/PersonalWebsiteDisplay.aspx?DocId=11653" rel="nofollow">
-                        <img src="../img/thong-bao-voi-bo-cong-thuong.png" />
-                    </a> 
-                    <a href="http://vietwebrating.com.vn/rate/web/app_dev.php/_customer/5/cert">
-                        <img src="../img/tin-nhiem.png" rel="nofollow"/>
-                    </a>
-                </div>
-                <div class="menu-footer">
-                    <h4>
-                        Truy C?p Nhanh</h4>
-    
-                    <ul/>
-        
-                    <li>
-                        <a href='/chuyen-muc/gioi-thieu.html' target=''>Gi?i thi?u</a>
-                    </li>
-        
-                    <li>
-                        <a href='/chuyen-muc/dich-vu.html' target=''>D?ch V?</a>
-                    </li>
-        
-                    <li>
-                        <a href='/chuyen-muc/blog-tin-tuc.html' target=''>Blog - Tin T?c</a>
-                    </li>
-        
-                    <li>
-                        <a href='/chuyen-muc/ho-tro.html' target=''>H? tr?</a>
-                    </li>
-        
-                    <li>
-                        <a href='https://vuoncayviet.com/tin-tuc/vuon-cay-viet-cay-canh-chat-luong-bao-hanh-yen-tam.html' target=''>Chính sách ??i tr? hàng</a>
-                    </li>
-        
-                    <ul/>
-        
-                </div>
-                <div class="info-footer">
-                    <p>
-                        <big>T&Agrave;I KHO7842N</big>
-                    </p>
-                    <p>
-                        <big>
-                            <b>Ng&acirc;n h&agrave;ng 272&ocirc;ng &Aacute; </b>S7889 TK: 0103720160, PGD T&ocirc; Hi7871n Th&agrave;nh, TP. HCM - Ch7911 T&agrave;i         Kho7843n: D432417ng C&ocirc;ng 272&ocirc;ng.</big>
-                    </p>
-                    <p>
-                        <big>
-                            <b>Ng&acirc;n h&agrave;ng VietCombank </b>S7889 TK: 042 100 385 5531 - Ch7911 T&agrave;i Kho7843n: Nguy7877n Th7883         H7891ng V&acirc;n.</big>
-                    </p>
-                    <p>
-                        <big>
-                            <b>Ng&acirc;n H&agrave;ng ACB</b> S7889 TK:130230819 - Ch7911 TK: D432417ng C&ocirc;ng 272&ocirc;ng</big>
-                    </p>
-                </div>
-
-      
-            </div>
-        </footer>
-        <section class="adress-footer">
-            <div class="container">
-                <div>
-                    <h4>
-                        <big>Li&ecirc;n h7879</big>
-                    </h4>
-                    <p>
-                        <big>
-                            <strong>V4327901n C&acirc;y Vi7879t</strong> chuy&ecirc;n b&aacute;n c&aacute;c lo7841i c&acirc;y c7843nh 2737875 b&agrave;n, c&acirc;y c7843nh phong thu7927, c&acirc;y c7843nh bonsai, ti7875u c7843nh terrarium v&agrave; cung c7845p c&aacute;c d7883ch v7909 li&ecirc;n quan 2737871n c&acirc;y c7843nh.&nbsp;Hotline: 0985507150. Email: lienhe@vuoncayviet.com</big>
-                    </p>
-                    <p>
-                        <big>
-                            <strong>2727883a ch7881 showroom:</strong>
-                        </big>
-                    </p>
-                    <p>
-                        <big>
-                            <em>
-                                <strong>20/4 K7923 2727891ng, Ph4327901ng 9, Qu7853n 3, TP.HCM</strong>
-                            </em>
-                        </big>
-                    </p>
-                    <p>&nbsp;</p>
-                    <p style="text-align: center;">
-                        <span style="color: rgb(51, 153, 102);">
-                            <a href="https://vuoncayviet.com/" target="_blank">
-                                <span style="color: rgb(51, 153, 102);">c&acirc;y c7843nh phong th7911y</span>
-                            </a>
-                            <span style="color: rgb(51, 153, 102);">, </span>
-                            <a href="https://vuoncayviet.com/tin-tuc/mua-cay-canh-mini-o-dau-chuyen-gia-tra-loi-cung-ban.html" target="_blank">
-                                <span style="color: rgb(51, 153, 102);">c&acirc;y c7843nh mini</span>
-                            </a>
-                        </span>
-                    </p>
-                </div>
-            </div>
-
-
-        </section>
-        <section class="copyright">
-            <div class="container"> 
-	
-	    
-
-                <b>Copyright © 2018 VUONCAYVIET.COM</b>
-	
-            </div>
-        </section>
-        <!-- Owl Carousel's CSS -->
-    
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    </form>
-</body>
+<?xml version="1.0" encoding="UTF-8"?>
+<plants>
+    <plant>
+        <name>Sen ?á Chu?i Ng?c ??ng</name>
+        <price>39000</price>
+        <link>https://webcaycanh.com/sen-da-chuoi-ngoc-dung/</link>
+        <image>https://webcaycanh.com/wp-content/uploads/2018/08/cay-sen-da-chuoi-ngoc-dung-255x255.jpg</image>
+    </plant>
+    <plant>
+        <name>Sen ?á Th??c D??c</name>
+        <price>39000</price>
+        <link>https://webcaycanh.com/sen-da-thuoc-duoc/</link>
+        <image>https://webcaycanh.com/wp-content/uploads/2018/08/cay-sen-da-thuoc-duoc-nho-255x255.jpg</image>
+    </plant>
+    <plant>
+        <name>Sen ?á H?ng Ph?n</name>
+        <price>39000</price>
+        <link>https://webcaycanh.com/sen-da-hong-phan/</link>
+        <image>https://webcaycanh.com/wp-content/uploads/2018/08/cay-sen-da-hong-phan-255x255.jpg</image>
+    </plant>
+    <plant>
+        <name>Sen ?á Lá Th?m</name>
+        <price>39000</price>
+        <link>https://webcaycanh.com/sen-da-la-thom/</link>
+        <image>https://webcaycanh.com/wp-content/uploads/2015/10/cay-nhat-mat-huong1-1-255x255.jpg</image>
+    </plant>
+    <plant>
+        <name>Sen ?á Vi?n H?ng</name>
+        <price>39000</price>
+        <link>https://webcaycanh.com/sen-da-vien-hong/</link>
+        <image>https://webcaycanh.com/wp-content/uploads/2015/09/sen-da-vien-hong-5-255x255.jpg</image>
+    </plant>
+    <plant>
+        <name>Sen ?á Nhím ?en</name>
+        <price>49000</price>
+        <link>https://webcaycanh.com/sen-da-nhim-den/</link>
+        <image>https://webcaycanh.com/wp-content/uploads/2018/03/sen-da-nhim-den-5-255x255.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây Sen ?á ??t Tr?ng</name>
+        <price>49000</price>
+        <link>https://webcaycanh.com/cay-sen-da-dat-trang/</link>
+        <image>https://webcaycanh.com/wp-content/uploads/2017/11/sen-da-dat-trang-1-255x255.png</image>
+    </plant>
+    <plant>
+        <name>Sen ?á Cánh B??m Xanh</name>
+        <price>49000</price>
+        <link>https://webcaycanh.com/sen-da-canh-buom-xanh/</link>
+        <image>https://webcaycanh.com/wp-content/uploads/2017/08/sen-da-canh-buom-xanh-1-255x255.jpg</image>
+    </plant>
+    <plant>
+        <name>Sen ?á Dù Vi?n H?ng</name>
+        <price>49000</price>
+        <link>https://webcaycanh.com/sen-da-du-vien-hong/</link>
+        <image>https://webcaycanh.com/wp-content/uploads/2017/06/du-vien-vien-hong-1-255x255.jpg</image>
+    </plant>
+    <plant>
+        <name>Sen ?á M?t Tr?ng</name>
+        <price>49000</price>
+        <link>https://webcaycanh.com/sen-da-mat-trang/</link>
+        <image>https://webcaycanh.com/wp-content/uploads/2017/04/sen-da-mat-trang-de-ban-1-255x255.jpg</image>
+    </plant>
+    <plant>
+        <name>Sen ?á Bèo Vi?n H?ng</name>
+        <price>49000</price>
+        <link>https://webcaycanh.com/sen-da-beo-vien-hong/</link>
+        <image>https://webcaycanh.com/wp-content/uploads/2017/04/cay-sen-da-beo-vien-hong-1-255x255.jpg</image>
+    </plant>
+    <plant>
+        <name>Sen ?á M?t N? Lông</name>
+        <price>39000</price>
+        <link>https://webcaycanh.com/sen-da-mat-na-long/</link>
+        <image>https://webcaycanh.com/wp-content/uploads/2016/11/sen-da-mat-na-long-3-255x255.jpg</image>
+    </plant>
+    <plant>
+        <name>Sen ?á 3D</name>
+        <price>39000</price>
+        <link>https://webcaycanh.com/sen-da-3d/</link>
+        <image>https://webcaycanh.com/wp-content/uploads/2016/11/sen-da-3d-2-1-255x255.jpg</image>
+    </plant>
+    <plant>
+        <name>Sen ?á Sedum C?m</name>
+        <price>39000</price>
+        <link>https://webcaycanh.com/sen-da-sedum-com/</link>
+        <image>https://webcaycanh.com/wp-content/uploads/2016/11/sen-da-sedum-com-3-255x255.jpg</image>
+    </plant>
+    <plant>
+        <name>Sen ?á Nh?t Nguy?t</name>
+        <price>49000</price>
+        <link>https://webcaycanh.com/sen-da-nhat-nguyet/</link>
+        <image>https://webcaycanh.com/wp-content/uploads/2016/10/sen-da-nhat-nguyet-1-1-255x255.jpg</image>
+    </plant>
+    <plant>
+        <name>Sen ?á L?c Bình</name>
+        <price>49000</price>
+        <link>https://webcaycanh.com/sen-da-luc-binh/</link>
+        <image>https://webcaycanh.com/wp-content/uploads/2016/09/sen-da-luc-binh-4-255x255.jpg</image>
+    </plant>
+    <plant>
+        <name>Sen ?á Ng?c Gu?c</name>
+        <price>49000</price>
+        <link>https://webcaycanh.com/sen-da-ngoc-guoc/</link>
+        <image>https://webcaycanh.com/wp-content/uploads/2016/07/sen-da-guoc-3-255x255.jpg</image>
+    </plant>
+    <plant>
+        <name>Sen ?á ??a</name>
+        <price>39000</price>
+        <link>https://webcaycanh.com/sen-da-dia/</link>
+        <image>https://webcaycanh.com/wp-content/uploads/2016/06/sen-da-dia-5-255x255.jpg</image>
+    </plant>
+</plants>
