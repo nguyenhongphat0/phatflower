@@ -5,6 +5,7 @@
  */
 package phatnh.util;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -39,8 +40,8 @@ public class DatabaseUtil {
         return this;
     }
     
-    public DatabaseUtil setInt(int i, int x) throws SQLException {
-        this.preparedStatement.setInt(i, x);
+    public DatabaseUtil setBigDecimal(int i, BigDecimal x) throws SQLException {
+        this.preparedStatement.setBigDecimal(i, x);
         return this;
     }
     

@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.servlet.ServletContext;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
@@ -68,6 +69,12 @@ public class HttpRequest {
         return this;
     }
     
+    public HttpRequest replace(String regex, String with) {
+        Pattern pattern = Pattern.compile(regex, Pattern.DOTALL | Pattern.CASE_INSENSITIVE);
+        this.result = pattern.matcher(this.result).replaceAll(with);
+        return this;
+    }
+    
     public HttpRequest prepend(String s) {
         this.result = s + this.result;
         return this;
@@ -78,15 +85,15 @@ public class HttpRequest {
         return this;
     }
 
-    public HttpRequest declareEntity() {
-        return this.prepend("<!DOCTYPE document ["
-                + "<!ENTITY nbsp ' '>"
-                + "<!ENTITY ndash '–'>"
-                + "<!ENTITY hellip '…'>"
-                + "<!ENTITY rarr '→'>"
-                + "<!ENTITY larr '←'>"
-                + "]>");
+    public HttpRequest declareDTD(String dtd) {
+        return this.prepend("<!DOCTYPE document SYSTEM '" + dtd + "'>");
     }
+    
+    public HttpRequest declareEntities(ServletContext context) {
+        String realPath = context.getRealPath("/");
+        String dtd = realPath + "/WEB-INF/dtd/html-entities.dtd";
+        return this.declareDTD(dtd);
+    }   
     
     @Override
     public String toString() {

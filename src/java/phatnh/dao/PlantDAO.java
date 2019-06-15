@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package phatnh.model;
+package phatnh.dao;
 
 import java.io.Serializable;
 import java.sql.SQLException;
 import javax.naming.NamingException;
+import phatnh.model.Plants;
 import phatnh.util.DatabaseUtil;
 import phatnh.util.ErrorHandler;
 
@@ -15,16 +16,16 @@ import phatnh.util.ErrorHandler;
  *
  * @author nguyenhongphat0
  */
-public class ProductDAO implements Serializable {
+public class PlantDAO implements Serializable {
     
-    public boolean insert(ProductDTO dto) {
+    public boolean insert(Plants.Plant dto) {
         try {
             return new DatabaseUtil()
                     .prepare("INSERT INTO products(name, link, image, price) VALUES (?, ?, ?, ?)")
                     .setString(1, dto.getName())
                     .setString(2, dto.getLink())
                     .setString(3, dto.getImage())
-                    .setInt(4, dto.getPrice())
+                    .setBigDecimal(4, dto.getPrice())
                     .executeUpdate()
                     .close()
                     .isSuccess();

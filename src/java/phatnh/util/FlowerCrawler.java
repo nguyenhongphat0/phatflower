@@ -21,6 +21,7 @@ import phatnh.util.HttpRequest;
 public class FlowerCrawler {
     private ServletContext context;
     private static final String CAYVAHOA = "https://cayvahoa.net/";
+    private static final String VUONCAYVIET = "https://vuoncayviet.com/";
 
     public FlowerCrawler(ServletContext context) {
         this.context = context;
@@ -40,10 +41,35 @@ public class FlowerCrawler {
                 .clean("<hr>")
                 .clean("<div class=\"footer row-fluid\">.*")
                 .append("</body>")
-                .declareEntity()
+                .declareEntities(context)
                 .toString();
         StreamSource src = new StreamSource(new StringReader(content));
         String xml = new XSLTransform(getXSLPath("cayvahoa.net.xsl"))
+                .transform(src)
+                .toString();
+        ProductParser parser = new ProductParser();
+        XMLUtil.parseString(xml, parser);
+        return parser.getCount();
+    }
+    
+    public int crawlVuonCayViet(String subdomain) {
+        String content = new HttpRequest(VUONCAYVIET + subdomain)
+                .go()
+                .match("<body[\\s\\S]*?>[\\s\\S]*?<\\/body>")
+                .clean("<section id=\"navbar\"[\\s\\S]*?>[\\s\\S]*?<\\/section>")
+                .clean("<script[\\s\\S]*?>[\\s\\S]*?<\\/script>")
+                .clean("<iframe[\\s\\S]*?>[\\s\\S]*?<\\/iframe>")
+                .clean("type=\"image\"")
+                .clean("&#")
+                .clean("&p=")
+                .replace("<img([\\s\\S]*?)/?>", "<img$1\\/>")
+                .replace("<div class='pic-news'<a", "<div class='pic-news'><a")
+                .replace("<ul[\\s\\S]*?>", "<ul/>")
+                .replace("</ul>", "<ul/>")
+                .declareEntities(context)
+                .toString();
+        StreamSource src = new StreamSource(new StringReader(content));
+        String xml = new XSLTransform(getXSLPath("vuoncayviet.com.xsl"))
                 .transform(src)
                 .toString();
         ProductParser parser = new ProductParser();

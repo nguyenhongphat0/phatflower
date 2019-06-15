@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plants xmlns="http://phatflower.vn"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://phatflower.vn plants.xsd">
+    <plant>
+        <name>Cây đại lộc</name>
+        <price>900000</price>
+        <link>https://cayvahoa.net/cay-dai-loc/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-dai-loc-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây kim ti?n</name>
+        <price>690000</price>
+        <link>https://cayvahoa.net/cay-kim-tien-hop-tuoi/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-kim-tien-2-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây l??i c?p</name>
+        <price>700000</price>
+        <link>https://cayvahoa.net/cay-luoi-cop/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/Cay-luoi-cop-3-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây bàng Singapore</name>
+        <price>550000</price>
+        <link>https://cayvahoa.net/cay-bang-singapore/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/Cay-bang-Singapore-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây thi?t m?c lan</name>
+        <price>700000</price>
+        <link>https://cayvahoa.net/ban-cay-thiet-moc-lan-tai-ha-noi/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/thiet-moc-lan-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây v?n niên thanh leo c?t</name>
+        <price>700000</price>
+        <link>https://cayvahoa.net/cay-van-nien-thanh-leo-cot/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/Cay-van-nien-thanh-leo-cot-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây kim ngân xo?n</name>
+        <price>600000</price>
+        <link>https://cayvahoa.net/san-don-cay-kim-ngan-xoan/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-kim-ngan-that-bim-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây c? nh?t</name>
+        <price>350000</price>
+        <link>https://cayvahoa.net/cay-co-nhat/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/chau-cay-co-nhat-dep-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây m?c h??ng</name>
+        <price>1000000</price>
+        <link>https://cayvahoa.net/cay-moc-huong/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-moc-huong-300x300.png</image>
+    </plant>
+    <plant>
+        <name>C? nhung nh?t</name>
+        <price>65000</price>
+        <link>https://cayvahoa.net/co-nhung-nhat/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/co-nhung-nhat-co-nhat-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây m? két</name>
+        <price>35000</price>
+        <link>https://cayvahoa.net/cay-mo-ket/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-chuoi-mo-ket-3-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây hoa lan t?i</name>
+        <price>150000</price>
+        <link>https://cayvahoa.net/cay-hoa-lan-toi/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-hoa-lan-toi-3-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>C? lá tre, c? lá g?ng</name>
+        <price>10000</price>
+        <link>https://cayvahoa.net/co-la-tre-co-la-gung/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/co-la-tre-co-la-gung-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây lim x?t</name>
+        <price>1</price>
+        <link>https://cayvahoa.net/cay-lim-xet/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-lim-xet-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây mu?ng hoa vàng</name>
+        <price>1</price>
+        <link>https://cayvahoa.net/cay-muong-hoa-vang/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-muong-hoa-vang-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây s?u</name>
+        <price>1</price>
+        <link>https://cayvahoa.net/cay-sau/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-sau-300x300.png</image>
+    </plant>
+    <plant>
+        <name>Hoa cúc h?a mi</name>
+        <price>200000</price>
+        <link>https://cayvahoa.net/hoa-cuc-hoa-mi/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/hoa-cuc-hoa-mi-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Hoa cát t??ng</name>
+        <price>120000</price>
+        <link>https://cayvahoa.net/hoa-cat-tuong/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/hoa-cat-tuong-1-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Hoa h??ng d??ng</name>
+        <price>90000</price>
+        <link>https://cayvahoa.net/cay-hoa-huong-duong/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/trong-hoa-huong-duong-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây hoa thu h?i ???ng</name>
+        <price>200000</price>
+        <link>https://cayvahoa.net/cay-hoa-thu-hai-duong/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cach-trong-va-cham-soc-chau-hoa-thu-hai-duong-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây hoa mào gà</name>
+        <price>39000</price>
+        <link>https://cayvahoa.net/cay-hoa-mao-ga/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/hoa-mao-ga-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây s?n tùng</name>
+        <price>300000</price>
+        <link>https://cayvahoa.net/cay-son-tung/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-son-tung-1-300x300.png</image>
+    </plant>
+    <plant>
+        <name>Cây hoa ng?c n?</name>
+        <price>169000</price>
+        <link>https://cayvahoa.net/cay-hoa-ngoc-nu/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/Cay-hoa-ngoc-nu-2-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây hoa nh? ý cát t??ng</name>
+        <price>130000</price>
+        <link>https://cayvahoa.net/cay-hoa-nhu-y-cat-tuong/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/2017/02/hoa-nhu-y-cat-tuong-3-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây ?? v??ng</name>
+        <price>450000</price>
+        <link>https://cayvahoa.net/cay-de-vuong/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-de-vuong-van-phong-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây chu?i c?nh</name>
+        <price>450000</price>
+        <link>https://cayvahoa.net/cay-chuoi-canh/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-chuoi-canh-1-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây lan tuy?t</name>
+        <price>550000</price>
+        <link>https://cayvahoa.net/cay-lan-tuyet/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-lan-tuyet-2-300x300.jpeg</image>
+    </plant>
+    <plant>
+        <name>Cây saphia / h?ng di?p môn</name>
+        <price>460000</price>
+        <link>https://cayvahoa.net/ban-cay-saphia-hong-diep-mon-y-nghia-tien-tai-va-suc-khoe/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/2016/09/cay-saphia-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây cau Hawai</name>
+        <price>499000</price>
+        <link>https://cayvahoa.net/y-nghia-cham-soc-ban-cay-cau-hawai/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/2016/09/16010292_1618383151511320_732240845_o-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây h??ng th?o – Rosemary</name>
+        <price>150000</price>
+        <link>https://cayvahoa.net/cay-huong-thao/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/2016/02/cây-h??ng-th?o-??p-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây kim ti?n</name>
+        <price>600000</price>
+        <link>https://cayvahoa.net/cay-kim-tien/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/2016/02/cay-kim-tien-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây kim ngân</name>
+        <price>250000</price>
+        <link>https://cayvahoa.net/cay-kim-ngan/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/2016/02/12769561_1277895132226792_582058226_n-1-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Hoa cúc h?a mi</name>
+        <price>200000</price>
+        <link>https://cayvahoa.net/hoa-cuc-hoa-mi/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/hoa-cuc-hoa-mi-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây hoa h?ng xanh</name>
+        <price>350000</price>
+        <link>https://cayvahoa.net/cay-hoa-hong-xanh/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-hoa-hong-xanh-3-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây hoa h?ng anh</name>
+        <price>99000</price>
+        <link>https://cayvahoa.net/cay-hoa-hong-anh/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/day-leo-hoa-hong-anh-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây hoa cúc indo</name>
+        <price>150000</price>
+        <link>https://cayvahoa.net/cay-hoa-cuc-indo/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/chau-cay-hoa-cuc-indo-trang-tri-cua-so-1-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây hoa ngàn sao</name>
+        <price>99000</price>
+        <link>https://cayvahoa.net/cay-hoa-ngan-sao/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-hoa-ngan-sao-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây hoa sen c?n</name>
+        <price>140000</price>
+        <link>https://cayvahoa.net/cay-hoa-sen-can/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-hoa-sen-can-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây hoa h?ng ??i màu</name>
+        <price>250000</price>
+        <link>https://cayvahoa.net/cay-hoa-hong-doi-mau/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/hoa-hong-doi-mau-3.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây hoa cúc vàng</name>
+        <price>160000</price>
+        <link>https://cayvahoa.net/cay-hoa-cuc-vang/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-hoa-cuc-vang-1-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây tr?u bà</name>
+        <price>130000</price>
+        <link>https://cayvahoa.net/cay-trau-ba/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-trau-ba-1-1-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây h?nh phúc ?? bàn</name>
+        <price>250000</price>
+        <link>https://cayvahoa.net/cay-hanh-phuc-de-ban/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-hanh-phuc-de-ban-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây d?a s?c vàng</name>
+        <price>185000</price>
+        <link>https://cayvahoa.net/cay-dua-soc-vang/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-dua-soc-vang-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Ti?u c?nh sen ?á</name>
+        <price>175000</price>
+        <link>https://cayvahoa.net/tieu-canh-sen-da/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/tieu-canh-sen-da-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây l??i mèo</name>
+        <price>170000</price>
+        <link>https://cayvahoa.net/cay-luoi-meo/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-luoi-meo-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây th?nh v??ng</name>
+        <price>230000</price>
+        <link>https://cayvahoa.net/cay-thinh-vuong/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/Cay-thinh-vuong-1-300x300.png</image>
+    </plant>
+    <plant>
+        <name>Cây phú quý</name>
+        <price>250000</price>
+        <link>https://cayvahoa.net/cay-phu-quy/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/Cay-phu-quy-2-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây chu?i hoàng y?n</name>
+        <price>80000</price>
+        <link>https://cayvahoa.net/cay-chuoi-hoang-yen/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/Cay-chuoi-hoang-yen-2-300x300.gif</image>
+    </plant>
+    <plant>
+        <name>Cây m?c h??ng</name>
+        <price>1000000</price>
+        <link>https://cayvahoa.net/cay-moc-huong/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-moc-huong-300x300.png</image>
+    </plant>
+    <plant>
+        <name>Cây hoa gi?y</name>
+        <price>90000</price>
+        <link>https://cayvahoa.net/cay-hoa-giay/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-hoa-giay-2-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây tùng tháp</name>
+        <price>1</price>
+        <link>https://cayvahoa.net/cay-tung-thap/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-tung-thap-2-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây hoa ??i</name>
+        <price>1</price>
+        <link>https://cayvahoa.net/cay-hoa-dai/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-hoa-dai-do-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây tùng c?i</name>
+        <price>1</price>
+        <link>https://cayvahoa.net/cay-tung-coi/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/ban-cay-tung-coi-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây tùng bách tán</name>
+        <price>1</price>
+        <link>https://cayvahoa.net/cay-tung-bach-tan/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/ban-cay-tung-bach-tan-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây thiên tu?</name>
+        <price>1</price>
+        <link>https://cayvahoa.net/cay-thien-tue/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-thien-tue-3-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây s?n tùng</name>
+        <price>300000</price>
+        <link>https://cayvahoa.net/cay-son-tung/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-son-tung-1-300x300.png</image>
+    </plant>
+    <plant>
+        <name>Cây nhàu</name>
+        <price>30000</price>
+        <link>https://cayvahoa.net/cay-nhau/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/47351292_2417796158235626_8159799845008179200_n-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây x? ?en</name>
+        <price>1</price>
+        <link>https://cayvahoa.net/cay-xa-den/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/ban-giong-cay-xa-den-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây lá d?a th?m</name>
+        <price>40000</price>
+        <link>https://cayvahoa.net/cay-la-dua-thom/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-la-dua-thom-2-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây x??ng cá</name>
+        <price>159000</price>
+        <link>https://cayvahoa.net/cay-xuong-ca/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/44332667_717339418631690_979077527865655296_n-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>H?t m?c ca</name>
+        <price>300000</price>
+        <link>https://cayvahoa.net/ban-hat-mac-ca/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/ban-hat-mac-ca-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây huy?t d?</name>
+        <price>70000</price>
+        <link>https://cayvahoa.net/cay-huyet-du/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-huyet-du-2-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây lá n?p th?m</name>
+        <price>40000</price>
+        <link>https://cayvahoa.net/cay-la-nep-thom/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/Cay-la-nep-thom-ban-o-dau-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây nha ?am</name>
+        <price>200000</price>
+        <link>https://cayvahoa.net/cay-nha-dam/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/Cay-nha-dam-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây tùng tuy?t mai</name>
+        <price>250000</price>
+        <link>https://cayvahoa.net/cay-tung-tuyet-mai/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-tung-tuyet-mai-2-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây hoa h?i ???ng</name>
+        <price>360000</price>
+        <link>https://cayvahoa.net/cay-hoa-hai-duong/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/2017/01/hoa-hai-duong-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây b?ch lan d??ng</name>
+        <price>280000</price>
+        <link>https://cayvahoa.net/cay-hoa-bach-lan-duong/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/2017/01/cay-bach-lan-duong-5-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây hoa trà</name>
+        <price>400000</price>
+        <link>https://cayvahoa.net/y-nghia-cay-hoa-tra/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/2016/12/cay-hoa-tra-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>cây ?ào t?t, cành ?ào t?t</name>
+        <price>1</price>
+        <link>https://cayvahoa.net/ban-chau-cay-dao-tet-canh-dao-gia-re-tai-ha-noi/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/2016/09/trang-tri-canh-dao-don-tet-va-nhung-luu-y-cuc-huu-ich-2-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây qu?t c?nh ngày t?t</name>
+        <price>250000</price>
+        <link>https://cayvahoa.net/ban-cay-quat-canh-ngay-tet-gia-re-cho-moi-nha/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/2016/09/cay-quat-canh-tet-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây hoa mai vàng t?t ??p</name>
+        <price>111</price>
+        <link>https://cayvahoa.net/ban-cay-vang-mai-tet-dep-mang-tai-loc/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/2016/08/hoa-mai-vang-dep-2-300x300.png</image>
+    </plant>
+    <plant>
+        <name>Cây nh?t chi mai</name>
+        <price>1</price>
+        <link>https://cayvahoa.net/cay-nhat-chi-mai/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/2016/10/IMG_4380copy-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây chiêu liêu gi?ng</name>
+        <price>50000</price>
+        <link>https://cayvahoa.net/cay-chieu-lieu-giong/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-chieu-lieu-3-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây s?a ?? gi?ng</name>
+        <price>40000</price>
+        <link>https://cayvahoa.net/cay-sua-do-giong/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-sua-do-giong-2-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây lát hoa gi?ng</name>
+        <price>30000</price>
+        <link>https://cayvahoa.net/cay-lat-hoa-giong/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-lat-hoa-giong-1-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây ph??ng v? gi?ng</name>
+        <price>30000</price>
+        <link>https://cayvahoa.net/cay-phuong-vi-giong/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-phuong-vi-giong-1-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây giáng h??ng gi?ng</name>
+        <price>30000</price>
+        <link>https://cayvahoa.net/cay-giang-huong-giong/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-giang-huong-giong-2-300x300.png</image>
+    </plant>
+    <plant>
+        <name>Cây gi?ng bàng ?ài loan</name>
+        <price>30000</price>
+        <link>https://cayvahoa.net/cay-giong-bang-dai-loan/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-bang-dai-loan-giong-3-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây vù h??ng gi?ng</name>
+        <price>30000</price>
+        <link>https://cayvahoa.net/cay-vu-huong-giong/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-vu-huong-giong-2-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Cây d?i xanh gi?ng</name>
+        <price>45000</price>
+        <link>https://cayvahoa.net/cay-doi-xanh-giong/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/cay-doi-xanh-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Dung d?ch th?y canh Hydro Deco</name>
+        <price>50000</price>
+        <link>https://cayvahoa.net/dung-dich-thuy-canh-hydro-deco-dinh-duong-trong-hoa-va-cay-canh/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/2016/08/Untitled-3-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Dung d?ch th?y canh Hydro Bee</name>
+        <price>175000</price>
+        <link>https://cayvahoa.net/dung-dich-thuy-canh-hydro-bee-dinh-duong-trong-rau-qua-cu/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/2016/08/Untitled-2-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Dung d?ch th?y canh Hydro Green</name>
+        <price>115000</price>
+        <link>https://cayvahoa.net/dung-dich-thuy-canh-hydro-green-cho-rau-la-dung-tich-0-5l-1l-5l/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/2016/08/chaithuoccopy-2-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Dung d?ch th?y canh Bio Life</name>
+        <price>70000</price>
+        <link>https://cayvahoa.net/dung-dich-thuy-canh-de-trong-cay/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/dung-dich-thuy-canh-bio-lìe-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Phân trùn qu?</name>
+        <price>30000</price>
+        <link>https://cayvahoa.net/phan-trun-que/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/21326004_977354662404687_301455299_n-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>??t tr?ng sen ?á / x??ng r?ng</name>
+        <price>50000</price>
+        <link>https://cayvahoa.net/ban-dat-trong-xuong-rong-va-sen-da/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/2016/12/dat-trong-sen-da-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Viên nén x? d?a ??m h?t</name>
+        <price>2000</price>
+        <link>https://cayvahoa.net/vien-nen-xo-dua-uom-hat-gieo-trong/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/2016/08/viennenxodua-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>??t sét nung tr?ng rau s?ch</name>
+        <price>30000</price>
+        <link>https://cayvahoa.net/dat-set-nung-trong-rau-sach-tai-nha-ben-vinh-cuu/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/Inkeddat-set_LI-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Ch?u ??t nung bình d??ng</name>
+        <price>30000</price>
+        <link>https://cayvahoa.net/chau-dat-nung-binh-duong/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/2016/04/UT8HifWXk4aXXagOFbXu-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Ch?u ??t nung tr?ng và ??</name>
+        <price>15000</price>
+        <link>https://cayvahoa.net/lam-nao-de-lam-chau-dat-nung-trang-va/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/2016/04/aiv1371603716-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Ch?u ??t nung mini</name>
+        <price>15000</price>
+        <link>https://cayvahoa.net/chau-dat-nung-mini/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/2016/04/chau-gom-dat-nung-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Ch?u ??t nung tr?ng lan</name>
+        <price>30000</price>
+        <link>https://cayvahoa.net/chau-dat-nung-trong-lan-noi-bat-khong-gian/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/2016/04/ban-chau-dat-nung-trong-lan-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Các lo?i ch?u ??t nung ??p</name>
+        <price>15000</price>
+        <link>https://cayvahoa.net/cac-loai-chau-dat-nung-dep/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/2016/03/chau-dat-nung-co-nho-300x300.jpg</image>
+    </plant>
+    <plant>
+        <name>Ch?u s? nh? ??p</name>
+        <price>20000</price>
+        <link>https://cayvahoa.net/chau-su-nho-dep/</link>
+        <image>https://cayvahoa.net/wp-content/uploads/2016/03/chau-su-nho-mini-300x300.jpg</image>
+    </plant>
+</plants>

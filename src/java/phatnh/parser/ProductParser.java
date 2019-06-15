@@ -5,15 +5,12 @@
  */
 package phatnh.parser;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigDecimal;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-import phatnh.model.ProductDAO;
-import phatnh.model.ProductDTO;
-import phatnh.util.ErrorHandler;
-import phatnh.util.XMLUtil;
+import phatnh.dao.PlantDAO;
+import phatnh.model.Plants;
 
 /**
  *
@@ -21,20 +18,20 @@ import phatnh.util.XMLUtil;
  */
 public class ProductParser extends DefaultHandler {
     private String current;
-    private ProductDTO dto;
-    private ProductDAO dao;
+    private Plants.Plant dto;
+    private PlantDAO dao;
     private int count;
 
     public ProductParser() {
-        dao = new ProductDAO();
+        dao = new PlantDAO();
         count = 0;
     }
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         this.current = qName;
-        if (qName.equals("product")) {
-            dto = new ProductDTO();
+        if (qName.equals("plant")) {
+            dto = new Plants.Plant();
         }
     }
 
@@ -46,12 +43,7 @@ public class ProductParser extends DefaultHandler {
                 dto.setName(s);
                 break;
             case "price":
-                int price = 0;
-                try {
-                    price = Integer.parseInt(s);
-                } catch (Exception e) {
-                    ErrorHandler.handle(e);
-                }
+                BigDecimal price = new BigDecimal(s);
                 dto.setPrice(price);
                 break;
             case "link":
@@ -65,7 +57,7 @@ public class ProductParser extends DefaultHandler {
 
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
-        if (qName.equals("product")) {
+        if (qName.equals("plant")) {
             boolean success = dao.insert(dto);
             if (success) {
                 count++;

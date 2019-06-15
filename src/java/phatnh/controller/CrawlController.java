@@ -34,8 +34,18 @@ public class CrawlController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String subdomain = request.getParameter("subdomain");
+        String domain = request.getParameter("domain");
         try (PrintWriter out = response.getWriter()) {
-            int count = new FlowerCrawler(getServletContext()).crawlCayVaHoa(subdomain);
+            FlowerCrawler fc = new FlowerCrawler(getServletContext());
+            int count = 0;
+            switch (domain) {
+                case "vuoncayviet.com":
+                    count = fc.crawlVuonCayViet(subdomain);
+                    break;
+                case "cayvahoa.net":
+                    count = fc.crawlCayVaHoa(subdomain);
+                    break;
+            }
             out.println("Đã cào được " + count + " sản phẩm");
         }
     }
