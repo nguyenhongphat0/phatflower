@@ -1,0 +1,212 @@
+:root {
+	--accent: #f88db1;
+}
+h1, h2, h3, h4, h5, h6 {
+	text-transform: uppercase;
+}
+.handwriting {
+	font-family: 'Segoe Script', sans-serif;
+}
+input:focus {
+	outline: none;
+}
+input[type="text"] {
+	width: 250px;
+	height: 27px;
+	background-color: #edf1f2;
+	border: 1px solid #edf1f2;
+    padding: 4px 12px;
+    border-radius: 4px;
+	color: gray;
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 20px;
+}
+input[type="checkbox"] {
+	display: none;
+}
+div.checkbox {
+	margin: 10px 0px;
+}
+div.checkbox label {
+	cursor: pointer;
+}
+input[type="checkbox"] + label::before {
+	content: '\2713';
+	color: white;
+	font-weight: bold;
+    display: inline-block;
+    width: 15px;
+	height: 15px;
+	line-height: 15px;
+	text-align: center;
+    border: 1px solid lightgray;
+	margin-right: 8px;
+	transition-duration: 0.3s;
+}
+input[type="checkbox"]:checked + label::before {
+	color: var(--accent);
+}
+button {
+	cursor: pointer;
+	background: none;
+	border: none;
+}
+button:focus {
+	outline: none;
+}
+button:active {
+	background-color: #edf1f2;
+}
+.gradient {
+	background: linear-gradient(to top right, #ff5263 0%, #ff7381 35%, #fcbd01 100%);
+}
+.center {
+	text-align: center;
+}
+.right {
+	margin-left: auto;
+	text-align: right;
+}
+.white-text {
+	color: white;
+}
+.light {
+	font-weight: lighter;
+}
+.pointer {
+	cursor: pointer;
+}
+html, body {
+	margin: 0;
+	height: 100%;
+	font-family: "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.header {
+	height: 80px;
+}
+.header .menu {
+	line-height: 80px;
+}
+a.wave {
+	color: black;
+	text-decoration: none;
+}
+.wave {
+	position: relative;
+	font-size: 15px;
+	font-weight: bold;
+	text-transform: uppercase;
+	padding: 10px 20px;
+}
+.wave::before, .wave::after {
+	content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid var(--accent);
+	transition: all 0.5s;
+	z-index: -1;
+}
+.wave::before {
+	border-top: none;
+	border-bottom: none;
+	transform: scale(1, 0);
+	transform-origin: top;
+}
+.wave::after {
+	border-left: none;
+	border-right: none;
+	transform: scale(0, 1);
+	transform-origin: top right;
+}
+.wave:hover::before, .wave:hover::after {
+	transform: scale(1);
+}
+.parallax {
+	display: table;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	padding: 50px;
+	box-sizing: border-box;
+}
+.parallax-background {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	left: 0;
+	top: 0;
+	filter: contrast(0.4);
+	z-index: -1;
+}
+.parallax-content {
+	border: 4px solid white;
+	color: white;
+	display: table-cell;
+	vertical-align: middle;
+	margin: auto;
+	padding: 20px;
+}
+.hr {
+	width: 100%;
+	height: 1px;
+	background-color: lightgray;
+}
+.a-color {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	margin: 2px;
+	padding: 5px;
+	border-radius: 100%;
+	cursor: pointer;
+}
+.a-color .amount {
+	background: white;
+	text-align: center;
+	line-height: 30px;
+	border-radius: 100%;
+	width: 100%;
+	height: 100%;
+}
+.a-product {
+	position: relative;
+	text-align: center;
+	padding: 8px;
+}
+.a-product .preview img {
+	object-fit: contain;
+	width: 100%;
+	height: 200px;
+}
+.a-product h4 {
+	margin: 0;
+}
+.a-product .price {
+	color: var(--accent);
+	font-size: 20px;
+}
+.a-product .overlay {
+	position: absolute;
+	top: 0;
+	bottom: 100%;
+	left: 0;
+	right: 0;
+	transition-duration: 0.3s;
+	background: #fffffff0;
+	overflow: hidden;
+	z-index: 1;
+}
+.a-product .overlay > .center {
+	transform: translateY(50%);
+}
+.a-product .overlay > .center > a {
+	display: block;
+}
+.a-product:hover .overlay {
+	bottom: 0;
+}

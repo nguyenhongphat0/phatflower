@@ -2,6 +2,7 @@
 package phatnh.model;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -157,6 +158,13 @@ public class Plants {
         public BigDecimal getPrice() {
             return price;
         }
+        
+        public String getReadablePrice() {
+            DecimalFormat f = new DecimalFormat();
+            f.setGroupingUsed(true);
+            f.setGroupingSize(3);
+            return f.format(price);
+        }
 
         /**
          * Sets the value of the price property.
@@ -180,6 +188,13 @@ public class Plants {
          */
         public String getLink() {
             return link;
+        }
+        
+        public String getDomain() {
+            String domain = link;
+            domain = domain.substring(domain.indexOf("//") + 2);
+            domain = domain.substring(0, domain.indexOf("/"));
+            return domain;
         }
 
         /**

@@ -89,7 +89,7 @@ public class DatabaseUtil {
     }
     
     public static interface ResultSetCallback {
-        public void forEach(ResultSet res);
+        public void forEach(ResultSet res) throws SQLException;
     }
     
     public static interface StatusCallback {

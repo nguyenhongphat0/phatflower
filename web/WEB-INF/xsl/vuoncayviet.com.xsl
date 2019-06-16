@@ -30,7 +30,7 @@
                 <xsl:value-of select="concat($domain, h3/a/@href)"></xsl:value-of>
             </xsl:element>
             <xsl:element name="image">
-                <xsl:value-of select="concat($domain, translate(.//img/@src, '..', ''))"></xsl:value-of>
+                <xsl:value-of select="concat($domain, substring-after(.//img/@src, '..'))"></xsl:value-of>
             </xsl:element>
         </xsl:element>
     </xsl:template>

@@ -5,11 +5,8 @@
  */
 package phatnh.util;
 
-import java.io.File;
 import java.io.StringReader;
-import java.util.Map;
 import javax.servlet.ServletContext;
-import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import phatnh.parser.ProductParser;
 import phatnh.util.HttpRequest;
@@ -73,6 +70,7 @@ public class FlowerCrawler {
         String xml = new XSLTransform(getXSLPath("vuoncayviet.com.xsl"))
                 .transform(src)
                 .toString();
+        System.out.println(xml);
         ProductParser parser = new ProductParser();
         XMLUtil.parseString(xml, parser);
         return parser.getCount();

@@ -6,7 +6,12 @@
 package phatnh.dao;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.naming.NamingException;
 import phatnh.model.Plants;
 import phatnh.util.DatabaseUtil;
@@ -17,6 +22,29 @@ import phatnh.util.ErrorHandler;
  * @author nguyenhongphat0
  */
 public class PlantDAO implements Serializable {
+    
+    public List<Plants.Plant> all() {
+        final List<Plants.Plant> list = new ArrayList<>();
+        try {
+            new DatabaseUtil()
+                    .prepare("SELECT name, link, image, price FROM products")
+                    .executeQuery()
+                    .fetch(new DatabaseUtil.ResultSetCallback() {
+                        @Override
+                        public void forEach(ResultSet res) throws SQLException {
+                            Plants.Plant plant = new Plants.Plant();
+                            plant.setName(res.getString(1));
+                            plant.setLink(res.getString(2));
+                            plant.setImage(res.getString(3));
+                            plant.setPrice(res.getBigDecimal(4));
+                            list.add(plant);
+                        }
+                    });
+        } catch (NamingException | SQLException ex) {
+            ErrorHandler.handle(ex);
+        }
+        return list;
+    }
     
     public boolean insert(Plants.Plant dto) {
         try {
