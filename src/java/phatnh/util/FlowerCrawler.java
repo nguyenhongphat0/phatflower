@@ -9,7 +9,7 @@ import java.io.StringReader;
 import javax.servlet.ServletContext;
 import javax.xml.transform.stream.StreamSource;
 import phatnh.parser.ProductParser;
-import phatnh.util.HttpRequest;
+import phatnh.builder.RequestBuilder;
 
 /**
  *
@@ -31,7 +31,7 @@ public class FlowerCrawler {
     }
     
     public int crawlCayVaHoa(String subdomain) {
-        String content = new HttpRequest(CAYVAHOA + subdomain)
+        String content = new RequestBuilder(CAYVAHOA + subdomain)
                 .go()
                 .match("<body[\\s\\S]*?>[\\s\\S]*?<\\/body>")
                 .clean("data-rsssl=1")
@@ -41,17 +41,11 @@ public class FlowerCrawler {
                 .append("</body>")
                 .declareEntities(context)
                 .toString();
-        StreamSource src = new StreamSource(new StringReader(content));
-        String xml = new XSLTransform(getXSLPath("cayvahoa.net.xsl"))
-                .transform(src)
-                .toString();
-        ProductParser parser = new ProductParser();
-        XMLUtil.parseString(xml, parser);
-        return parser.getCount();
+        return process("cayvahoa.net.xsl", content);
     }
     
     public int crawlVuonCayViet(String subdomain) {
-        String content = new HttpRequest(VUONCAYVIET + subdomain)
+        String content = new RequestBuilder(VUONCAYVIET + subdomain)
                 .go()
                 .match("<body[\\s\\S]*?>[\\s\\S]*?<\\/body>")
                 .clean("<section id=\"navbar\"[\\s\\S]*?>[\\s\\S]*?<\\/section>")
@@ -66,18 +60,11 @@ public class FlowerCrawler {
                 .replace("</ul>", "<ul/>")
                 .declareEntities(context)
                 .toString();
-        StreamSource src = new StreamSource(new StringReader(content));
-        String xml = new XSLTransform(getXSLPath("vuoncayviet.com.xsl"))
-                .transform(src)
-                .toString();
-        System.out.println(xml);
-        ProductParser parser = new ProductParser();
-        XMLUtil.parseString(xml, parser);
-        return parser.getCount();
+        return process("vuoncayviet.com.xsl", content);
     }
     
     public int crawlWebCayCanh(String subdomain) {
-        String content = new HttpRequest(WEBCAYCANH + subdomain)
+        String content = new RequestBuilder(WEBCAYCANH + subdomain)
                 .go()
                 .match("<body[\\s\\S]*?>[\\s\\S]*?<\\/body>")
                 .clean("<script[\\s\\S]*?>[\\s\\S]*?<\\/script>")
@@ -89,10 +76,11 @@ public class FlowerCrawler {
                 .replace("<img([\\s\\S]*?)/?>", "<img$1\\/>")
                 .declareEntities(context)
                 .toString();
-        StreamSource src = new StreamSource(new StringReader(content));
-        String xml = new XSLTransform(getXSLPath("webcaycanh.com.xsl"))
-                .transform(src)
-                .toString();
+        return process("webcaycanh.com.xsl", content);
+    }
+    
+    public int process(String xsl, String content) {
+        String xml = XSLTransform.transform(getXSLPath(xsl), content);
         ProductParser parser = new ProductParser();
         XMLUtil.parseString(xml, parser);
         return parser.getCount();

@@ -5,10 +5,8 @@
  */
 package phatnh.util;
 
-import java.io.File;
+import java.io.StringReader;
 import java.io.StringWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -20,32 +18,20 @@ import javax.xml.transform.stream.StreamSource;
  * @author nguyenhongphat0
  */
 public class XSLTransform {
-    private StreamSource xsl;
-    private StreamResult res;
-    
-    public XSLTransform(String xslpath) {
-        this.xsl = new StreamSource(xslpath);
-    }
-    
-    public XSLTransform transform(StreamSource src) {
+    public static String transform(String xslpath, String xmlContent) {
         try {
+            StringReader reader = new StringReader(xmlContent);
             StringWriter writer = new StringWriter();
-            this.res = new StreamResult(writer);
+            StreamSource src = new StreamSource(reader);
+            StreamResult res = new StreamResult(writer);
+            StreamSource xsl = new StreamSource(xslpath);
             TransformerFactory tf = TransformerFactory.newInstance();
-            Transformer trans = tf.newTransformer(this.xsl);
-            trans.transform(src, this.res);
+            Transformer trans = tf.newTransformer(xsl);
+            trans.transform(src, res);
+            return res.getWriter().toString();
         } catch (TransformerException ex) {
             ErrorHandler.handle(ex);
+            return null;
         }
-        return this;
-    }
-    
-    public StreamResult toStreamResult() {
-        return this.res;
-    }
-    
-    @Override
-    public String toString() {
-        return this.res.getWriter().toString();
     }
 }

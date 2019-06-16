@@ -4,5 +4,8 @@
     Author     : nguyenhongphat0
 --%>
 
+    <div class="center d-pb-4">
+        &copy; 2019 Phat Flower Inc.
+    </div>
 </body>
 </html>

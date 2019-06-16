@@ -10,11 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.naming.NamingException;
 import phatnh.model.Plants;
-import phatnh.util.DatabaseUtil;
+import phatnh.builder.QueryBuilder;
 import phatnh.util.ErrorHandler;
 
 /**
@@ -26,10 +24,10 @@ public class PlantDAO implements Serializable {
     public List<Plants.Plant> all() {
         final List<Plants.Plant> list = new ArrayList<>();
         try {
-            new DatabaseUtil()
+            new QueryBuilder()
                     .prepare("SELECT name, link, image, price FROM products")
                     .executeQuery()
-                    .fetch(new DatabaseUtil.ResultSetCallback() {
+                    .fetch(new QueryBuilder.ResultSetCallback() {
                         @Override
                         public void forEach(ResultSet res) throws SQLException {
                             Plants.Plant plant = new Plants.Plant();
@@ -39,7 +37,8 @@ public class PlantDAO implements Serializable {
                             plant.setPrice(res.getBigDecimal(4));
                             list.add(plant);
                         }
-                    });
+                    })
+                    .close();
         } catch (NamingException | SQLException ex) {
             ErrorHandler.handle(ex);
         }
@@ -48,7 +47,7 @@ public class PlantDAO implements Serializable {
     
     public boolean insert(Plants.Plant dto) {
         try {
-            return new DatabaseUtil()
+            return new QueryBuilder()
                     .prepare("INSERT INTO products(name, link, image, price) VALUES (?, ?, ?, ?)")
                     .setString(1, dto.getName())
                     .setString(2, dto.getLink())
