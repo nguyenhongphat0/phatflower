@@ -38,11 +38,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Plants.Plant }
+     * Create an instance of {@link Plant }
      * 
      */
-    public Plants.Plant createPlantsPlant() {
-        return new Plants.Plant();
+    public Plant createPlant() {
+        return new Plant();
     }
 
 }

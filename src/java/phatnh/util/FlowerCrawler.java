@@ -5,9 +5,7 @@
  */
 package phatnh.util;
 
-import java.io.StringReader;
 import javax.servlet.ServletContext;
-import javax.xml.transform.stream.StreamSource;
 import phatnh.parser.ProductParser;
 import phatnh.builder.RequestBuilder;
 
@@ -16,13 +14,32 @@ import phatnh.builder.RequestBuilder;
  * @author nguyenhongphat0
  */
 public class FlowerCrawler {
-    private ServletContext context;
+    private final ServletContext context;
+    private final String url, domain, subdomain;
+    
     private static final String CAYVAHOA = "https://cayvahoa.net/";
     private static final String VUONCAYVIET = "https://vuoncayviet.com/";
     private static final String WEBCAYCANH = "https://webcaycanh.com/";
 
-    public FlowerCrawler(ServletContext context) {
+    public FlowerCrawler(ServletContext context, String url) {
         this.context = context;
+        this.url = url;
+        this.domain = XMLUtil.getDomainFromURL(url);
+        this.subdomain = XMLUtil.getSubDomainFromURL(url);
+    }
+    
+    public int crawl() {
+        String prefix = "https://" + domain + "/";
+        switch (prefix) {
+            case CAYVAHOA:
+                return crawlCayVaHoa(subdomain);
+            case VUONCAYVIET:
+                return crawlVuonCayViet(subdomain);
+            case WEBCAYCANH:
+                return crawlWebCayCanh(subdomain);
+            default:
+                return -1;
+        }
     }
     
     public String getXSLPath(String filename) {
@@ -31,21 +48,23 @@ public class FlowerCrawler {
     }
     
     public int crawlCayVaHoa(String subdomain) {
-        String content = new RequestBuilder(CAYVAHOA + subdomain)
+        String content = new RequestBuilder(url)
                 .go()
                 .match("<body[\\s\\S]*?>[\\s\\S]*?<\\/body>")
                 .clean("data-rsssl=1")
                 .clean("<br>")
                 .clean("<hr>")
+                .clean("itemscope")
                 .clean("<div class=\"footer row-fluid\">.*")
                 .append("</body>")
-                .declareEntities(context)
+                .replace("&", "&amp;")
+                .sout()
                 .toString();
-        return process("cayvahoa.net.xsl", content);
+        return process(content);
     }
     
     public int crawlVuonCayViet(String subdomain) {
-        String content = new RequestBuilder(VUONCAYVIET + subdomain)
+        String content = new RequestBuilder(url)
                 .go()
                 .match("<body[\\s\\S]*?>[\\s\\S]*?<\\/body>")
                 .clean("<section id=\"navbar\"[\\s\\S]*?>[\\s\\S]*?<\\/section>")
@@ -58,13 +77,13 @@ public class FlowerCrawler {
                 .replace("<div class='pic-news'<a", "<div class='pic-news'><a")
                 .replace("<ul[\\s\\S]*?>", "<ul/>")
                 .replace("</ul>", "<ul/>")
-                .declareEntities(context)
+                .replace("&", "&amp;")
                 .toString();
-        return process("vuoncayviet.com.xsl", content);
+        return process(content);
     }
     
     public int crawlWebCayCanh(String subdomain) {
-        String content = new RequestBuilder(WEBCAYCANH + subdomain)
+        String content = new RequestBuilder(url)
                 .go()
                 .match("<body[\\s\\S]*?>[\\s\\S]*?<\\/body>")
                 .clean("<script[\\s\\S]*?>[\\s\\S]*?<\\/script>")
@@ -74,13 +93,17 @@ public class FlowerCrawler {
                 .clean("<hr>")
                 .clean("itemscope")
                 .replace("<img([\\s\\S]*?)/?>", "<img$1\\/>")
-                .declareEntities(context)
+                .replace("&", "&amp;")
                 .toString();
-        return process("webcaycanh.com.xsl", content);
+        return process(content);
     }
     
-    public int process(String xsl, String content) {
-        String xml = XSLTransform.transform(getXSLPath(xsl), content);
+    public int process(String content) {
+        String xsl = getXSLPath(domain + ".xsl");
+        String xml = XSLTransform.transform(xsl, content);
+        if (xml == null) {
+            return 0;
+        }
         ProductParser parser = new ProductParser();
         XMLUtil.parseString(xml, parser);
         return parser.getCount();

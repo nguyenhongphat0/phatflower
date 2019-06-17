@@ -26,6 +26,7 @@
 					<span class="menu-item"><a href="ViewAllController" class="wave">Cây kiểng</a></span>
 					<span class="menu-item"><a href="ViewAllController" class="wave">Chậu</a></span>
 					<span class="menu-item"><a href="ViewAllController" class="wave">Giới thiệu</a></span>
+					<span class="menu-item"><a href="admin.jsp" class="wave">Quản lý</a></span>
 				</div>
 			</div>
 		</div>

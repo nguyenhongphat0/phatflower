@@ -10,7 +10,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 import phatnh.dao.PlantDAO;
-import phatnh.model.Plants;
+import phatnh.model.Plant;
 
 /**
  *
@@ -18,7 +18,7 @@ import phatnh.model.Plants;
  */
 public class ProductParser extends DefaultHandler {
     private String current;
-    private Plants.Plant dto;
+    private Plant dto;
     private PlantDAO dao;
     private int count;
 
@@ -31,7 +31,7 @@ public class ProductParser extends DefaultHandler {
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         this.current = qName;
         if (qName.equals("plant")) {
-            dto = new Plants.Plant();
+            dto = new Plant();
         }
     }
 

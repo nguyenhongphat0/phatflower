@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
-import phatnh.model.Plants;
+import phatnh.model.Plant;
 import phatnh.builder.QueryBuilder;
 import phatnh.util.ErrorHandler;
 
@@ -21,8 +21,8 @@ import phatnh.util.ErrorHandler;
  */
 public class PlantDAO implements Serializable {
     
-    public List<Plants.Plant> all() {
-        final List<Plants.Plant> list = new ArrayList<>();
+    public List<Plant> all() {
+        final List<Plant> list = new ArrayList<>();
         try {
             new QueryBuilder()
                     .prepare("SELECT name, link, image, price FROM products")
@@ -30,7 +30,7 @@ public class PlantDAO implements Serializable {
                     .fetch(new QueryBuilder.ResultSetCallback() {
                         @Override
                         public void forEach(ResultSet res) throws SQLException {
-                            Plants.Plant plant = new Plants.Plant();
+                            Plant plant = new Plant();
                             plant.setName(res.getString(1));
                             plant.setLink(res.getString(2));
                             plant.setImage(res.getString(3));
@@ -45,7 +45,7 @@ public class PlantDAO implements Serializable {
         return list;
     }
     
-    public boolean insert(Plants.Plant dto) {
+    public boolean insert(Plant dto) {
         try {
             return new QueryBuilder()
                     .prepare("INSERT INTO products(name, link, image, price) VALUES (?, ?, ?, ?)")

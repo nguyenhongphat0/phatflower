@@ -12,7 +12,6 @@ import java.net.URL;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.servlet.ServletContext;
 import phatnh.util.ErrorHandler;
 
 /**
@@ -82,16 +81,6 @@ public class RequestBuilder {
         this.result += s;
         return this;
     }
-
-    public RequestBuilder declareDTD(String dtd) {
-        return this.prepend("<!DOCTYPE document SYSTEM '" + dtd + "'>");
-    }
-    
-    public RequestBuilder declareEntities(ServletContext context) {
-        String realPath = context.getRealPath("/");
-        String dtd = realPath + "/WEB-INF/dtd/html-entities.dtd";
-        return this.declareDTD(dtd);
-    }   
     
     @Override
     public String toString() {

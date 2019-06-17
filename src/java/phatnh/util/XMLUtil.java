@@ -34,4 +34,18 @@ public class XMLUtil {
             ErrorHandler.handle(e);
         }
     }
+    
+    public static String getDomainFromURL(String url) {
+        String domain = url;
+        domain = domain.substring(domain.indexOf("//") + 2);
+        domain = domain.substring(0, domain.indexOf("/"));
+        return domain;
+    }
+    
+    public static String getSubDomainFromURL(String url) {
+        String domain = url;
+        domain = domain.substring(domain.indexOf("//") + 2);
+        domain = domain.substring(domain.indexOf("/"));
+        return domain;
+    }
 }

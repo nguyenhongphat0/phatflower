@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import phatnh.util.ErrorHandler;
 import phatnh.util.FlowerCrawler;
 
 /**
@@ -32,25 +33,24 @@ public class CrawlController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String subdomain = request.getParameter("subdomain");
-        String domain = request.getParameter("domain");
-        try (PrintWriter out = response.getWriter()) {
-            FlowerCrawler fc = new FlowerCrawler(getServletContext());
-            int count = 0;
-            switch (domain) {
-                case "cayvahoa.net":
-                    count = fc.crawlCayVaHoa(subdomain);
-                    break;
-                case "vuoncayviet.com":
-                    count = fc.crawlVuonCayViet(subdomain);
-                    break;
-                case "webcaycanh.com":
-                    count = fc.crawlWebCayCanh(subdomain);
-                    break;
-            }
-            out.println("Đã cào được " + count + " sản phẩm");
+        response.setContentType("text/xml;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        String url = request.getParameter("url") + "/";
+        if (url.startsWith("http://")) {
+            url = url.replaceFirst("http://", "");
         }
+        if (!url.startsWith("https://")) {
+            url = "https://" + url;
+        }
+        try {
+            FlowerCrawler fc = new FlowerCrawler(getServletContext(), url);
+            int count = fc.crawl();
+            out.print(count);
+        } catch (Exception e) {
+            ErrorHandler.handle(e);
+            out.print(-2); // 404, etc,...
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
