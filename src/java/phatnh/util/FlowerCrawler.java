@@ -58,7 +58,6 @@ public class FlowerCrawler {
                 .clean("<div class=\"footer row-fluid\">.*")
                 .append("</body>")
                 .replace("&", "&amp;")
-                .sout()
                 .toString();
         return process(content);
     }

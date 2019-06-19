@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<xs:schema version="1.0"
+           targetNamespace="http://phatflower.vn"
+           xmlns="http://phatflower.vn"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+    <xs:element name="categories">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="category" type="Category" minOccurs="0" maxOccurs="unbounded"></xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="Category">
+        <xs:sequence>
+            <xs:element name="id" type="xs:decimal"></xs:element>
+            <xs:element name="name" type="xs:string"></xs:element>
+            <xs:element name="count" type="xs:decimal"></xs:element>
+            <xs:element name="enable" type="xs:boolean"></xs:element>
+            <xs:element name="onmenu" type="xs:boolean"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

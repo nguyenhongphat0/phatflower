@@ -4,8 +4,28 @@
 h1, h2, h3, h4, h5, h6 {
     text-transform: uppercase;
 }
+table {
+    border-collapse: collapse;
+    border: 1px solid #f2f2f2;
+}
+thead {
+    background-color: #151b26;
+    color: white;
+}
+tr {
+    border-bottom: 1px solid #f2f2f2;
+}
+th, td {
+    padding: 10px;
+}
+.hidden {
+    display: none;
+}
 .handwriting {
     font-family: 'Segoe Script', sans-serif;
+}
+.capitalize {
+    text-transform: capitalize;
 }
 input:focus {
     outline: none;
@@ -14,7 +34,7 @@ input:focus {
   color: lightgray;
   opacity: 1;
 }
-input[type="text"] {
+input[type="text"], input[type="password"], input[type="number"] {
     width: 250px;
     height: 27px;
     background-color: #edf1f2;

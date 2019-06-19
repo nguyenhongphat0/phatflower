@@ -34,8 +34,8 @@ public class FrontController extends HttpServlet {
         String url = "/";
         String action = request.getParameter("action");
         switch (action) {
-            case "crawl":
-                url = "CrawlController";
+            case "admin":
+                url = "AdminController";
                 break;
         }
         request.getRequestDispatcher(url).forward(request, response);

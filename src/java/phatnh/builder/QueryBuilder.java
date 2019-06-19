@@ -59,7 +59,7 @@ public class QueryBuilder {
     }
     
     /**
-     * Set number for the statement
+     * Set big decimal for the statement
      * @param i
      * @param x
      * @return
@@ -67,6 +67,18 @@ public class QueryBuilder {
      */
     public QueryBuilder setBigDecimal(int i, BigDecimal x) throws SQLException {
         this.preparedStatement.setBigDecimal(i, x);
+        return this;
+    }
+    
+    /**
+     * Set number for the statement
+     * @param i
+     * @param x
+     * @return
+     * @throws SQLException 
+     */
+    public QueryBuilder setInt(int i, int x) throws SQLException {
+        this.preparedStatement.setInt(i, x);
         return this;
     }
     

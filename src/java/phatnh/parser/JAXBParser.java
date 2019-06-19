@@ -19,7 +19,7 @@ import phatnh.util.ErrorHandler;
  * @author nguyenhongphat0
  */
 public class JAXBParser {
-    private static final String XSD_FILE = "web/WEB-INF/xsd/plants.xsd";
+    private static final String XSD_FILE = "web/WEB-INF/xsd/categories.xsd";
     private static final String OUTPUT_FOLDER = "src/java";
     
     /**
