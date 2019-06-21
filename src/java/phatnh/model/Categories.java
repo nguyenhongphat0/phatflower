@@ -67,6 +67,8 @@ public class Categories {
     }
 
     public void clear() {
-        category = new ArrayList<Category>();
+        if (category != null) {
+            category.clear();
+        }
     }
 }
