@@ -8,8 +8,6 @@ package phatnh.dao;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import javax.naming.NamingException;
 import phatnh.builder.QueryBuilder;
@@ -53,6 +51,7 @@ public class CategoryDAO implements Serializable {
     }
     
     public void all() throws NamingException, SQLException {
+        categories.clear();
         new QueryBuilder()
                 .prepare("SELECT id, name, count, enable, onmenu, length(name)*count as priority FROM categories ORDER BY priority DESC")
                 .executeQuery()

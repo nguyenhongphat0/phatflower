@@ -61,4 +61,18 @@ public class PlantDAO implements Serializable {
             return false;
         }
     }
+    
+    public List<String> fetchNames() throws NamingException, SQLException {
+        final List<String> names = new ArrayList<>();
+        new QueryBuilder()
+                .prepare("SELECT name FROM products")
+                .executeQuery()
+                .fetch(new QueryBuilder.ResultSetCallback() {
+                    @Override
+                    public void forEach(ResultSet res) throws SQLException {
+                        names.add(res.getString("name").toLowerCase());
+                    }
+                });
+        return names;
+    }
 }

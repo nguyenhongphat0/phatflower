@@ -66,4 +66,7 @@ public class Categories {
         return this.category;
     }
 
+    public void clear() {
+        category = new ArrayList<Category>();
+    }
 }

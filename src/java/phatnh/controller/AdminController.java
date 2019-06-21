@@ -5,9 +5,14 @@
  */
 package phatnh.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -31,6 +36,7 @@ import phatnh.util.FlowerCrawler;
 @WebServlet(name = "AdminController", urlPatterns = {"/AdminController"})
 public class AdminController extends HttpServlet {
     PrintWriter out;
+    CategoryDAO dao = new CategoryDAO();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,8 +47,7 @@ public class AdminController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
         try {
             response.setContentType("text/xml;charset=UTF-8");
             out = response.getWriter();
@@ -61,7 +66,7 @@ public class AdminController extends HttpServlet {
                     updateCategory(request, response);
                     break;
             }
-        } catch (NamingException | SQLException | JAXBException ex) {
+        } catch (NamingException | SQLException | JAXBException | IOException ex) {
             ErrorHandler.handle(ex);
         }
         
@@ -124,20 +129,21 @@ public class AdminController extends HttpServlet {
         }        
     }
 
-    private void categorize(HttpServletRequest request, HttpServletResponse response) {
+    private void categorize(HttpServletRequest request, HttpServletResponse response) throws NamingException, SQLException, JAXBException {
         int max = Integer.parseInt(request.getParameter("max"));
         int count = Categorize.categorize(max);
+        generateXML();
         out.println("Phân loại xong. Đã thêm " + count + " phân loại mới");
     }
     
-    private void fetchCategories(HttpServletRequest request, HttpServletResponse response) throws NamingException, SQLException, JAXBException {
-        CategoryDAO dao = new CategoryDAO();
+    private void fetchCategories(HttpServletRequest request, HttpServletResponse response) throws NamingException, SQLException, JAXBException, IOException {
         dao.all();
         JAXBContext jc = JAXBContext.newInstance(Categories.class);
         Marshaller ms = jc.createMarshaller();
         StringWriter writer = new StringWriter();
         ms.marshal(dao.getCategories(), writer);
-        out.print(writer.toString());
+        String xml = writer.toString();
+        out.print(xml);
     }
     
     private void updateCategory(HttpServletRequest request, HttpServletResponse response) throws NamingException, SQLException, JAXBException {
@@ -146,7 +152,15 @@ public class AdminController extends HttpServlet {
         String value = request.getParameter("value");
         CategoryDAO dao = new CategoryDAO();
         dao.update(id, field, value);
+        generateXML();
         out.print("Lưu thông tin thành công");
     }
-
+    
+    private void generateXML() throws NamingException, SQLException, JAXBException {
+        dao.all();
+        String path = getServletContext().getRealPath("/WEB-INF/xml/categories.xml");
+        JAXBContext jc = JAXBContext.newInstance(Categories.class);
+        Marshaller ms = jc.createMarshaller();
+        ms.marshal(dao.getCategories(), new File(path));
+    }
 }

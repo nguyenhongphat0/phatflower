@@ -14,6 +14,7 @@ import java.util.Map;
 import javax.naming.NamingException;
 import phatnh.builder.QueryBuilder;
 import phatnh.dao.CategoryDAO;
+import phatnh.dao.PlantDAO;
 import phatnh.util.ErrorHandler;
 
 /**
@@ -24,7 +25,7 @@ public class Categorize {
     
     public static int categorize(int max) {
         try {
-            List<String> names = fetchNames();
+            List<String> names = new PlantDAO().fetchNames();
             List<String> words = hashName(names, max);
             Map<String, Integer> token = group(names, words);
             CategoryDAO dao = new CategoryDAO();
@@ -34,20 +35,6 @@ public class Categorize {
             ErrorHandler.handle(ex);
             return 0;
         }
-    }
-    
-    public static List<String> fetchNames() throws NamingException, SQLException {
-        final List<String> names = new ArrayList<>();
-        new QueryBuilder()
-                .prepare("SELECT name FROM products")
-                .executeQuery()
-                .fetch(new QueryBuilder.ResultSetCallback() {
-                    @Override
-                    public void forEach(ResultSet res) throws SQLException {
-                        names.add(res.getString("name").toLowerCase());
-                    }
-                });
-        return names;
     }
     
     public static List<String> splitWords(String s, int n) {
