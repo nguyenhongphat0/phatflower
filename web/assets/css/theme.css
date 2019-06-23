@@ -92,8 +92,17 @@ button:active {
     margin-left: auto;
     text-align: right;
 }
+.right-text {
+    text-align: right;
+}
+.center-text {
+    text-align: right;
+}
 .white-text {
     color: white;
+}
+a.no-underline {
+    text-decoration: none;
 }
 .light {
     font-weight: lighter;
@@ -209,7 +218,7 @@ a.wave {
 .a-product h4 {
     margin: 0;
 }
-.a-product .price {
+.price {
     color: var(--accent);
     font-size: 20px;
 }
@@ -232,4 +241,19 @@ a.wave {
 }
 .a-product:hover .overlay {
     bottom: 0;
+}
+.accent-color {
+    color: var(--accent);
+}
+.accent-background {
+    background-color: var(--accent);
+}
+.small-text {
+    font-size: 12px;
+    color: gray;
+    
+}
+.thumbnail img {
+    width: 100%;
+    height: auto;
 }

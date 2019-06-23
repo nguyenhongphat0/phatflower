@@ -17,3 +17,10 @@ create table categories (
     onmenu boolean default false,
     primary key (id)
 );
+drop table if exists product_contents;
+create table product_contents (
+    id int not null,
+    content text,
+    primary key (id),
+    foreign key (id) references products(id)
+);

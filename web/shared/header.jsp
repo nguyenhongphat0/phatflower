@@ -15,6 +15,7 @@
 	<title>Phat Flower</title>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/grid.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/theme.css">
+        <script src="${pageContext.request.contextPath}/assets/js/functions.js"></script>
 </head>
 <body>
 	<div class="header">

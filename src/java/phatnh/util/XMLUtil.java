@@ -7,6 +7,7 @@ package phatnh.util;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import javax.xml.parsers.ParserConfigurationException;
@@ -47,5 +48,10 @@ public class XMLUtil {
         domain = domain.substring(domain.indexOf("//") + 2);
         domain = domain.substring(domain.indexOf("/"));
         return domain;
+    }
+    
+    public static String getVietnameseString(String s) {
+        byte[] bytes = s.getBytes(StandardCharsets.ISO_8859_1);
+        return new String(bytes, StandardCharsets.UTF_8);
     }
 }

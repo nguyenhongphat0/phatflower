@@ -66,9 +66,4 @@ public class Categories {
         return this.category;
     }
 
-    public void clear() {
-        if (category != null) {
-            category.clear();
-        }
-    }
 }

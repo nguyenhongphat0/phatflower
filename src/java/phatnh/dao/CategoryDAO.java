@@ -51,7 +51,6 @@ public class CategoryDAO implements Serializable {
     }
     
     public void all() throws NamingException, SQLException {
-        categories.clear();
         new QueryBuilder()
                 .prepare("SELECT id, name, count, enable, onmenu, length(name)*count as priority FROM categories ORDER BY priority DESC")
                 .executeQuery()

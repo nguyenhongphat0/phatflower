@@ -2,12 +2,10 @@
 package phatnh.model;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-import phatnh.util.XMLUtil;
 
 
 /**
@@ -20,6 +18,7 @@ import phatnh.util.XMLUtil;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}decimal" minOccurs="0"/>
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="price" type="{http://www.w3.org/2001/XMLSchema}decimal"/>
  *         &lt;element name="link" type="{http://www.w3.org/2001/XMLSchema}string"/>
@@ -34,6 +33,7 @@ import phatnh.util.XMLUtil;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Plant", propOrder = {
+    "id",
     "name",
     "price",
     "link",
@@ -41,6 +41,7 @@ import phatnh.util.XMLUtil;
 })
 public class Plant {
 
+    protected BigDecimal id;
     @XmlElement(required = true)
     protected String name;
     @XmlElement(required = true)
@@ -49,6 +50,30 @@ public class Plant {
     protected String link;
     @XmlElement(required = true)
     protected String image;
+
+    /**
+     * Gets the value of the id property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link BigDecimal }
+     *     
+     */
+    public BigDecimal getId() {
+        return id;
+    }
+
+    /**
+     * Sets the value of the id property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link BigDecimal }
+     *     
+     */
+    public void setId(BigDecimal value) {
+        this.id = value;
+    }
 
     /**
      * Gets the value of the name property.
@@ -146,14 +171,4 @@ public class Plant {
         this.image = value;
     }
 
-    public String getReadablePrice() {
-        DecimalFormat f = new DecimalFormat();
-        f.setGroupingUsed(true);
-        f.setGroupingSize(3);
-        return f.format(price);
-    }
-    
-    public String getDomain() {
-        return XMLUtil.getDomainFromURL(link);
-    }
 }

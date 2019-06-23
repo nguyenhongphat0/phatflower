@@ -91,6 +91,7 @@
                         <div>Lưu ý:</div>
                         <ul class="cautions">
                             <li>Đường dẫn phải thuộc 1 trong 3 trang "cayvahoa.net", "vuoncayviet.com" hoặc "webcaycanh.com"</li>
+                            <li>Hãy nhập đường dẫn những trang danh mục, vì nơi đó có nhiều sản phẩm nhất.</li>
                             <li>Đường dẫn phải bao gồm domain (có hay không có https:// đều được)</li>
                         </ul>
                     </p>
@@ -170,7 +171,9 @@
                 e.preventDefault();
                 return false;
             }
+            categoriesTable = document.querySelector('#categories-table tbody');
             function categorize() {
+                categoriesTable.innerHTML = '';
                 var result = document.querySelector('#categorize .result');
                 result.innerHTML = "<i>Đang đánh danh mục sản phẩm...</i>";
                 var max = document.querySelector('#maxCategoryWords');
@@ -200,9 +203,7 @@
                     action: 'admin',
                     task: 'fetchCategories'
                 }, function(res) {
-                    window.res = res;
-                    var table = document.querySelector('#categories-table tbody');
-                    table.innerHTML = '';
+                    categoriesTable.innerHTML = '';
                     var xml = res.responseXML;
                     var categories = xml.getElementsByTagName('category');
                     for (i = 0; i < categories.length; i++) {
@@ -223,7 +224,7 @@
                         var onmenuValue = category.getElementsByTagName('onmenu')[0].textContent;
                         onmenu.innerHTML = '<div class="checkbox"><input onclick="updateCategory(this)" name="onmenu" id="is-onmenu-category-' + id + '" type="checkbox" ' + (onmenuValue === 'true' ? 'checked' : '') + '><label for="is-onmenu-category-' + id + '"></label></div>';
                         row.appendChild(onmenu);
-                        table.appendChild(row);
+                        categoriesTable.appendChild(row);
                     }
                 });
             }

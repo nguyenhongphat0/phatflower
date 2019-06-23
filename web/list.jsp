@@ -66,15 +66,15 @@
             <div class="hr"></div>
             <small id="summary-description"></small>
             <div class="grid">
-                <c:forEach items="${list}" var="item" varStatus="counter">
+                <c:forEach items="${dao.plantList}" var="item" varStatus="counter">
                     <div id="product-${counter.count}" class="a-product m-5 d-2">
                         <div class="overlay">
                             <div class="center">
                                 <a target="_blank" href="${item.link}" class="wave">Go to site</a>
                                 <div class="d-pb-2"></div>
-                                <a href="#" class="wave">Show relevant</a>
+                                <a href="ViewDetailController?id=${item.id}" class="wave">View detail</a>
                                 <div class="d-pb-2"></div>
-                                <a href="#" class="wave">View more</a>
+                                <a href="#" class="wave">Comparison</a>
                             </div>
                         </div>
                         <div class="preview">
@@ -82,8 +82,8 @@
                         </div>
                         <div class="meta">
                             <h4 class="name">${item.name}</h4>
-                            <span class="price">${item.readablePrice} vnđ</span><br/>
-                            <small class="handwriting">${item.domain}</small>
+                            <span class="price">${dao.getReadablePrice(item)} vnđ</span><br/>
+                            <small class="handwriting">${dao.getDomain(item)}</small>
                         </div>
                     </div>
                 </c:forEach>

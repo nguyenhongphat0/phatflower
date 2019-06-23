@@ -25,9 +25,11 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import phatnh.algorithm.Categorize;
 import phatnh.dao.CategoryDAO;
+import phatnh.dao.PlantDAO;
 import phatnh.model.Categories;
 import phatnh.util.ErrorHandler;
 import phatnh.util.FlowerCrawler;
+import phatnh.util.XMLUtil;
 
 /**
  *
@@ -36,7 +38,6 @@ import phatnh.util.FlowerCrawler;
 @WebServlet(name = "AdminController", urlPatterns = {"/AdminController"})
 public class AdminController extends HttpServlet {
     PrintWriter out;
-    CategoryDAO dao = new CategoryDAO();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,6 +50,7 @@ public class AdminController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
         try {
+            request.setCharacterEncoding("UTF-8");
             response.setContentType("text/xml;charset=UTF-8");
             out = response.getWriter();
             String task = request.getParameter("task");
@@ -65,11 +67,15 @@ public class AdminController extends HttpServlet {
                 case "updateCategory":
                     updateCategory(request, response);
                     break;
+                case "saveContent":
+                    saveContent(request, response);
+                    break;
             }
         } catch (NamingException | SQLException | JAXBException | IOException ex) {
             ErrorHandler.handle(ex);
+        } finally {
+            out.close();
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -137,6 +143,7 @@ public class AdminController extends HttpServlet {
     }
     
     private void fetchCategories(HttpServletRequest request, HttpServletResponse response) throws NamingException, SQLException, JAXBException, IOException {
+        CategoryDAO dao = new CategoryDAO();
         dao.all();
         JAXBContext jc = JAXBContext.newInstance(Categories.class);
         Marshaller ms = jc.createMarshaller();
@@ -157,10 +164,18 @@ public class AdminController extends HttpServlet {
     }
     
     private void generateXML() throws NamingException, SQLException, JAXBException {
+        CategoryDAO dao = new CategoryDAO();
         dao.all();
         String path = getServletContext().getRealPath("/WEB-INF/xml/categories.xml");
         JAXBContext jc = JAXBContext.newInstance(Categories.class);
         Marshaller ms = jc.createMarshaller();
         ms.marshal(dao.getCategories(), new File(path));
+    }
+    
+    private void saveContent(HttpServletRequest request, HttpServletResponse response) throws NamingException, SQLException, JAXBException {
+        PlantDAO dao = new PlantDAO();
+        String id = request.getParameter("id");
+        String content = XMLUtil.getVietnameseString(request.getParameter("content"));
+        dao.insertContent(id, content);
     }
 }

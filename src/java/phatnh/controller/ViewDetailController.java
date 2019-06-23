@@ -6,21 +6,22 @@
 package phatnh.controller;
 
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import phatnh.builder.RequestBuilder;
 import phatnh.dao.PlantDAO;
 import phatnh.model.Plant;
+import phatnh.util.ErrorHandler;
 
 /**
  *
  * @author nguyenhongphat0
  */
-@WebServlet(name = "ViewAllController", urlPatterns = {"/ViewAllController"})
-public class ViewAllController extends HttpServlet {
+@WebServlet(name = "ViewDetailController", urlPatterns = {"/ViewDetailController"})
+public class ViewDetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,10 +35,34 @@ public class ViewAllController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PlantDAO dao = new PlantDAO();
-        dao.all();
-        request.setAttribute("dao", dao);
-        request.getRequestDispatcher("list.jsp").forward(request, response);
+        String id = request.getParameter("id");
+        try {
+            PlantDAO dao = new PlantDAO();
+            Plant plant = dao.find(id);
+            request.setAttribute("plant", plant);
+            
+            String domain = dao.getDomain(plant);
+            request.setAttribute("domain", domain);
+            
+            dao.findSimilar(plant.getName());
+            request.setAttribute("dao", dao);
+            
+            String content = dao.fetchContent(id);
+            if (content.equals("")) {
+                String html = new RequestBuilder(plant.getLink())
+                        .go()
+                        .match("<body[\\s\\S]*?>[\\s\\S]*?<\\/body>")
+                        .clean("<script[\\s\\S]*?>[\\s\\S]*?<\\/script>")
+                        .toString();
+                request.setAttribute("html", html);
+            } else {
+                request.setAttribute("content", content);
+            }
+        } catch (Exception e) {
+            ErrorHandler.handle(e);
+        } finally {
+            request.getRequestDispatcher("detail.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
