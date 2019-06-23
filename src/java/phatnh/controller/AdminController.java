@@ -6,13 +6,9 @@
 package phatnh.controller;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -70,10 +66,17 @@ public class AdminController extends HttpServlet {
                 case "saveContent":
                     saveContent(request, response);
                     break;
+                case "logs":
+                    fetchLogs(request, response);
+                    break;
+                case "cleanLogs":
+                    cleanLogs(request, response);
+                    break;
             }
         } catch (NamingException | SQLException | JAXBException | IOException ex) {
             ErrorHandler.handle(ex);
         } finally {
+            out.flush();
             out.close();
         }
     }
@@ -177,5 +180,14 @@ public class AdminController extends HttpServlet {
         String id = request.getParameter("id");
         String content = XMLUtil.getVietnameseString(request.getParameter("content"));
         dao.insertContent(id, content);
+    }
+    
+    private void fetchLogs(HttpServletRequest request, HttpServletResponse response) {
+        response.setContentType("text/plain;charset=UTF-8");
+        out.println(ErrorHandler.fetch());
+    }
+    
+    private void cleanLogs(HttpServletRequest request, HttpServletResponse response) {
+        ErrorHandler.clear();
     }
 }

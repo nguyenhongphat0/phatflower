@@ -9,10 +9,10 @@
 <jsp:include page="shared/header.jsp"/>
 <div id="summary" class="section">
     <div class="grid container">
-        <div class="m-10 d-1">
+        <div class="m-2 d-1">
             <div id="thumbnails" class="thumbnail"></div>
         </div>
-        <div class="m-10 d-5 d-pl-4 d-pr-4">
+        <div class="m-8 d-5 d-pl-4 d-pr-4">
             <img src="${plant.image}" width="100%"/>
         </div>
         <div class="m-10 d-4 d-pl-4">
@@ -97,7 +97,7 @@
                         <div class="center">
                             <a target="_blank" href="${item.link}" class="wave">Go to site</a>
                             <div class="d-pb-2"></div>
-                            <a href="ViewDetailController?id=${item.id}" class="wave">View detail</a>
+                            <a href="FrontController?action=detail&id=${item.id}" class="wave">View detail</a>
                             <div class="d-pb-2"></div>
                             <a href="#" class="wave">Comparison</a>
                         </div>

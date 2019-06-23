@@ -62,7 +62,7 @@
             </p>
         </div>
         <div class="m-10 d-7">
-            <h3 id="summary-title">Tất cả cây cảnh</h3>
+            <h3 id="summary-title">Tất cả ${param.category}</h3>
             <div class="hr"></div>
             <small id="summary-description"></small>
             <div class="grid">
@@ -72,7 +72,7 @@
                             <div class="center">
                                 <a target="_blank" href="${item.link}" class="wave">Go to site</a>
                                 <div class="d-pb-2"></div>
-                                <a href="ViewDetailController?id=${item.id}" class="wave">View detail</a>
+                                <a href="FrontController?action=detail&id=${item.id}" class="wave">View detail</a>
                                 <div class="d-pb-2"></div>
                                 <a href="#" class="wave">Comparison</a>
                             </div>

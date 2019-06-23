@@ -6,7 +6,6 @@
 package phatnh.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,6 +35,12 @@ public class FrontController extends HttpServlet {
         switch (action) {
             case "admin":
                 url = "AdminController";
+                break;
+            case "list":
+                url = "ViewListController";
+                break;
+            case "detail":
+                url = "ViewDetailController";
                 break;
         }
         request.getRequestDispatcher(url).forward(request, response);

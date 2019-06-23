@@ -61,6 +61,9 @@
                 box-shadow: 0 0 5px #151b26;
                 color: white;
             }
+            pre {
+                white-space: pre-wrap;
+            }
         </style>
     </head>
     <body>
@@ -72,9 +75,9 @@
                     <a onclick="show('crawl')" class="wave">Cào sản phẩm</a>
                     <a class="wave">Dọn dẹp sản phẩm</a>
                     <div class="d-pl-4 d-pt-2 d-pb-2"><small style="color: lightgray">Quản lý danh mục</small></div>
-                    <a onclick="show('categorize')" class="wave">Phân loại sản phẩm</a>
+                    <a onclick="show('categorize'); fetchCategories();" class="wave">Phân loại sản phẩm</a>
                     <div class="d-pl-4 d-pt-2 d-pb-2"><small style="color: lightgray">Quản lý hệ thống</small></div>
-                    <a class="wave">Xem log</a>
+                    <a onclick="show('logs'); fetchLogs()" class="wave">Xem log</a>
                     <a class="wave logout" href="index.jsp">&lt; Đăng xuất</a>
                 </div>
             </div>
@@ -120,6 +123,12 @@
                         <tbody></tbody>
                     </table>
                 </div>
+                <div id="logs">
+                    <h1>NHẬT KÝ HỆ THỐNG</h1>
+                    <button class="wave" onclick="fetchLogs()">Làm mới</button>
+                    <button class="wave" onclick="cleanLogs()">Dọn dẹp log</button>
+                    <pre id="logs-container"></pre>
+                </div>
             </div>
         </div>
                 
@@ -131,6 +140,7 @@
             function show(id) {
                 hide('crawl');
                 hide('categorize');
+                hide('logs');
                 document.getElementById(id).classList.remove('hidden');
             }
             show('crawl');
@@ -197,12 +207,12 @@
                     popup(res.responseText, 2000)
                 });
             }
-            fetchCategories();
             function fetchCategories() {
                 request({
                     action: 'admin',
                     task: 'fetchCategories'
                 }, function(res) {
+                    window.res = res;
                     categoriesTable.innerHTML = '';
                     var xml = res.responseXML;
                     var categories = xml.getElementsByTagName('category');
@@ -226,6 +236,24 @@
                         row.appendChild(onmenu);
                         categoriesTable.appendChild(row);
                     }
+                });
+            }
+            function fetchLogs() {
+                var container = document.getElementById('logs-container');
+                container.innerHTML = "Đang tải nhật ký hệ thống";
+                request({
+                    action: 'admin',
+                    task: 'logs'
+                }, function(res) {
+                    container.innerHTML = res.responseText;
+                });
+            }
+            function cleanLogs() {
+                request({
+                    action: 'admin',
+                    task: 'cleanLogs'
+                }, function(res) {
+                    fetchLogs();
                 });
             }
         </script>

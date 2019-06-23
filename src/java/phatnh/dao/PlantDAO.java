@@ -23,7 +23,11 @@ import phatnh.util.XMLUtil;
  * @author nguyenhongphat0
  */
 public class PlantDAO implements Serializable {
-    private Plants plants = new Plants();
+    private Plants plants;
+
+    public PlantDAO() {
+        plants = new Plants();
+    }
 
     public Plants getPlants() {
         return plants;
@@ -88,6 +92,30 @@ public class PlantDAO implements Serializable {
             ErrorHandler.handle(ex);
         }
         return plant;
+    }
+    
+    public void search(String name) {
+        try {
+            new QueryBuilder()
+                    .prepare("SELECT id, name, link, image, price FROM products WHERE name LIKE ?")
+                    .setString(1, "%" + name + "%")
+                    .executeQuery()
+                    .fetch(new QueryBuilder.ResultSetCallback() {
+                        @Override
+                        public void forEach(ResultSet res) throws SQLException {
+                            Plant plant = new Plant();
+                            plant.setId(res.getBigDecimal("id"));
+                            plant.setName(res.getString("name"));
+                            plant.setLink(res.getString("link"));
+                            plant.setImage(res.getString("image"));
+                            plant.setPrice(res.getBigDecimal("price"));
+                            getPlantList().add(plant);
+                        }
+                    })
+                    .close();
+        } catch (NamingException | SQLException ex) {
+            ErrorHandler.handle(ex);
+        }
     }
     
     public boolean insert(Plant dto) {

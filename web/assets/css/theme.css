@@ -115,9 +115,6 @@ html, body {
     height: 100%;
     font-family: "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-.header {
-    height: 80px;
-}
 .header .menu {
     line-height: 80px;
 }

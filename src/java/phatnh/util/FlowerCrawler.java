@@ -5,7 +5,16 @@
  */
 package phatnh.util;
 
+import java.io.IOException;
+import java.io.StringReader;
 import javax.servlet.ServletContext;
+import javax.xml.XMLConstants;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 import phatnh.parser.ProductParser;
 import phatnh.builder.RequestBuilder;
 
@@ -45,6 +54,11 @@ public class FlowerCrawler {
     public String getXSLPath(String filename) {
         String realPath = context.getRealPath("/");
         return realPath + "/WEB-INF/xsl/" + filename;
+    }
+    
+    public String getXSDPath(String filename) {
+        String realPath = context.getRealPath("/");
+        return realPath + "/WEB-INF/xsd/" + filename;
     }
     
     public int crawlCayVaHoa(String subdomain) {
@@ -100,11 +114,27 @@ public class FlowerCrawler {
     public int process(String content) {
         String xsl = getXSLPath(domain + ".xsl");
         String xml = XSLTransform.transform(xsl, content);
-        if (xml == null) {
+        if (xml == null || !validate(xml)) {
             return 0;
         }
         ProductParser parser = new ProductParser();
         XMLUtil.parseString(xml, parser);
         return parser.getCount();
+    }
+    
+    public boolean validate(String xml) {
+        StringReader sr = new StringReader(xml);
+        StreamSource xmlSource = new StreamSource(sr);
+        StreamSource xsd = new StreamSource(getXSDPath("plants.xsd"));
+        try {
+            SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+            Schema schema = sf.newSchema(xsd);
+            Validator validator = schema.newValidator();
+            validator.validate(xmlSource);
+            return true;
+        } catch (SAXException | IOException e) {
+            ErrorHandler.handle(e);
+            return false;
+        }
     }
 }

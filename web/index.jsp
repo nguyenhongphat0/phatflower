@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="shared/header.jsp"/>
-<div class="section">
+<div>
         <div class="grid">
                 <div class="m-10 d-7 d-pr-2 m-pr-0 m-pb-2">
                         <div class="parallax">

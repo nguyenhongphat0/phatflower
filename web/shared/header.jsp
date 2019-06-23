@@ -21,21 +21,22 @@
 	<div class="header">
 		<div class="container">
 			<div class="grid">
-				<div class="d-5 left">
-                                    <a href="${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/assets/img/logo.png" title="Phat Flower" height="100"/></a>
+				<div class="m-10 d-3 left">
+                                    <a href="${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/assets/img/logo.png" title="Phat Flower" height="80"/></a>
 				</div>
-				<div class="d-5 right menu">
+				<div class="m-10 d-7 right menu">
+                                    <span class="menu-item"><a href="FrontController?action=list" class="wave">Tất cả</a></span>
                                     <c:import var="xml" url="WEB-INF/xml/categories.xml" charEncoding="UTF-8"></c:import>
                                     <x:parse var="doc" doc="${xml}"></x:parse>
                                     <x:set var="categories" select="$doc//*[name()='category' and (*[name()='onmenu']='true')]"></x:set>
                                     <x:forEach select="$categories" var="category">
+                                        <x:set var="name" select="$category/*[name()='name']"></x:set>
                                         <span class="menu-item">
-                                            <a href="ViewAllController" class="wave">
-                                                <x:out select="$category/*[name()='name']"></x:out>
+                                            <a href="FrontController?action=list&category=<x:out select="$name"></x:out>" class="wave">
+                                                <x:out select="$name"></x:out>
                                             </a>
                                         </span>
                                     </x:forEach>
-                                    <span class="menu-item"><a href="ViewAllController" class="wave">Giới thiệu</a></span>
                                     <span class="menu-item"><a href="admin.jsp" class="wave">Quản lý</a></span>
 				</div>
 			</div>
