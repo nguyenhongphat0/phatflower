@@ -130,8 +130,8 @@ public class AdminController extends HttpServlet {
         }
         try {
             FlowerCrawler fc = new FlowerCrawler(getServletContext(), url);
-            int count = fc.crawl();
-            out.print(count);
+            String result = fc.crawl();
+            out.print(result);
         } catch (Exception e) {
             ErrorHandler.handle(e);
             out.print(-2); // 404, etc,...

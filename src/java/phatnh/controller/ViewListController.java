@@ -33,9 +33,14 @@ public class ViewListController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String category = request.getParameter("category");
+        String hot = request.getParameter("hot");
         PlantDAO dao = new PlantDAO();
         if (category == null) {
-            dao.all();
+            if (hot == null) {
+                dao.all();
+            } else {
+                dao.hot();
+            }
         } else {
             dao.search(category);
         }

@@ -21,10 +21,17 @@ public class ProductParser extends DefaultHandler {
     private Plant dto;
     private PlantDAO dao;
     private int count;
+    private int fail;
+    public String message;
 
     public ProductParser() {
         dao = new PlantDAO();
         count = 0;
+        fail = 0;
+    }
+
+    public String getMessage() {
+        return message;
     }
 
     @Override
@@ -44,6 +51,9 @@ public class ProductParser extends DefaultHandler {
                 break;
             case "price":
                 BigDecimal price = new BigDecimal(s);
+                if (s.equals("0")) {
+                    fail++;
+                }
                 dto.setPrice(price);
                 break;
             case "link":
@@ -58,12 +68,22 @@ public class ProductParser extends DefaultHandler {
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
         if (qName.equals("plant")) {
-            boolean success = dao.insert(dto);
+            boolean success = dao.getPlantList().add(dto);
             if (success) {
                 count++;
             }
         }
         this.current = "";
+    }
+
+    @Override
+    public void endDocument() throws SAXException {
+        int inserted = dao.insertAll();
+        this.message = "Đã cào được " + count + " sản phẩm.";
+        if (inserted < count) {
+            this.message += " Trong đó có " + inserted + " sản phẩm mới, " + (count - inserted - fail) + " sản phẩm bị trùng, " + fail + " sản phẩm lỗi đã không được thêm vào database.";
+        }
+        
     }
 
     public int getCount() {

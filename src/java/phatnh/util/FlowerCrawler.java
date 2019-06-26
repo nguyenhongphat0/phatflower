@@ -37,7 +37,7 @@ public class FlowerCrawler {
         this.subdomain = XMLUtil.getSubDomainFromURL(url);
     }
     
-    public int crawl() {
+    public String crawl() {
         String prefix = "https://" + domain + "/";
         switch (prefix) {
             case CAYVAHOA:
@@ -47,7 +47,7 @@ public class FlowerCrawler {
             case WEBCAYCANH:
                 return crawlWebCayCanh(subdomain);
             default:
-                return -1;
+                return "-1";
         }
     }
     
@@ -61,7 +61,7 @@ public class FlowerCrawler {
         return realPath + "/WEB-INF/xsd/" + filename;
     }
     
-    public int crawlCayVaHoa(String subdomain) {
+    public String crawlCayVaHoa(String subdomain) {
         String content = new RequestBuilder(url)
                 .go()
                 .match("<body[\\s\\S]*?>[\\s\\S]*?<\\/body>")
@@ -76,7 +76,7 @@ public class FlowerCrawler {
         return process(content);
     }
     
-    public int crawlVuonCayViet(String subdomain) {
+    public String crawlVuonCayViet(String subdomain) {
         String content = new RequestBuilder(url)
                 .go()
                 .match("<body[\\s\\S]*?>[\\s\\S]*?<\\/body>")
@@ -87,7 +87,8 @@ public class FlowerCrawler {
                 .clean("&#")
                 .clean("&p=")
                 .replace("<img([\\s\\S]*?)/?>", "<img$1\\/>")
-                .replace("<div class='pic-news'<a", "<div class='pic-news'><a")
+                .replace("<div class='pic-news'<a", "<div class='pic-news'><a") // handle poor html: <div class='pic-news'<a href=
+                .replace("<a href='#' class='active'>\\d+</span>", "<a>") // handle poor html: <a href='#' class='active'>1</span></a>
                 .replace("<ul[\\s\\S]*?>", "<ul/>")
                 .replace("</ul>", "<ul/>")
                 .replace("&", "&amp;")
@@ -95,7 +96,7 @@ public class FlowerCrawler {
         return process(content);
     }
     
-    public int crawlWebCayCanh(String subdomain) {
+    public String crawlWebCayCanh(String subdomain) {
         String content = new RequestBuilder(url)
                 .go()
                 .match("<body[\\s\\S]*?>[\\s\\S]*?<\\/body>")
@@ -111,18 +112,19 @@ public class FlowerCrawler {
         return process(content);
     }
     
-    public int process(String content) {
+    public String process(String content) {
         String xsl = getXSLPath(domain + ".xsl");
         String xml = XSLTransform.transform(xsl, content);
-        if (xml == null || !validate(xml)) {
-            return 0;
+        xml = validate(xml);
+        if (xml == null) {
+            return "0";
         }
         ProductParser parser = new ProductParser();
         XMLUtil.parseString(xml, parser);
-        return parser.getCount();
+        return parser.getMessage();
     }
     
-    public boolean validate(String xml) {
+    public String validate(String xml) {
         StringReader sr = new StringReader(xml);
         StreamSource xmlSource = new StreamSource(sr);
         StreamSource xsd = new StreamSource(getXSDPath("plants.xsd"));
@@ -131,10 +133,19 @@ public class FlowerCrawler {
             Schema schema = sf.newSchema(xsd);
             Validator validator = schema.newValidator();
             validator.validate(xmlSource);
-            return true;
+            return xml;
         } catch (SAXException | IOException e) {
-            ErrorHandler.handle(e);
-            return false;
+            if (e.getMessage().contains("'' is not a valid value for 'decimal'")) {
+                ErrorHandler.log("Lỗi trong quá trình parse, giá liên hệ trong sản phẩm.");
+                return validate(removeInvalidEntry(xml));
+            } else {
+                ErrorHandler.handle(e);
+                return null;
+            }
         }
+    }
+
+    private String removeInvalidEntry(String xml) {
+        return xml.replaceAll("<price/>", "<price>0</price>");
     }
 }

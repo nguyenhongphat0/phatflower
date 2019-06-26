@@ -10,10 +10,12 @@
 <div id="summary" class="section">
     <div class="grid container">
         <div class="m-2 d-1">
-            <div id="thumbnails" class="thumbnail"></div>
+            <div id="thumbnails" class="thumbnail">
+                <img src="${plant.image}"/>
+            </div>
         </div>
-        <div class="m-8 d-5 d-pl-4 d-pr-4">
-            <img src="${plant.image}" width="100%"/>
+        <div id="previewer" class="m-8 d-5 d-pl-4 d-pr-4 thumbnail">
+            <img src="${plant.image}"/>
         </div>
         <div class="m-10 d-4 d-pl-4">
             <a class="no-underline" href="${plant.link}" target="_blank"><h1 class="accent-color">${plant.name}</h1></a>
@@ -118,13 +120,19 @@
 <script>
     function loadThumbnail() {
         var container = document.getElementById('thumbnails');
+        container.children[0].onclick = viewThumbnail;
         var content = document.getElementById('real-content');
         var imgs = content.getElementsByTagName('img');
         var length = imgs.length;
         for (i = 0; i < length; i++) {
             var img = imgs[0];
+            img.onclick = viewThumbnail;
             container.appendChild(img);
         }
+    }
+    function viewThumbnail() {
+        var previewer = document.querySelector('#previewer img');
+        previewer.src = this.src;
     }
     window.onload = function() {
         <c:if test="${not empty html}">

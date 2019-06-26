@@ -74,5 +74,6 @@ public class ErrorHandler {
             message += "Thông tin thêm: " + e.getMessage();
         }
         log(message);
+        e.printStackTrace(); // REMEMBER TO REMOVE THIS BEFORE SUBMIT
     }
 }

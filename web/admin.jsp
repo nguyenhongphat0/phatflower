@@ -161,19 +161,19 @@
                     task: 'crawl',
                     url: document.forms.crawl.url.value
                 }, function(res) {
-                    var res = Number(res.responseText);
+                    var res = res.responseText;
                     switch (res) {
-                        case -2:
+                        case '-2':
                             result.innerHTML = 'Đường dẫn không hợp lệ, vui lòng kiểm tra lại!';
                             break;
-                        case -1:
+                        case '-1':
                             result.innerHTML = 'Đường dẫn phải thuộc 1 trong 3 trang "cayvahoa.net", "vuoncayviet.com" hoặc "webcaycanh.com"̣, vui lòng kiểm tra lại!';
                             break;
-                        case 0:
+                        case '0':
                             result.innerHTML = 'Rất tiếc, không cào được sản phẩm nào. Thử lại với trang nào nhiều sản phẩm hơn thử xem!';
                             break;
                         default:
-                            result.innerHTML = 'Đã cào được ' + res + ' sản phẩm!';
+                            result.innerHTML = res + "<div class='d-pt-4'></div><a class='wave' href='FrontController?action=list&hot=true' target='_blank'>Xem các sản phẩm đã cào được</a>";
                             break;
                     }
                     

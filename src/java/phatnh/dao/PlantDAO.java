@@ -6,6 +6,7 @@
 package phatnh.dao;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
@@ -52,6 +53,29 @@ public class PlantDAO implements Serializable {
         try {
             new QueryBuilder()
                     .prepare("SELECT id, name, link, image, price FROM products")
+                    .executeQuery()
+                    .fetch(new QueryBuilder.ResultSetCallback() {
+                        @Override
+                        public void forEach(ResultSet res) throws SQLException {
+                            Plant plant = new Plant();
+                            plant.setId(res.getBigDecimal("id"));
+                            plant.setName(res.getString("name"));
+                            plant.setLink(res.getString("link"));
+                            plant.setImage(res.getString("image"));
+                            plant.setPrice(res.getBigDecimal("price"));
+                            getPlantList().add(plant);
+                        }
+                    })
+                    .close();
+        } catch (NamingException | SQLException ex) {
+            ErrorHandler.handle(ex);
+        }
+    }
+    
+    public void hot() {
+        try {
+            new QueryBuilder()
+                    .prepare("SELECT id, name, link, image, price FROM products WHERE is_hot = 1")
                     .executeQuery()
                     .fetch(new QueryBuilder.ResultSetCallback() {
                         @Override
@@ -133,6 +157,36 @@ public class PlantDAO implements Serializable {
             ErrorHandler.handle(e);
             return false;
         }
+    }
+    
+    public int insertAll() {
+        int count = 0;
+        try {
+            QueryBuilder qb = new QueryBuilder();
+            qb.prepare("UPDATE products SET is_hot = 0 WHERE is_hot = 1").executeUpdate();
+            for (Plant plant : getPlantList()) {
+                boolean exist = false;
+                qb.prepare("SELECT link FROM products WHERE link = ?")
+                        .setString(1, plant.getLink())
+                        .executeQuery();
+                if (qb.getResultSet().next()) {
+                    exist = true;
+                }
+                if (!exist && plant.getPrice().compareTo(new BigDecimal(0)) == 1) {
+                    qb.prepare("INSERT INTO products(name, link, image, price) VALUES (?, ?, ?, ?)")
+                            .setString(1, plant.getName())
+                            .setString(2, plant.getLink())
+                            .setString(3, plant.getImage())
+                            .setBigDecimal(4, plant.getPrice())
+                            .executeUpdate();
+                    count++;
+                }
+            }
+            qb.close();
+        } catch (NamingException | SQLException e) {
+            ErrorHandler.handle(e);
+        }
+        return count;
     }
     
     public boolean insertContent(String id, String content) {
