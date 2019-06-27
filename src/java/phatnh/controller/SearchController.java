@@ -6,18 +6,24 @@
 package phatnh.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import phatnh.dao.PlantDAO;
+import phatnh.model.Plants;
+import phatnh.util.ErrorHandler;
 
 /**
  *
  * @author nguyenhongphat0
  */
-@WebServlet(name = "FrontController", urlPatterns = {"/FrontController"})
-public class FrontController extends HttpServlet {
+@WebServlet(name = "SearchController", urlPatterns = {"/SearchController"})
+public class SearchController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,23 +36,20 @@ public class FrontController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = "/";
-        String action = request.getParameter("action");
-        switch (action) {
-            case "admin":
-                url = "AdminController";
-                break;
-            case "list":
-                url = "ViewListController";
-                break;
-            case "detail":
-                url = "ViewDetailController";
-                break;
-            case "search":
-                url = "SearchController";
-                break;
+        response.setContentType("text/xml;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try {
+            String search = request.getParameter("search");
+            PlantDAO dao = new PlantDAO();
+            dao.search(search);
+            JAXBContext jc = JAXBContext.newInstance(Plants.class);
+            Marshaller ms = jc.createMarshaller();
+            ms.marshal(dao.getPlants(), out);
+            out.close();
+        } catch (Exception e) {
+            ErrorHandler.handle(e);
+            out.println("Không tìm thấy sản phẩm nào");
         }
-        request.getRequestDispatcher(url).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -38,6 +38,34 @@
                                         </span>
                                     </x:forEach>
                                     <span class="menu-item"><a href="admin.jsp" class="wave">Quản lý</a></span>
+                                    <span>
+                                        <input type="text" name="search" placeholder="Tìm sản phẩm" onkeyup="search(this.value)"/>
+                                        <div id="quick-search-result"></div>
+                                        <script>
+                                            function search(value) {
+                                                var container = document.getElementById('quick-search-result');
+                                                container.innerHTML = '';
+                                                if (!value) {
+                                                    return;
+                                                }
+                                                request({
+                                                    action: 'search',
+                                                    search: value
+                                                }, function(res) {
+                                                    var plants = res.responseXML.getElementsByTagName('plant');
+                                                    for (var i = 0; i < plants.length && i < 5; i++) {
+                                                        var plant = plants[i];
+                                                        var id = plant.querySelector('id').textContent;
+                                                        var name = plant.querySelector('name').textContent;
+                                                        var price = plant.querySelector('price').textContent;
+                                                        var image = plant.querySelector('image').textContent;
+                                                        container.innerHTML += '<a class="wave" href="FrontController?action=detail&id=' + id + '"><img src="' + image + '" width="80"/><div class="info"><b>' + name + '</b><br/><span class="price">' + price + '</span></div></a>';
+                                                    }
+                                                    container.innerHTML += '<a class="wave right-text" href="FrontController?action=list">Xem tất cả +</a>';
+                                                });
+                                            }
+                                        </script>
+                                    </span>
 				</div>
 			</div>
 		</div>

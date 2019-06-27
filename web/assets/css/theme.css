@@ -96,7 +96,7 @@ button:active {
     text-align: right;
 }
 .center-text {
-    text-align: right;
+    text-align: center;
 }
 .white-text {
     color: white;
@@ -117,6 +117,10 @@ html, body {
 }
 .header .menu {
     line-height: 80px;
+    position: relative;
+}
+.header .menu input[type="text"] {
+    width: 100px;
 }
 a.wave {
     color: black;
@@ -253,4 +257,21 @@ a.wave {
 .thumbnail img {
     width: 100%;
     height: auto;
+}
+#quick-search-result {
+    background-color: white;
+    position: absolute;
+    right: 0;
+    z-index: 100;
+    line-height: initial;
+    text-align: left;
+    box-shadow: 0 5px 5px 0px grey;
+}
+#quick-search-result > a {
+    display: block;
+}
+#quick-search-result .info {
+    display: inline-block;
+    vertical-align: 20px;
+    margin: 0px 20px;
 }
