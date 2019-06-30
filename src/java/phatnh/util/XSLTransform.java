@@ -19,6 +19,10 @@ import javax.xml.transform.stream.StreamSource;
  */
 public class XSLTransform {
     public static String transform(String xslpath, String xmlContent) {
+        return transformWithParams(xslpath, xmlContent, null);
+    }
+    
+    public static String transformWithParams(String xslpath, String xmlContent, CustomizeTransformerCallback callback) {
         try {
             StringReader reader = new StringReader(xmlContent);
             StringWriter writer = new StringWriter();
@@ -27,11 +31,18 @@ public class XSLTransform {
             StreamSource xsl = new StreamSource(xslpath);
             TransformerFactory tf = TransformerFactory.newInstance();
             Transformer trans = tf.newTransformer(xsl);
+            if (callback != null) {
+                callback.customize(trans);
+            }
             trans.transform(src, res);
             return res.getWriter().toString();
         } catch (TransformerException ex) {
             ErrorHandler.handle(ex);
             return null;
         }
+    }
+    
+    public static interface CustomizeTransformerCallback {
+        public void customize(Transformer trans);
     }
 }

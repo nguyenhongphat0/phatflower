@@ -11,6 +11,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -62,7 +63,13 @@ public class ExportPDFController extends HttpServlet {
             StringWriter sw = new StringWriter();
             ms.marshal(dao.getPlants(), sw);
             
-            String fo = XSLTransform.transform(getResourcePath("xsl/fo.xsl"), sw.toString());
+            String fo = XSLTransform.transformWithParams(getResourcePath("/WEB-INF/xsl/fo.xsl"), sw.toString(), new XSLTransform.CustomizeTransformerCallback() {
+                @Override
+                public void customize(Transformer trans) {
+                    trans.setParameter("now", new Date().toString());
+                    trans.setParameter("root", getResourcePath(""));
+                }
+            });
             exportPDF(fo, request, response);
         } catch (Exception e) {
             ErrorHandler.handle(e);
@@ -110,14 +117,14 @@ public class ExportPDFController extends HttpServlet {
 
     private String getResourcePath(String path) {
         String realPath = getServletContext().getRealPath("/");
-        return realPath + "/WEB-INF/" + path;
+        return realPath + path;
     }
 
     private void exportPDF(String fo, HttpServletRequest request, HttpServletResponse response) throws FOPException, IOException, TransformerException, SAXException {
         response.setContentType("application/pdf;charset=UTF-8");
         OutputStream out = response.getOutputStream();
         FopFactory ff = FopFactory.newInstance();
-        ff.setUserConfig(getResourcePath("xml/fop-config.xml"));
+        ff.setUserConfig(getResourcePath("/WEB-INF/xml/fop-config.xml"));
         FOUserAgent fua = ff.newFOUserAgent();
         Fop fop = ff.newFop(MimeConstants.MIME_PDF, fua, out);
         

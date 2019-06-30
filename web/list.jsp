@@ -40,8 +40,7 @@
             </p>
         </div>
         <div class="m-10 d-7 relative">
-            <form class="absolute" target="_blank" method="POST" action="FrontController" style="right: 0; top: 15px">
-                <input type="hidden" name="action" value="exportPDF">
+            <form class="absolute" target="_blank" method="POST" action="FrontController?action=exportPDF" style="right: 0; top: 15px">
                 <input type="hidden" name="ids" id="export-ids">
                 <button type="submit" class="wave">Xuất ra PDF</button>
             </form>
@@ -153,12 +152,13 @@
     }
     function fetchMore() {
         var container = document.getElementById('products-container');
+        container.innerHTML = '';
         request({
             action: 'search',
             search: filter.keyword
         }, function(res) {
             var plants = res.responseXML.getElementsByTagName('plant');
-            for (var i = 0; i < plants.length && i < 5; i++) {
+            for (var i = 0; i < plants.length; i++) {
                 var plant = plants[i];
                 var id = plant.querySelector('id').textContent;
                 var name = plant.querySelector('name').textContent;
@@ -167,8 +167,8 @@
                 var image = plant.querySelector('image').textContent;
                 container.innerHTML += '<div id="product-'+ id +'" class="a-product m-5 d-2"><div class="overlay"><div class="center"><a target="_blank" href="' + link + '" class="wave">Go to site</a><div class="d-pb-2"></div><a href="FrontController?action=detail&id=' + id + '" class="wave">View detail</a><div class="d-pb-2"></div><a href="#" class="wave">Comparison</a></div></div><div class="preview"><img src="' + image + '" alt="' + name + '"></div><div class="meta"><h4 class="name">' + name + '</h4><span class="price">' + formatPrice(price) + ' vnđ</span><br/><small class="handwriting">' + getDomain(link) + '</small></div></div>'
             }
+            filterByCategory();
             countProducts(false);
-            summary.description.innerHTML += ' (Đã tìm thêm trên Database)';
         });
     }
     function countProducts(fetchMoreIfNone) {
@@ -188,9 +188,11 @@
             summary.description.innerHTML = 'Có ' + count + ' sản phẩm phù hợp';
             document.getElementById('export-ids').value = ids.join(',');
         } else {
-            summary.description.innerHTML = 'Không tìm thấy sản phẩm nào';
             if (fetchMoreIfNone) {
+                summary.description.innerHTML = 'Đang tải thêm sản phẩm...';
                 fetchMore();
+            } else {
+                summary.description.innerHTML = 'Không tìm thấy sản phẩm nào.';
             }
         }
     }
