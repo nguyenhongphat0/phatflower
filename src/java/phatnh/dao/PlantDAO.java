@@ -118,6 +118,29 @@ public class PlantDAO implements Serializable {
         return plant;
     }
     
+    public void findAll(String ids) { // ids is a tokenized string in this format: 1,2,3
+        try {
+            new QueryBuilder()
+                    .prepare("SELECT id, name, link, image, price FROM products WHERE id IN (" + ids + ")")
+                    .executeQuery()
+                    .fetch(new QueryBuilder.ResultSetCallback() {
+                        @Override
+                        public void forEach(ResultSet res) throws SQLException {
+                            Plant plant = new Plant();
+                            plant.setId(res.getBigDecimal("id"));
+                            plant.setName(res.getString("name"));
+                            plant.setLink(res.getString("link"));
+                            plant.setImage(res.getString("image"));
+                            plant.setPrice(res.getBigDecimal("price"));
+                            getPlantList().add(plant);
+                        }
+                    })
+                    .close();
+        } catch (NamingException | SQLException ex) {
+            ErrorHandler.handle(ex);
+        }
+    }
+    
     public void search(String name) {
         try {
             new QueryBuilder()

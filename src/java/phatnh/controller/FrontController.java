@@ -45,6 +45,9 @@ public class FrontController extends HttpServlet {
             case "search":
                 url = "SearchController";
                 break;
+            case "exportPDF":
+                url = "ExportPDFController";
+                break;
         }
         request.getRequestDispatcher(url).forward(request, response);
     }

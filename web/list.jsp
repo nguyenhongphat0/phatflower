@@ -39,13 +39,18 @@
                 </div>
             </p>
         </div>
-        <div class="m-10 d-7">
+        <div class="m-10 d-7 relative">
+            <form class="absolute" target="_blank" method="POST" action="FrontController" style="right: 0; top: 15px">
+                <input type="hidden" name="action" value="exportPDF">
+                <input type="hidden" name="ids" id="export-ids">
+                <button type="submit" class="wave">Xuất ra PDF</button>
+            </form>
             <h3 id="summary-title">Tất cả ${param.category}</h3>
             <div class="hr"></div>
             <small id="summary-description"></small>
             <div id="products-container" class="grid">
-                <c:forEach items="${dao.plantList}" var="item" varStatus="counter">
-                    <div id="product-${counter.count}" class="a-product m-5 d-2">
+                <c:forEach items="${dao.plantList}" var="item">
+                    <div id="product-${item.id}" class="a-product m-5 d-2">
                         <div class="overlay">
                             <div class="center">
                                 <a target="_blank" href="${item.link}" class="wave">Go to site</a>
@@ -168,16 +173,20 @@
     }
     function countProducts(fetchMoreIfNone) {
         var count = 0;
+        var ids = [];
         var products = document.querySelectorAll('.a-product');
         var length = products.length;
         for (var i = 0; i < length; i++) {
             var product = products[i];
             if (!product.classList.contains('hidden')) {
                 count++;
+                var id = product.id.replace(/\D*/, '');
+                ids.push(id);
             }
         }
         if (count > 0) {
             summary.description.innerHTML = 'Có ' + count + ' sản phẩm phù hợp';
+            document.getElementById('export-ids').value = ids.join(',');
         } else {
             summary.description.innerHTML = 'Không tìm thấy sản phẩm nào';
             if (fetchMoreIfNone) {
@@ -191,5 +200,6 @@
         filterByKeyword();
         countProducts(true);
     }
+    countProducts(true);
 </script>
 <jsp:include page="shared/footer.jsp"/>

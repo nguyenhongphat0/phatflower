@@ -276,3 +276,9 @@ a.wave {
     vertical-align: 20px;
     margin: 0px 20px;
 }
+.relative {
+    position: relative;
+}
+.absolute {
+    position: absolute;
+}
