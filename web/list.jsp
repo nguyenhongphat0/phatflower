@@ -14,37 +14,15 @@
             <h3>Phân loại</h3>
             <div class="hr"></div>
             <p>
-                <small><b>Màu sắc</b></small>
+                <small><b>Theo tên</b></small>
                 <div>
-                    <div class="a-color" style="background: #123456">
-                        <div class="amount">10</div>
-                    </div>
-                    <div class="a-color" style="background: #fafafa">
-                        <div class="amount">5</div>
-                    </div>
-                    <div class="a-color" style="background: #E84C3D">
-                        <div class="amount">230</div>
-                    </div>
-                    <div class="a-color" style="background: #F39C11">
-                        <div class="amount">3</div>
-                    </div>
-                    <div class="a-color" style="background: #dce3f7">
-                        <div class="amount">2</div>
-                    </div>
-                    <div class="a-color" style="background: #861850">
-                        <div class="amount">4</div>
-                    </div>
-                    <div class="a-color" style="background: #A0D468">
-                        <div class="amount">171</div>
-                    </div>
-                    <div class="a-color" style="background: var(--accent)">
-                        <div class="amount">33</div>
-                    </div>
+                    <input id="keyword" onkeyup="addKeywordToFilter()" type="text" name="search" style="width: calc(100% - 150px)">
+                    <button onclick="addKeywordToFilter()" class="wave" type="submit">Tìm ngay</button>
                 </div>
             </p>
             <div class="hr"></div>
             <p>
-                <small><b>Phân loại</b></small>
+                <small><b>Thể loại</b></small>
                 <div>
                     <c:import var="xml" url="WEB-INF/xml/categories.xml" charEncoding="UTF-8"></c:import>
                     <x:parse var="doc" doc="${xml}"></x:parse>
@@ -65,7 +43,7 @@
             <h3 id="summary-title">Tất cả ${param.category}</h3>
             <div class="hr"></div>
             <small id="summary-description"></small>
-            <div class="grid">
+            <div id="products-container" class="grid">
                 <c:forEach items="${dao.plantList}" var="item" varStatus="counter">
                     <div id="product-${counter.count}" class="a-product m-5 d-2">
                         <div class="overlay">
@@ -98,18 +76,27 @@
     function hide(product) {
         product.classList.add('hidden');
     }
-    function hideAll(products) {
-        products.forEach(function(product) {
-            hide(product);
-        });
+    function showAll() {
+        var products = document.querySelectorAll('.a-product');
+        var length = products.length;
+        for (var i = 0; i < length; i++) {
+            var product = products[i];
+            show(product);
+        }
     }
     filter = {
-        categories: []
+        categories: [],
+        keyword: ''
     };
     summary = {
         title: document.getElementById('summary-title'),
         description: document.getElementById('summary-description')
     };
+    function addKeywordToFilter() {
+        var keyword = document.getElementById('keyword').value;
+        filter.keyword = keyword.trim();
+        filterAll();
+    }
     function addCategoryToFilter(category) {
         filter.categories.push(category);
     }
@@ -125,31 +112,84 @@
             removeCategoryFromFilter(category);
         }
         summary.title.innerHTML = 'Kết quả tìm kiếm';
-        filterByCategory();
+        filterAll();
     }
     function filterByCategory() {
+        if (filter.categories.length === 0) {
+            return;
+        }
         var products = document.querySelectorAll('.a-product');
-        var count = 0;
-        hideAll(products);
-        products.forEach(function(product) {
+        var length = products.length;
+        for (var i = 0; i < length; i++) {
+            var product = products[i];
             var name = product.getElementsByClassName('name')[0].innerHTML.toLowerCase();
             var check = false;
-            filter.categories.forEach(function(category) {
+            for (var j = 0; j < filter.categories.length; j++) {
+                var category = filter.categories[j];
                 if (name.indexOf(category) >= 0) {
                     check = true;
                 }
-            });
-            if (check) {
-                show(product);
+            }
+            if (!check) {
+                hide(product);
+            }
+        }
+    }
+    function filterByKeyword() {
+        var products = document.querySelectorAll('.a-product');
+        var length = products.length;
+        for (var i = 0; i < length; i++) {
+            var product = products[i];
+            var name = product.getElementsByClassName('name')[0].innerHTML.toLowerCase();
+            if (name.indexOf(filter.keyword) === -1) {
+                hide(product);
+            }
+        }
+    }
+    function fetchMore() {
+        var container = document.getElementById('products-container');
+        request({
+            action: 'search',
+            search: filter.keyword
+        }, function(res) {
+            var plants = res.responseXML.getElementsByTagName('plant');
+            for (var i = 0; i < plants.length && i < 5; i++) {
+                var plant = plants[i];
+                var id = plant.querySelector('id').textContent;
+                var name = plant.querySelector('name').textContent;
+                var price = plant.querySelector('price').textContent;
+                var link = plant.querySelector('link').textContent;
+                var image = plant.querySelector('image').textContent;
+                container.innerHTML += '<div id="product-'+ id +'" class="a-product m-5 d-2"><div class="overlay"><div class="center"><a target="_blank" href="' + link + '" class="wave">Go to site</a><div class="d-pb-2"></div><a href="FrontController?action=detail&id=' + id + '" class="wave">View detail</a><div class="d-pb-2"></div><a href="#" class="wave">Comparison</a></div></div><div class="preview"><img src="' + image + '" alt="' + name + '"></div><div class="meta"><h4 class="name">' + name + '</h4><span class="price">' + formatPrice(price) + ' vnđ</span><br/><small class="handwriting">' + getDomain(link) + '</small></div></div>'
+            }
+            countProducts(false);
+            summary.description.innerHTML += ' (Đã tìm thêm trên Database)';
+        });
+    }
+    function countProducts(fetchMoreIfNone) {
+        var count = 0;
+        var products = document.querySelectorAll('.a-product');
+        var length = products.length;
+        for (var i = 0; i < length; i++) {
+            var product = products[i];
+            if (!product.classList.contains('hidden')) {
                 count++;
             }
-        });
+        }
         if (count > 0) {
             summary.description.innerHTML = 'Có ' + count + ' sản phẩm phù hợp';
         } else {
             summary.description.innerHTML = 'Không tìm thấy sản phẩm nào';
+            if (fetchMoreIfNone) {
+                fetchMore();
+            }
         }
-        
+    }
+    function filterAll() {
+        showAll();
+        filterByCategory();
+        filterByKeyword();
+        countProducts(true);
     }
 </script>
 <jsp:include page="shared/footer.jsp"/>

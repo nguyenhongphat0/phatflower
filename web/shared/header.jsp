@@ -25,7 +25,6 @@
                                     <a href="${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/assets/img/logo.png" title="Phat Flower" height="80"/></a>
 				</div>
 				<div class="m-10 d-7 right menu">
-                                    <span class="menu-item"><a href="FrontController?action=list" class="wave">Tất cả</a></span>
                                     <c:import var="xml" url="WEB-INF/xml/categories.xml" charEncoding="UTF-8"></c:import>
                                     <x:parse var="doc" doc="${xml}"></x:parse>
                                     <x:set var="categories" select="$doc//*[name()='category' and (*[name()='onmenu']='true')]"></x:set>

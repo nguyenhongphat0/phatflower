@@ -17,7 +17,7 @@
                 height: 100%;
             }
             body > .grid > .d-2 {
-                position: absolute;
+                position: fixed;
                 background-color: #151b26;
                 box-shadow: 0 0 5px #151b26;
                 height: 100%;
@@ -70,14 +70,13 @@
         <div class="grid">
             <div class="d-2">
                 <a href="${pageContext.request.contextPath}"><img class="admin-logo" src="${pageContext.request.contextPath}/assets/img/logo.png" title="Phat Flower"/></a>
-                <div class="admin-menu">
-                    <div class="d-pl-4 d-pt-2 d-pb-2"><small style="color: lightgray">Quản lý sản phẩm</small></div>
+                <div class="admin-menu d-pt-4">
                     <a onclick="show('crawl')" class="wave">Cào sản phẩm</a>
-                    <a class="wave">Dọn dẹp sản phẩm</a>
-                    <div class="d-pl-4 d-pt-2 d-pb-2"><small style="color: lightgray">Quản lý danh mục</small></div>
+                    <div class="d-pl-4 d-pr-4 d-pb-4"><small style="color: lightgray">Nhập đường dẫn các trang sản phẩm để hệ thống tìm và nạp sản phẩm vào cơ sở dữ liệu</small></div>
                     <a onclick="show('categorize'); fetchCategories();" class="wave">Phân loại sản phẩm</a>
-                    <div class="d-pl-4 d-pt-2 d-pb-2"><small style="color: lightgray">Quản lý hệ thống</small></div>
-                    <a onclick="show('logs'); fetchLogs()" class="wave">Xem log</a>
+                    <div class="d-pl-4 d-pr-4 d-pb-4"><small style="color: lightgray">Phân rã tên các sản phẩm để tìm các danh mục thích hợp, tuỳ chỉnh các danh mục trên thanh điều hướng cũng như các tiêu chí lọc sản phẩm</small></div>
+                    <a onclick="show('logs'); fetchLogs()" class="wave">Nhật ký hệ thống</a>
+                    <div class="d-pl-4 d-pr-4 d-pb-4"><small style="color: lightgray">Xem các lỗi xảy ra trong quá trình hệ thống hoạt động</small></div>
                     <a class="wave logout" href="index.jsp">&lt; Đăng xuất</a>
                 </div>
             </div>
