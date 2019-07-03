@@ -45,6 +45,19 @@ public class PlantDAO implements Serializable {
         return f.format(plant.getPrice());
     }
     
+    public String comparePrice(Plant p1, Plant p2) {
+        float diff = p1.getPrice().floatValue() - p2.getPrice().floatValue();
+        p1.setPrice(new BigDecimal(Math.abs(diff)));
+        String result = getReadablePrice(p1) + " vnđ";
+        if (diff > 0) {
+            return "Đắt hơn " + result;
+        } else if (diff < 0) {
+            return "Rẻ hơn " + result;
+        } else {
+            return "Bằng giá";
+        }
+    }
+    
     public String getDomain(Plant plant) {
         return XMLUtil.getDomainFromURL(plant.getLink());
     }

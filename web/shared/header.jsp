@@ -43,14 +43,15 @@
                                         <script>
                                             function search(value) {
                                                 var container = document.getElementById('quick-search-result');
-                                                container.innerHTML = '';
                                                 if (!value) {
+                                                    container.innerHTML = '';
                                                     return;
                                                 }
                                                 request({
                                                     action: 'search',
                                                     search: value
                                                 }, function(res) {
+                                                    container.innerHTML = '';
                                                     var plants = res.responseXML.getElementsByTagName('plant');
                                                     for (var i = 0; i < plants.length && i < 5; i++) {
                                                         var plant = plants[i];

@@ -6,20 +6,32 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:include page="shared/header.jsp"/>
-<div id="summary" class="section">
+<c:if test="${empty param.quickview}">
+    <jsp:include page="shared/header.jsp"/>
+</c:if>
+<c:if test="${not empty param.quickview}">
+    <jsp:include page="shared/header-lite.jsp"/>
+</c:if>
+<div id="detail-summary">
+    <div id="detail-overlay" style="background-image: url(${plant.image})"></div>
     <div class="grid container">
-        <div class="m-2 d-1">
-            <div id="thumbnails" class="thumbnail">
+        <div class="m-2 d-1 d-pt-2">
+            <div id="detail-thumbnails" class="thumbnail">
                 <img src="${plant.image}"/>
             </div>
         </div>
-        <div id="previewer" class="m-8 d-5 d-pl-4 d-pr-4 thumbnail">
-            <img src="${plant.image}"/>
+        <div class="m-8 d-5 d-pl-4">
+            <div id="previewer">
+                <img src="${plant.image}"/>
+            </div>
         </div>
-        <div class="m-10 d-4 d-pl-4">
+        <div class="d-none m-block">
             <a class="no-underline" href="${plant.link}" target="_blank"><h1 class="accent-color">${plant.name}</h1></a>
-            
+            <span class="price">${dao.getReadablePrice(plant)} vnđ</span><br/>
+            <small class="handwriting">${domain}</small>
+        </div>
+        <div class="m-none d-block d-4 d-pl-4 d-pr-4" id="detail-description">
+            <a class="no-underline" href="${plant.link}" target="_blank"><h1 class="accent-color">${plant.name}</h1></a>
             <span class="price">${dao.getReadablePrice(plant)} vnđ</span><br/>
             <small class="handwriting">${domain}</small>
             <div class="small-text">
@@ -89,37 +101,34 @@
         </div>
     </div>
 </div>
+<c:if test="${not empty dao.plantList}">
 <div class="section">
     <div class="container">
-        <h2>Cây tương tự</h2>
-        <div class="grid">
-            <c:forEach items="${dao.plantList}" var="item" varStatus="counter">
-                <div id="product-${counter.count}" class="a-product m-5 d-2">
-                    <div class="overlay">
-                        <div class="center">
-                            <a target="_blank" href="${item.link}" class="wave">Go to site</a>
-                            <div class="d-pb-2"></div>
-                            <a href="FrontController?action=detail&id=${item.id}" class="wave">View detail</a>
-                            <div class="d-pb-2"></div>
-                            <a href="#" class="wave">Comparison</a>
-                        </div>
-                    </div>
-                    <div class="preview">
-                        <img src="${item.image}" alt="${item.name}">
-                    </div>
-                    <div class="meta">
-                        <h4 class="name">${item.name}</h4>
-                        <span class="price">${dao.getReadablePrice(item)} vnđ</span><br/>
-                        <small class="handwriting">${dao.getDomain(item)}</small>
-                    </div>
-                </div>
-            </c:forEach>
-        </div>
+        <h2>So với các sản phẩm khác</h2>
+        <table border="0">
+            <tbody>
+                <c:forEach items="${dao.plantList}" var="item" varStatus="counter">
+                    <tr>
+                        <td width="120"><img src="${item.image}" alt="${item.name}" width="120"></td>
+                        <td>
+                            <a href="FrontController?action=detail&id=${item.id}" class="wave">${item.name}</a>
+                        </td>
+                        <td width="150" class="m-none"><small class="handwriting">${dao.getDomain(item)}</small></td>
+                        <td class="right-text">
+                            <span class="price">${dao.getReadablePrice(item)} vnđ</span>
+                            <span class="diff-price">${dao.comparePrice(item, plant)}</span>
+                        </td>
+                        <td width="150" class="m-none"><a target="_blank" href="${item.link}" class="wave">Đến trang gốc</a></td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
     </div>
 </div>
+</c:if>
 <script>
     function loadThumbnail() {
-        var container = document.getElementById('thumbnails');
+        var container = document.getElementById('detail-thumbnails');
         container.children[0].onclick = viewThumbnail;
         var content = document.getElementById('real-content');
         var imgs = content.getElementsByTagName('img');
@@ -132,7 +141,9 @@
     }
     function viewThumbnail() {
         var previewer = document.querySelector('#previewer img');
+        var overlay = document.querySelector('#detail-overlay');
         previewer.src = this.src;
+        overlay.style.backgroundImage = 'url(' + this.src + ')';
     }
     window.onload = function() {
         <c:if test="${not empty html}">
@@ -143,7 +154,13 @@
         loadThumbnail();
     };
 </script>
-<jsp:include page="shared/footer.jsp"/>
+<c:if test="${empty param.quickview}">
+    <jsp:include page="shared/footer.jsp"/>
+</c:if>
+<c:if test="${not empty param.quickview}">
+        </body>
+    </html>
+</c:if>
 <c:if test="${not empty html}">
     <!-- Because this section contains serious invalid html data, it should be at the very end of the page -->
     <div id="origin-content" style="display: none">${html}</div>

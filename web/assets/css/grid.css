@@ -79,6 +79,12 @@
 .d-10 {
 	width: 100%;
 }
+.d-none {
+    display: none;
+}
+.d-block {
+    display: block;
+}
 @media (max-width: 1000px) {
 	.m-1 {
 		width: 10%;
@@ -146,4 +152,10 @@
 	.m-pb-4 {
 		padding-bottom: 20px;
 	}
+        .m-none {
+            display: none;
+        }
+        .m-block {
+            display: block;
+        }
 }

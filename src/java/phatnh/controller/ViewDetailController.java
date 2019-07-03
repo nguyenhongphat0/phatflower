@@ -36,6 +36,7 @@ public class ViewDetailController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String id = request.getParameter("id");
+        String quickview = request.getParameter("quickview");
         try {
             PlantDAO dao = new PlantDAO();
             Plant plant = dao.find(id);
@@ -44,7 +45,9 @@ public class ViewDetailController extends HttpServlet {
             String domain = dao.getDomain(plant);
             request.setAttribute("domain", domain);
             
-            dao.findSimilar(plant.getName());
+            if (quickview == null) {
+                dao.findSimilar(plant.getName());
+            }
             request.setAttribute("dao", dao);
             
             String content = dao.fetchContent(id);

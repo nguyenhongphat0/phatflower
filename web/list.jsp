@@ -52,11 +52,11 @@
                     <div id="product-${item.id}" class="a-product m-5 d-2">
                         <div class="overlay">
                             <div class="center">
-                                <a target="_blank" href="${item.link}" class="wave">Go to site</a>
+                                <a class="wave" onclick="quickview(${item.id})">Xem nhanh</a>
                                 <div class="d-pb-2"></div>
-                                <a href="FrontController?action=detail&id=${item.id}" class="wave">View detail</a>
+                                <a href="FrontController?action=detail&id=${item.id}" href="#" class="wave">So sánh giá</a>
                                 <div class="d-pb-2"></div>
-                                <a href="#" class="wave">Comparison</a>
+                                <a target="_blank" href="${item.link}" class="wave">Đến trang gốc</a>
                             </div>
                         </div>
                         <div class="preview">
@@ -74,6 +74,16 @@
     </div>
 </div>
 <script>
+    function quickview(id) {
+        var container = document.getElementById('quick-view-container');
+        var qv = document.getElementById('quick-view');
+        container.classList.add('show');
+        qv.src = 'FrontController?action=detail&quickview=true&id=' + id;
+    }
+    function hideQuickview() {
+        var container = document.getElementById('quick-view-container');
+        container.classList.remove('show');
+    }
     function show(product) {
         product.classList.remove('hidden');
     }
@@ -165,7 +175,7 @@
                 var price = plant.querySelector('price').textContent;
                 var link = plant.querySelector('link').textContent;
                 var image = plant.querySelector('image').textContent;
-                container.innerHTML += '<div id="product-'+ id +'" class="a-product m-5 d-2"><div class="overlay"><div class="center"><a target="_blank" href="' + link + '" class="wave">Go to site</a><div class="d-pb-2"></div><a href="FrontController?action=detail&id=' + id + '" class="wave">View detail</a><div class="d-pb-2"></div><a href="#" class="wave">Comparison</a></div></div><div class="preview"><img src="' + image + '" alt="' + name + '"></div><div class="meta"><h4 class="name">' + name + '</h4><span class="price">' + formatPrice(price) + ' vnđ</span><br/><small class="handwriting">' + getDomain(link) + '</small></div></div>'
+                container.innerHTML += '<div id="product-'+ id +'" class="a-product m-5 d-2"><div class="overlay"><div class="center"><a href="#" class="wave" onclick="quickview(' + id + ')">Xem nhanh</a><div class="d-pb-2"></div><a href="FrontController?action=detail&id=' + id + '" class="wave">So sánh giá</a><div class="d-pb-2"></div><a target="_blank" href="' + link + '" class="wave">Đến trang gốc</a></div></div><div class="preview"><img src="' + image + '" alt="' + name + '"></div><div class="meta"><h4 class="name">' + name + '</h4><span class="price">' + formatPrice(price) + ' vnđ</span><br/><small class="handwriting">' + getDomain(link) + '</small></div></div>'
             }
             filterByCategory();
             countProducts(false);
@@ -204,4 +214,8 @@
     }
     countProducts(true);
 </script>
+<div id="quick-view-container" onclick="hideQuickview()">
+    <iframe id="quick-view" src=""/>
+</div>
+
 <jsp:include page="shared/footer.jsp"/>

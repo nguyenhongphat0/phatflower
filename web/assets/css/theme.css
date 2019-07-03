@@ -5,8 +5,10 @@ h1, h2, h3, h4, h5, h6 {
     text-transform: uppercase;
 }
 table {
+    table-layout: fixed;
     border-collapse: collapse;
     border: 1px solid #f2f2f2;
+    width: 100%;
 }
 thead {
     background-color: #151b26;
@@ -213,7 +215,7 @@ a.wave {
     padding: 8px;
 }
 .a-product .preview img {
-    object-fit: contain;
+    object-fit: cover;
     width: 100%;
     height: 200px;
 }
@@ -250,15 +252,6 @@ a.wave {
 .accent-background {
     background-color: var(--accent);
 }
-.small-text {
-    font-size: 12px;
-    color: gray;
-    
-}
-.thumbnail img {
-    width: 100%;
-    height: auto;
-}
 #quick-search-result {
     background-color: white;
     position: absolute;
@@ -281,4 +274,77 @@ a.wave {
 }
 .absolute {
     position: absolute;
+}
+.diff-price {
+    display: block;
+    color: gray;
+    font-style: italic;
+}
+#detail-summary {
+    position: relative;
+    max-height: calc(100vh - 150px);
+    overflow: hidden;
+}
+#detail-description {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    overflow: auto;
+    color: white;
+}
+#detail-description .small-text {
+    font-size: 14px;
+    color: black;
+    filter: grayscale(1) invert(1);
+}
+#detail-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -100;
+    background-size: cover;
+    background-position: center;
+    transition-duration: 0.5s;
+    filter: grayscale(1) brightness(0.25);
+}
+#detail-thumbnails {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+#detail-thumbnails img {
+    width: 100%;
+    height: auto;
+    border: 3px solid white;
+    box-sizing: border-box;
+}
+#previewer {
+    height: 100%;
+}
+#previewer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+#quick-view-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: #fffffff0;
+    opacity: 0;
+    transition-duration: 1s;
+    z-index: 100;
+}
+#quick-view-container.show {
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+}
+#quick-view {
+    margin: auto;
+    margin-top: 10%;
+    display: block;
+    border: none;
+    width: 80%;
+    height: 80%;
 }

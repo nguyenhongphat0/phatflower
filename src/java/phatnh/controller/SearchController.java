@@ -17,6 +17,7 @@ import javax.xml.bind.Marshaller;
 import phatnh.dao.PlantDAO;
 import phatnh.model.Plants;
 import phatnh.util.ErrorHandler;
+import phatnh.util.XMLUtil;
 
 /**
  *
@@ -36,10 +37,11 @@ public class SearchController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         response.setContentType("text/xml;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            String search = request.getParameter("search");
+            String search = XMLUtil.getVietnameseString(request.getParameter("search"));
             PlantDAO dao = new PlantDAO();
             dao.search(search);
             JAXBContext jc = JAXBContext.newInstance(Plants.class);
