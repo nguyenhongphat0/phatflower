@@ -70,6 +70,17 @@
                     </div>
                 </c:forEach>
             </div>
+            <div id="pagination">
+                <span>Số sản phẩm trên 1 trang: </span>
+                <select class="wave" onchange="changeLimit(this)">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="999999999">Tất cả</option>
+                </select>
+                <span id="pagination-container"></span>
+            </div>
         </div>
     </div>
 </div>
@@ -211,8 +222,57 @@
         filterByCategory();
         filterByKeyword();
         countProducts(true);
+        paginate(1);
     }
     countProducts(true);
+    pagination = {
+        limit: 10,
+        page: 1,
+        count: 0
+    }
+    function changeLimit(that) {
+        pagination.limit = that.value;
+        paginate(1);
+    }
+    function clearOutside() {
+        var products = document.querySelectorAll('.a-product');
+        var length = products.length;
+        for (var i = 0; i < length; i++) {
+            var product = products[i];
+            product.classList.remove('outside');
+        }
+    }
+    function paginate(page) {
+        pagination.page = page;
+        pagination.count = 0;
+        var products = document.querySelectorAll('.a-product');
+        var min = pagination.limit*(pagination.page - 1);
+        var max = pagination.limit*pagination.page - 1;
+        clearOutside();
+        for (var i = 0; i < products.length; i++) {
+            var product = products[i];
+            if (!product.classList.contains('hidden')) {
+                if (pagination.count < min || pagination.count > max) {
+                    product.classList.add('outside');
+                }
+                pagination.count++;
+            }
+        }
+        generatePaginations();
+    }
+    paginate(1);
+    function generatePaginations() {
+        var container = document.getElementById('pagination-container');
+        container.innerHTML = '';
+        var n = Math.ceil(pagination.count/pagination.limit)
+        for (var i = 1; i <= n; i++) {
+            var active = '';
+            if (i === pagination.page) {
+                active = ' active';
+            }
+            container.innerHTML += '<a onclick="paginate(' + i + ')" class="wave' + active + '">' + i + '</a>';
+        }
+    }
 </script>
 <div id="quick-view-container" onclick="hideQuickview()">
     <iframe id="quick-view" src=""/>
