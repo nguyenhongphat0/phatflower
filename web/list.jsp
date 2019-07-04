@@ -11,10 +11,10 @@
 <div class="section">
     <div class="grid container">
         <div class="m-10 d-3 d-pr-4">
-            <h3>Phân loại</h3>
+            <h1 class="light">Phân loại</h1>
             <div class="hr"></div>
             <p>
-                <small><b>Theo tên</b></small>
+                <h5>Theo tên</h5>
                 <div>
                     <input id="keyword" onkeyup="addKeywordToFilter()" type="text" name="search" style="width: calc(100% - 150px)">
                     <button onclick="addKeywordToFilter()" class="wave" type="submit">Tìm ngay</button>
@@ -22,7 +22,7 @@
             </p>
             <div class="hr"></div>
             <p>
-                <small><b>Thể loại</b></small>
+                <h5>Thể loại</h5>
                 <div>
                     <c:import var="xml" url="WEB-INF/xml/categories.xml" charEncoding="UTF-8"></c:import>
                     <x:parse var="doc" doc="${xml}"></x:parse>
@@ -44,9 +44,9 @@
                 <input type="hidden" name="ids" id="export-ids">
                 <button type="submit" class="wave">Xuất ra PDF</button>
             </form>
-            <h3 id="summary-title">Tất cả ${param.category}</h3>
+            <h1 class="light" id="summary-title">Tất cả ${param.category}</h1>
             <div class="hr"></div>
-            <small id="summary-description"></small>
+            <h5 id="summary-description"></h5>
             <div id="products-container" class="grid">
                 <c:forEach items="${dao.plantList}" var="item">
                     <div id="product-${item.id}" class="a-product m-5 d-2">
@@ -136,7 +136,6 @@
         } else {
             removeCategoryFromFilter(category);
         }
-        summary.title.innerHTML = 'Kết quả tìm kiếm';
         filterAll();
     }
     function filterByCategory() {
@@ -181,12 +180,7 @@
             var plants = res.responseXML.getElementsByTagName('plant');
             for (var i = 0; i < plants.length; i++) {
                 var plant = plants[i];
-                var id = plant.querySelector('id').textContent;
-                var name = plant.querySelector('name').textContent;
-                var price = plant.querySelector('price').textContent;
-                var link = plant.querySelector('link').textContent;
-                var image = plant.querySelector('image').textContent;
-                container.innerHTML += '<div id="product-'+ id +'" class="a-product m-5 d-2"><div class="overlay"><div class="center"><a href="#" class="wave" onclick="quickview(' + id + ')">Xem nhanh</a><div class="d-pb-2"></div><a href="FrontController?action=detail&id=' + id + '" class="wave">So sánh giá</a><div class="d-pb-2"></div><a target="_blank" href="' + link + '" class="wave">Đến trang gốc</a></div></div><div class="preview"><img src="' + image + '" alt="' + name + '"></div><div class="meta"><h4 class="name">' + name + '</h4><span class="price">' + formatPrice(price) + ' vnđ</span><br/><small class="handwriting">' + getDomain(link) + '</small></div></div>'
+                container.innerHTML += plant2HTML(plant);
             }
             filterByCategory();
             countProducts(false);
@@ -218,6 +212,7 @@
         }
     }
     function filterAll() {
+        summary.title.innerHTML = 'Kết quả tìm kiếm';
         showAll();
         filterByCategory();
         filterByKeyword();

@@ -35,3 +35,16 @@ function getDomain(url) {
     domain = domain.substring(0, domain.indexOf("/"));
     return domain;
 }
+
+function plant2HTML(plant, noquickview) {
+    var id = plant.querySelector('id').textContent;
+    var name = plant.querySelector('name').textContent;
+    var price = plant.querySelector('price').textContent;
+    var link = plant.querySelector('link').textContent;
+    var image = plant.querySelector('image').textContent;
+    var quickview = '<div class="d-pt-4"></div>';
+    if (!noquickview) {
+        quickview = '<a href="#" class="wave" onclick="quickview(' + id + ')">Xem nhanh</a><div class="d-pb-2"></div>';
+    }
+    return '<div id="product-'+ id +'" class="a-product m-5 d-2"><div class="overlay"><div class="center">' + quickview + '<a href="FrontController?action=detail&id=' + id + '" class="wave">So sánh giá</a><div class="d-pb-2"></div><a target="_blank" href="' + link + '" class="wave">Đến trang gốc</a></div></div><div class="preview"><img src="' + image + '" alt="' + name + '"></div><div class="meta"><h4 class="name">' + name + '</h4><span class="price">' + formatPrice(price) + ' vnđ</span><br/><small class="handwriting">' + getDomain(link) + '</small></div></div>';
+}

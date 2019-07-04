@@ -23,6 +23,7 @@ import phatnh.algorithm.Categorize;
 import phatnh.dao.CategoryDAO;
 import phatnh.dao.PlantDAO;
 import phatnh.model.Categories;
+import phatnh.model.Plants;
 import phatnh.util.ErrorHandler;
 import phatnh.util.FlowerCrawler;
 import phatnh.util.XMLUtil;
@@ -71,6 +72,9 @@ public class AdminController extends HttpServlet {
                     break;
                 case "cleanLogs":
                     cleanLogs(request, response);
+                    break;
+                case "mostViewedPlants":
+                    mostViewedPlants(request, response);
                     break;
             }
         } catch (NamingException | SQLException | JAXBException | IOException ex) {
@@ -189,5 +193,15 @@ public class AdminController extends HttpServlet {
     
     private void cleanLogs(HttpServletRequest request, HttpServletResponse response) {
         ErrorHandler.clear();
+    }
+    
+    private void mostViewedPlants(HttpServletRequest request, HttpServletResponse response) throws NamingException, SQLException, JAXBException, IOException {
+        PlantDAO dao = new PlantDAO();
+        String limit = request.getParameter("limit");
+        dao.mostViewedPlants(limit);
+        JAXBContext jc = JAXBContext.newInstance(Plants.class);
+        Marshaller ms = jc.createMarshaller();
+        StringWriter writer = new StringWriter();
+        ms.marshal(dao.getPlants(), response.getWriter());
     }
 }

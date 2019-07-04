@@ -23,12 +23,6 @@ th, td {
 .hidden {
     display: none;
 }
-.handwriting {
-    font-family: 'Segoe Script', sans-serif;
-}
-.capitalize {
-    text-transform: capitalize;
-}
 input:focus {
     outline: none;
 }
@@ -100,9 +94,6 @@ button:active {
 }
 .center-text {
     text-align: center;
-}
-.white-text {
-    color: white;
 }
 a.no-underline {
     text-decoration: none;
@@ -331,9 +322,11 @@ a.wave {
     position: fixed;
     left: 0;
     top: 0;
+    width: 0;
+    height: 0;
     background: #fffffff0;
     opacity: 0;
-    transition-duration: 1s;
+    transition: opacity 1s;
     z-index: 100;
 }
 #quick-view-container.show {
@@ -355,4 +348,21 @@ a.wave {
 #pagination-container .active {
     color: var(--accent);
     font-weight: bold;
+}
+.handwriting {
+    font-family: 'Segoe Script', sans-serif;
+}
+.capitalize {
+    text-transform: capitalize;
+}
+.lowercase {
+    text-transform: lowercase;
+}
+.white-text {
+    color: white !important;
+}
+#popular-keywords a {
+    line-height: 30px;
+    color: white;
+    text-transform: lowercase;
 }

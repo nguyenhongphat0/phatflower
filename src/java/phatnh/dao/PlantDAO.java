@@ -307,4 +307,32 @@ public class PlantDAO implements Serializable {
             ErrorHandler.handle(ex);
         }
     }
+    
+    public void mostViewedPlants(String limit) {
+        try {
+            String sql = "SELECT count(a.id) as 'views', p.* FROM analytics a, products p "
+                    + "WHERE a.product IS NOT NULL and  a.product = p.id "
+                    + "GROUP BY a.product "
+                    + "ORDER BY views DESC "
+                    + "LIMIT " + limit;
+            new QueryBuilder()
+                    .prepare(sql)
+                    .executeQuery()
+                    .fetch(new QueryBuilder.ResultSetCallback() {
+                        @Override
+                        public void forEach(ResultSet res) throws SQLException {
+                            Plant plant = new Plant();
+                            plant.setId(res.getBigDecimal("id"));
+                            plant.setName(res.getString("name"));
+                            plant.setLink(res.getString("link"));
+                            plant.setImage(res.getString("image"));
+                            plant.setPrice(res.getBigDecimal("price"));
+                            getPlantList().add(plant);
+                        }
+                    })
+                    .close();
+        } catch (NamingException | SQLException ex) {
+            ErrorHandler.handle(ex);
+        }
+    }
 }
