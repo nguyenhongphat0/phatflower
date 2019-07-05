@@ -71,7 +71,7 @@
             <div class="d-2">
                 <a href="${pageContext.request.contextPath}"><img class="admin-logo" src="${pageContext.request.contextPath}/assets/img/logo.png" title="Phat Flower"/></a>
                 <div class="admin-menu d-pt-4">
-                    <a onclick="show('analytics')" class="wave">Tổng quan</a>
+                    <a onclick="show('analytics'); analizeAll();" class="wave">Tổng quan</a>
                     <a onclick="show('crawl')" class="wave">Cào sản phẩm</a>
                     <a onclick="show('categorize'); fetchCategories();" class="wave">Phân loại sản phẩm</a>
                     <a onclick="show('logs'); fetchLogs()" class="wave">Nhật ký hệ thống</a>
@@ -82,13 +82,33 @@
                 <div id="notification" class="hidden"></div>
                 <div id="analytics">
                     <h1>Tổng quan</h1>
+                    <h3>Lượt xem thời gian thực</h3>
+                    <table id="real-time-views-table">
+                        <thead>
+                            <tr>
+                                <th>Thời gian</th>
+                                <th width="100" style="text-align: left">Số lượng</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <h3>Số lượt xem theo ngày</h3>
+                    <table id="daily-views-table">
+                        <thead>
+                            <tr>
+                                <th>Ngày</th>
+                                <th width="100" style="text-align: left">Số lượng</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
                     <h3>Các trang truy cập nhiều nhất</h3>
                     <table id="urls-table">
                         <thead>
                             <tr>
                                 <th width="50">STT</th>
                                 <th>Trang</th>
-                                <th width="50">Số lượng</th>
+                                <th width="100" style="text-align: left">Số lượng</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -99,7 +119,7 @@
                             <tr>
                                 <th width="50">STT</th>
                                 <th>Trình duyệt</th>
-                                <th width="50">Số lượng</th>
+                                <th width="100" style="text-align: left">Số lượng</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -284,33 +304,73 @@
                     action: 'admin',
                     task: 'analizeUserAgent'
                 }, function(res) {
-                    var userAgentTable = document.querySelector('#user-agent-table tbody');
+                    var table = document.querySelector('#user-agent-table tbody');
+                    table.innerHTML = '';
                     var analytics = res.responseXML.getElementsByTagName('analytic');
                     for (var i = 0; i < analytics.length; i++) {
                         var analytic = analytics[i];
                         var value = analytic.querySelector('value').textContent;
                         var count = analytic.querySelector('count').textContent;
-                        userAgentTable.innerHTML += '<tr><td>' + (i + 1) + '</td><td>' + value + '</td><td>' + count + '</td></tr>';
+                        table.innerHTML += '<tr><td>' + (i + 1) + '</td><td>' + value + '</td><td>' + count + '</td></tr>';
                     }
                 });
             }
-            analizeUserAgent();
             function analizePageUrl() {
                 request({
                     action: 'admin',
                     task: 'analizePageUrl'
                 }, function(res) {
-                    var userAgentTable = document.querySelector('#urls-table tbody');
+                    var table = document.querySelector('#urls-table tbody');
+                    table.innerHTML = '';
                     var analytics = res.responseXML.getElementsByTagName('analytic');
                     for (var i = 0; i < analytics.length; i++) {
                         var analytic = analytics[i];
                         var value = analytic.querySelector('value').textContent;
                         var count = analytic.querySelector('count').textContent;
-                        userAgentTable.innerHTML += '<tr><td>' + (i + 1) + '</td><td><a href="FrontController?' + value + '" target="_blank">' + value + '</a></td><td>' + count + '</td></tr>';
+                        table.innerHTML += '<tr><td>' + (i + 1) + '</td><td><a href="FrontController?' + value + '" target="_blank">' + value + '</a></td><td>' + count + '</td></tr>';
                     }
                 });
             }
-            analizePageUrl();
+            function analizeDailyViews() {
+                request({
+                    action: 'admin',
+                    task: 'analizeDailyViews'
+                }, function(res) {
+                    var table = document.querySelector('#daily-views-table tbody');
+                    table.innerHTML = '';
+                    var analytics = res.responseXML.getElementsByTagName('analytic');
+                    for (var i = 0; i < analytics.length; i++) {
+                        var analytic = analytics[i];
+                        var value = analytic.querySelector('value').textContent;
+                        var count = analytic.querySelector('count').textContent;
+                        table.innerHTML += '<tr><td>' + value + '</td><td>' + count + '</td></tr>';
+                    }
+                });
+            }
+            function analizeRealTimeViews() {
+                request({
+                    action: 'admin',
+                    task: 'analizeRealTimeViews'
+                }, function(res) {
+                    var table = document.querySelector('#real-time-views-table tbody');
+                    table.innerHTML = '';
+                    var analytics = res.responseXML.getElementsByTagName('analytic');
+                    for (var i = 0; i < analytics.length; i++) {
+                        var analytic = analytics[i];
+                        var value = analytic.querySelector('value').textContent;
+                        var count = analytic.querySelector('count').textContent;
+                        table.innerHTML += '<tr><td>' + value + '</td><td>' + count + '</td></tr>';
+                    }
+                });
+                setTimeout(analizeRealTimeViews, 1000);
+            }
+            function analizeAll() {
+                analizeRealTimeViews();
+                analizeDailyViews();
+                analizePageUrl();
+                analizeUserAgent();
+            }
+            analizeAll();
         </script>
     </body>
 </html>

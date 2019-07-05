@@ -83,6 +83,12 @@ public class AdminController extends HttpServlet {
                 case "analizePageUrl":
                     analizePageUrl(request, response);
                     break;
+                case "analizeDailyViews":
+                    analizeDailyViews(request, response);
+                    break;
+                case "analizeRealTimeViews":
+                    analizeRealTimeViews(request, response);
+                    break;
             }
         } catch (NamingException | SQLException | JAXBException | IOException ex) {
             ErrorHandler.handle(ex);
@@ -219,5 +225,15 @@ public class AdminController extends HttpServlet {
     private void analizePageUrl(HttpServletRequest request, HttpServletResponse response) {
         AnalyticDAO dao = new AnalyticDAO();
         dao.analizePageUrls(out);
+    }
+
+    private void analizeDailyViews(HttpServletRequest request, HttpServletResponse response) {
+        AnalyticDAO dao = new AnalyticDAO();
+        dao.analizeDailyViews(out);
+    }
+
+    private void analizeRealTimeViews(HttpServletRequest request, HttpServletResponse response) {
+        AnalyticDAO dao = new AnalyticDAO();
+        dao.analizeRealTimeViews(out);
     }
 }

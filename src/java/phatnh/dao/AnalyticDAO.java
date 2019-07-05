@@ -38,15 +38,7 @@ public class AnalyticDAO implements Serializable {
         String sql = "SELECT user_agent as value, count(id) as count FROM analytics "
                 + "GROUP BY user_agent "
                 + "ORDER BY count DESC";
-        try {
-            QueryBuilder qb = new QueryBuilder()
-                    .prepare(sql)
-                    .executeQuery();
-            writeResult(qb.getResultSet(), writer);
-            qb.close();
-        } catch (NamingException | SQLException | XMLStreamException ex) {
-            ErrorHandler.handle(ex);
-        }
+        writeResult(sql, writer);
     }
     
     public void analizePageUrls(PrintWriter writer) {
@@ -54,35 +46,52 @@ public class AnalyticDAO implements Serializable {
                 + "WHERE page_url IS NOT NULL "
                 + "GROUP BY page_url "
                 + "ORDER BY count DESC";
+        writeResult(sql, writer);
+    }
+    
+    public void analizeDailyViews(PrintWriter writer) {
+        String sql = "SELECT date(moment) AS value, count(id) AS count FROM analytics "
+                + "GROUP BY date(moment) "
+                + "ORDER BY value DESC "
+                + "LIMIT 30";
+        writeResult(sql, writer);
+    }
+    
+    public void analizeRealTimeViews(PrintWriter writer) {
+        String sql = "SELECT time(moment) AS value, count(id) as count FROM analytics "
+                + "WHERE moment >= now() - INTERVAL 1 HOUR "
+                + "GROUP BY minute(moment) "
+                + "ORDER BY value DESC";
+        writeResult(sql, writer);
+    }
+    
+    private void writeResult(String sql, PrintWriter writer) {
         try {
             QueryBuilder qb = new QueryBuilder()
                     .prepare(sql)
                     .executeQuery();
-            writeResult(qb.getResultSet(), writer);
+            ResultSet res = qb.getResultSet();
+            XMLOutputFactory xof = XMLOutputFactory.newInstance();
+            XMLStreamWriter xsw = xof.createXMLStreamWriter(writer);
+            xsw.writeStartDocument();
+            xsw.writeStartElement("analytics");
+            while (res.next()) {
+                xsw.writeStartElement("analytic");
+                xsw.writeStartElement("value");
+                xsw.writeCharacters(res.getString("value"));
+                xsw.writeEndElement();
+                xsw.writeStartElement("count");
+                xsw.writeCharacters(res.getString("count"));
+                xsw.writeEndElement();
+                xsw.writeEndElement();
+            }
+            xsw.writeEndElement();
+            xsw.writeEndDocument();
+            xsw.flush();
+            xsw.close();
             qb.close();
         } catch (NamingException | SQLException | XMLStreamException ex) {
             ErrorHandler.handle(ex);
         }
-    }
-    
-    public void writeResult(ResultSet res, PrintWriter writer) throws XMLStreamException, SQLException {
-        XMLOutputFactory xof = XMLOutputFactory.newInstance();
-        XMLStreamWriter xsw = xof.createXMLStreamWriter(writer);
-        xsw.writeStartDocument();
-        xsw.writeStartElement("analytics");
-        while (res.next()) {
-            xsw.writeStartElement("analytic");
-            xsw.writeStartElement("value");
-            xsw.writeCharacters(res.getString("value"));
-            xsw.writeEndElement();
-            xsw.writeStartElement("count");
-            xsw.writeCharacters(res.getString("count"));
-            xsw.writeEndElement();
-            xsw.writeEndElement();
-        }
-        xsw.writeEndElement();
-        xsw.writeEndDocument();
-        xsw.flush();
-        xsw.close();
     }
 }

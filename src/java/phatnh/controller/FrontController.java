@@ -54,7 +54,9 @@ public class FrontController extends HttpServlet {
                     url = "ExportPDFController";
                     break;
             }
-            recordAnalytic(request, response);
+            if (!action.equals("admin")) {
+                recordAnalytic(request, response);
+            }
         } catch (Exception e) {
             ErrorHandler.handle(e);
         } finally {
