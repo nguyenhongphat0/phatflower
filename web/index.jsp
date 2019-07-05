@@ -118,9 +118,7 @@
                 }
             });
         }
-        window.onload = function() {
-            fetchKeywords();
-        }
+        fetchKeywords();
     </script>
 </div>
 <div class="section">

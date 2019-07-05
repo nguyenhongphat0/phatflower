@@ -20,6 +20,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import phatnh.algorithm.Categorize;
+import phatnh.dao.AnalyticDAO;
 import phatnh.dao.CategoryDAO;
 import phatnh.dao.PlantDAO;
 import phatnh.model.Categories;
@@ -76,12 +77,17 @@ public class AdminController extends HttpServlet {
                 case "mostViewedPlants":
                     mostViewedPlants(request, response);
                     break;
+                case "analizeUserAgent":
+                    analizeUserAgent(request, response);
+                    break;
+                case "analizePageUrl":
+                    analizePageUrl(request, response);
+                    break;
             }
         } catch (NamingException | SQLException | JAXBException | IOException ex) {
             ErrorHandler.handle(ex);
         } finally {
-            out.flush();
-            out.close();
+//            out.close();
         }
     }
 
@@ -203,5 +209,15 @@ public class AdminController extends HttpServlet {
         Marshaller ms = jc.createMarshaller();
         StringWriter writer = new StringWriter();
         ms.marshal(dao.getPlants(), response.getWriter());
+    }
+
+    private void analizeUserAgent(HttpServletRequest request, HttpServletResponse response) {
+        AnalyticDAO dao = new AnalyticDAO();
+        dao.analizeUserAgent(out);
+    }
+
+    private void analizePageUrl(HttpServletRequest request, HttpServletResponse response) {
+        AnalyticDAO dao = new AnalyticDAO();
+        dao.analizePageUrls(out);
     }
 }

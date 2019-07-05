@@ -71,17 +71,40 @@
             <div class="d-2">
                 <a href="${pageContext.request.contextPath}"><img class="admin-logo" src="${pageContext.request.contextPath}/assets/img/logo.png" title="Phat Flower"/></a>
                 <div class="admin-menu d-pt-4">
+                    <a onclick="show('analytics')" class="wave">Tổng quan</a>
                     <a onclick="show('crawl')" class="wave">Cào sản phẩm</a>
-                    <div class="d-pl-4 d-pr-4 d-pb-4"><small style="color: lightgray">Nhập đường dẫn các trang sản phẩm để hệ thống tìm và nạp sản phẩm vào cơ sở dữ liệu</small></div>
                     <a onclick="show('categorize'); fetchCategories();" class="wave">Phân loại sản phẩm</a>
-                    <div class="d-pl-4 d-pr-4 d-pb-4"><small style="color: lightgray">Phân rã tên các sản phẩm để tìm các danh mục thích hợp, tuỳ chỉnh các danh mục trên thanh điều hướng cũng như các tiêu chí lọc sản phẩm</small></div>
                     <a onclick="show('logs'); fetchLogs()" class="wave">Nhật ký hệ thống</a>
-                    <div class="d-pl-4 d-pr-4 d-pb-4"><small style="color: lightgray">Xem các lỗi xảy ra trong quá trình hệ thống hoạt động</small></div>
                     <a class="wave logout" href="index.jsp">&lt; Đăng xuất</a>
                 </div>
             </div>
             <div class="d-8">
                 <div id="notification" class="hidden"></div>
+                <div id="analytics">
+                    <h1>Tổng quan</h1>
+                    <h3>Các trang truy cập nhiều nhất</h3>
+                    <table id="urls-table">
+                        <thead>
+                            <tr>
+                                <th width="50">STT</th>
+                                <th>Trang</th>
+                                <th width="50">Số lượng</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <h3>Trình duyệ̣t</h3>
+                    <table id="user-agent-table">
+                        <thead>
+                            <tr>
+                                <th width="50">STT</th>
+                                <th>Trình duyệt</th>
+                                <th width="50">Số lượng</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
                 <div id="crawl">
                     <h1>Cào sản phẩm</h1>
                     <h2>Nhập đường dẫn để cào</h2>
@@ -137,12 +160,13 @@
                 document.getElementById(id).classList.add('hidden');
             }
             function show(id) {
+                hide('analytics');
                 hide('crawl');
                 hide('categorize');
                 hide('logs');
                 document.getElementById(id).classList.remove('hidden');
             }
-            show('crawl');
+            show('analytics');
             function popup(content, timeout) {
                 var notification = document.getElementById('notification');
                 notification.innerHTML = content;
@@ -255,6 +279,38 @@
                     fetchLogs();
                 });
             }
+            function analizeUserAgent() {
+                request({
+                    action: 'admin',
+                    task: 'analizeUserAgent'
+                }, function(res) {
+                    var userAgentTable = document.querySelector('#user-agent-table tbody');
+                    var analytics = res.responseXML.getElementsByTagName('analytic');
+                    for (var i = 0; i < analytics.length; i++) {
+                        var analytic = analytics[i];
+                        var value = analytic.querySelector('value').textContent;
+                        var count = analytic.querySelector('count').textContent;
+                        userAgentTable.innerHTML += '<tr><td>' + (i + 1) + '</td><td>' + value + '</td><td>' + count + '</td></tr>';
+                    }
+                });
+            }
+            analizeUserAgent();
+            function analizePageUrl() {
+                request({
+                    action: 'admin',
+                    task: 'analizePageUrl'
+                }, function(res) {
+                    var userAgentTable = document.querySelector('#urls-table tbody');
+                    var analytics = res.responseXML.getElementsByTagName('analytic');
+                    for (var i = 0; i < analytics.length; i++) {
+                        var analytic = analytics[i];
+                        var value = analytic.querySelector('value').textContent;
+                        var count = analytic.querySelector('count').textContent;
+                        userAgentTable.innerHTML += '<tr><td>' + (i + 1) + '</td><td><a href="FrontController?' + value + '" target="_blank">' + value + '</a></td><td>' + count + '</td></tr>';
+                    }
+                });
+            }
+            analizePageUrl();
         </script>
     </body>
 </html>
