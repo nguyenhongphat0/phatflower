@@ -9,7 +9,13 @@ function request(params, callback) {
     }
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-            callback(xhttp);
+            if (!xhttp.responseXML) {
+                setTimeout(function() {
+                    request(params, callback);
+                }, 100); // try again in 0.1s if something went wrong
+            } else {
+                callback(xhttp);
+            }
         }
     };
     xhttp.open("POST", "FrontController", true);

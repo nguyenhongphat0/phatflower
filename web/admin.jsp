@@ -82,48 +82,44 @@
                 <div id="notification" class="hidden"></div>
                 <div id="analytics">
                     <h1>Tổng quan</h1>
-                    <h3>Lượt xem thời gian thực</h3>
-                    <table id="real-time-views-table">
-                        <thead>
-                            <tr>
-                                <th>Thời gian</th>
-                                <th width="100" style="text-align: left">Số lượng</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                    <h3>Số lượt xem theo ngày</h3>
-                    <table id="daily-views-table">
-                        <thead>
-                            <tr>
-                                <th>Ngày</th>
-                                <th width="100" style="text-align: left">Số lượng</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                    <h3>Các trang truy cập nhiều nhất</h3>
-                    <table id="urls-table">
-                        <thead>
-                            <tr>
-                                <th width="50">STT</th>
-                                <th>Trang</th>
-                                <th width="100" style="text-align: left">Số lượng</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                    <h3>Trình duyệ̣t</h3>
-                    <table id="user-agent-table">
-                        <thead>
-                            <tr>
-                                <th width="50">STT</th>
-                                <th>Trình duyệt</th>
-                                <th width="100" style="text-align: left">Số lượng</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
+                    <div class="grid">
+                        <div class="d-5">
+                            <h3>Lượt xem thời gian thực</h3>
+                            <canvas id="real-time-view-canvas"></canvas>
+                        </div>
+                        <div class="d-5">
+                            <h3>Lượt xem theo ngày</h3>
+                            <canvas id="daily-view-canvas"></canvas>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="d-5">
+                            <h3>Các trang được quan tâm nhất</h3>
+                            <table id="urls-table">
+                                <thead>
+                                    <tr>
+                                        <th width="50">STT</th>
+                                        <th>Trang</th>
+                                        <th width="100" style="text-align: left">Số lượt</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                        <div class="d-5">
+                            <h3>Trình duyệ̣t, thiết bị</h3>
+                            <table id="user-agent-table">
+                                <thead>
+                                    <tr>
+                                        <th width="50">STT</th>
+                                        <th>User Agent</th>
+                                        <th width="100" style="text-align: left">Số lượt</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
                 <div id="crawl">
                     <h1>Cào sản phẩm</h1>
@@ -173,8 +169,9 @@
                 </div>
             </div>
         </div>
-                
+
         <script src="${pageContext.request.contextPath}/assets/js/functions.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/charts.js"></script>
         <script>
             function hide(id) {
                 document.getElementById(id).classList.add('hidden');
@@ -327,7 +324,7 @@
                         var analytic = analytics[i];
                         var value = analytic.querySelector('value').textContent;
                         var count = analytic.querySelector('count').textContent;
-                        table.innerHTML += '<tr><td>' + (i + 1) + '</td><td><a href="FrontController?' + value + '" target="_blank">' + value + '</a></td><td>' + count + '</td></tr>';
+                        table.innerHTML += '<tr><td>' + (i + 1) + '</td><td style="word-break: break-word"><a href="FrontController?' + value + '" target="_blank">' + value + '</a></td><td>' + count + '</td></tr>';
                     }
                 });
             }
@@ -336,15 +333,7 @@
                     action: 'admin',
                     task: 'analizeDailyViews'
                 }, function(res) {
-                    var table = document.querySelector('#daily-views-table tbody');
-                    table.innerHTML = '';
-                    var analytics = res.responseXML.getElementsByTagName('analytic');
-                    for (var i = 0; i < analytics.length; i++) {
-                        var analytic = analytics[i];
-                        var value = analytic.querySelector('value').textContent;
-                        var count = analytic.querySelector('count').textContent;
-                        table.innerHTML += '<tr><td>' + value + '</td><td>' + count + '</td></tr>';
-                    }
+                    drawLineChart(res, 'daily-view-canvas');
                 });
             }
             function analizeRealTimeViews() {
@@ -352,15 +341,7 @@
                     action: 'admin',
                     task: 'analizeRealTimeViews'
                 }, function(res) {
-                    var table = document.querySelector('#real-time-views-table tbody');
-                    table.innerHTML = '';
-                    var analytics = res.responseXML.getElementsByTagName('analytic');
-                    for (var i = 0; i < analytics.length; i++) {
-                        var analytic = analytics[i];
-                        var value = analytic.querySelector('value').textContent;
-                        var count = analytic.querySelector('count').textContent;
-                        table.innerHTML += '<tr><td>' + value + '</td><td>' + count + '</td></tr>';
-                    }
+                    drawLineChart(res, 'real-time-view-canvas');
                 });
                 setTimeout(analizeRealTimeViews, 1000);
             }

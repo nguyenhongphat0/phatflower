@@ -52,7 +52,6 @@ public class AnalyticDAO implements Serializable {
     public void analizeDailyViews(PrintWriter writer) {
         String sql = "SELECT date(moment) AS value, count(id) AS count FROM analytics "
                 + "GROUP BY date(moment) "
-                + "ORDER BY value DESC "
                 + "LIMIT 30";
         writeResult(sql, writer);
     }
@@ -61,7 +60,7 @@ public class AnalyticDAO implements Serializable {
         String sql = "SELECT time(moment) AS value, count(id) as count FROM analytics "
                 + "WHERE moment >= now() - INTERVAL 1 HOUR "
                 + "GROUP BY minute(moment) "
-                + "ORDER BY value DESC";
+                + "ORDER BY value ASC";
         writeResult(sql, writer);
     }
     
