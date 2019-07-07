@@ -35,7 +35,6 @@ import phatnh.util.XMLUtil;
  */
 @WebServlet(name = "AdminController", urlPatterns = {"/AdminController"})
 public class AdminController extends HttpServlet {
-    PrintWriter out;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -50,7 +49,6 @@ public class AdminController extends HttpServlet {
         try {
             request.setCharacterEncoding("UTF-8");
             response.setContentType("text/xml;charset=UTF-8");
-            out = response.getWriter();
             String task = request.getParameter("task");
             switch (task) {
                 case "crawl":
@@ -90,10 +88,9 @@ public class AdminController extends HttpServlet {
                     analizeRealTimeViews(request, response);
                     break;
             }
+            response.getWriter().close();
         } catch (NamingException | SQLException | JAXBException | IOException ex) {
             ErrorHandler.handle(ex);
-        } finally {
-//            out.close();
         }
     }
 
@@ -137,6 +134,7 @@ public class AdminController extends HttpServlet {
     }// </editor-fold>
 
     private void crawl(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
         String url = request.getParameter("url") + "/";
         if (url.startsWith("http://")) {
             url = url.replaceFirst("http://", "");
@@ -154,7 +152,8 @@ public class AdminController extends HttpServlet {
         }        
     }
 
-    private void categorize(HttpServletRequest request, HttpServletResponse response) throws NamingException, SQLException, JAXBException {
+    private void categorize(HttpServletRequest request, HttpServletResponse response) throws NamingException, SQLException, JAXBException, IOException {
+        PrintWriter out = response.getWriter();
         int max = Integer.parseInt(request.getParameter("max"));
         int count = Categorize.categorize(max);
         generateXML();
@@ -162,6 +161,7 @@ public class AdminController extends HttpServlet {
     }
     
     private void fetchCategories(HttpServletRequest request, HttpServletResponse response) throws NamingException, SQLException, JAXBException, IOException {
+        PrintWriter out = response.getWriter();
         CategoryDAO dao = new CategoryDAO();
         dao.all();
         JAXBContext jc = JAXBContext.newInstance(Categories.class);
@@ -172,7 +172,8 @@ public class AdminController extends HttpServlet {
         out.print(xml);
     }
     
-    private void updateCategory(HttpServletRequest request, HttpServletResponse response) throws NamingException, SQLException, JAXBException {
+    private void updateCategory(HttpServletRequest request, HttpServletResponse response) throws NamingException, SQLException, JAXBException, IOException {
+        PrintWriter out = response.getWriter();
         String id = request.getParameter("id");
         String field = request.getParameter("field");
         String value = request.getParameter("value");
@@ -198,7 +199,8 @@ public class AdminController extends HttpServlet {
         dao.insertContent(id, content);
     }
     
-    private void fetchLogs(HttpServletRequest request, HttpServletResponse response) {
+    private void fetchLogs(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
         response.setContentType("text/plain;charset=UTF-8");
         out.println(ErrorHandler.fetch());
     }
@@ -217,23 +219,23 @@ public class AdminController extends HttpServlet {
         ms.marshal(dao.getPlants(), response.getWriter());
     }
 
-    private void analizeUserAgent(HttpServletRequest request, HttpServletResponse response) {
+    private void analizeUserAgent(HttpServletRequest request, HttpServletResponse response) throws IOException {
         AnalyticDAO dao = new AnalyticDAO();
-        dao.analizeUserAgent(out);
+        dao.analizeUserAgent(response.getWriter());
     }
 
-    private void analizePageUrl(HttpServletRequest request, HttpServletResponse response) {
+    private void analizePageUrl(HttpServletRequest request, HttpServletResponse response) throws IOException {
         AnalyticDAO dao = new AnalyticDAO();
-        dao.analizePageUrls(out);
+        dao.analizePageUrls(response.getWriter());
     }
 
-    private void analizeDailyViews(HttpServletRequest request, HttpServletResponse response) {
+    private void analizeDailyViews(HttpServletRequest request, HttpServletResponse response) throws IOException {
         AnalyticDAO dao = new AnalyticDAO();
-        dao.analizeDailyViews(out);
+        dao.analizeDailyViews(response.getWriter());
     }
 
-    private void analizeRealTimeViews(HttpServletRequest request, HttpServletResponse response) {
+    private void analizeRealTimeViews(HttpServletRequest request, HttpServletResponse response) throws IOException {
         AnalyticDAO dao = new AnalyticDAO();
-        dao.analizeRealTimeViews(out);
+        dao.analizeRealTimeViews(response.getWriter());
     }
 }

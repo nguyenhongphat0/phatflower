@@ -22,6 +22,18 @@
             </p>
             <div class="hr"></div>
             <p>
+                <h5>Trang gốc</h5>
+                <div>
+                    <c:forEach items="cayvahoa.net,vuoncayviet.com,webcaycanh.com" var="domain" varStatus="counter">
+                        <div class="checkbox">
+                            <input id="domain-${counter.count}" type="checkbox" name="type" value="senda" onclick="domainCheckboxClick(this, '${domain}')">
+                            <label for="domain-${counter.count}">${domain}</label>
+                        </div>
+                    </c:forEach>
+                </div>
+            </p>
+            <div class="hr"></div>
+            <p>
                 <h5>Thể loại</h5>
                 <div>
                     <c:import var="xml" url="WEB-INF/xml/categories.xml" charEncoding="UTF-8"></c:import>
@@ -65,7 +77,7 @@
                         <div class="meta">
                             <h4 class="name">${item.name}</h4>
                             <span class="price">${dao.getReadablePrice(item)} vnđ</span><br/>
-                            <small class="handwriting">${dao.getDomain(item)}</small>
+                            <small class="domain handwriting">${dao.getDomain(item)}</small>
                         </div>
                     </div>
                 </c:forEach>
@@ -111,6 +123,7 @@
     }
     filter = {
         categories: [],
+        domains: [],
         keyword: ''
     };
     summary = {
@@ -130,11 +143,27 @@
             return category !== c;
         });
     }
+    function addDomainToFilter(domain) {
+        filter.domains.push(domain);
+    }
+    function removeDomainFromFilter(domain) {
+        filter.domains = filter.domains.filter(function(s) {
+            return domain !== s;
+        });
+    }
     function categoryCheckboxClick(that, category) {
         if (that.checked) {
             addCategoryToFilter(category);
         } else {
             removeCategoryFromFilter(category);
+        }
+        filterAll();
+    }
+    function domainCheckboxClick(that, domain) {
+        if (that.checked) {
+            addDomainToFilter(domain);
+        } else {
+            removeDomainFromFilter(domain);
         }
         filterAll();
     }
@@ -151,6 +180,27 @@
             for (var j = 0; j < filter.categories.length; j++) {
                 var category = filter.categories[j];
                 if (name.indexOf(category) >= 0) {
+                    check = true;
+                }
+            }
+            if (!check) {
+                hide(product);
+            }
+        }
+    }
+    function filterByDomain() {
+        if (filter.domains.length === 0) {
+            return;
+        }
+        var products = document.querySelectorAll('.a-product');
+        var length = products.length;
+        for (var i = 0; i < length; i++) {
+            var product = products[i];
+            var domain = product.getElementsByClassName('domain')[0].innerHTML.toLowerCase();
+            var check = false;
+            for (var j = 0; j < filter.domains.length; j++) {
+                var d = filter.domains[j];
+                if (domain.indexOf(d) >= 0) {
                     check = true;
                 }
             }
@@ -183,6 +233,7 @@
                 container.innerHTML += plant2HTML(plant);
             }
             filterByCategory();
+            filterByDomain();
             countProducts(false);
         });
     }
@@ -215,6 +266,7 @@
         summary.title.innerHTML = 'Kết quả tìm kiếm';
         showAll();
         filterByCategory();
+        filterByDomain();
         filterByKeyword();
         countProducts(true);
         paginate(1);

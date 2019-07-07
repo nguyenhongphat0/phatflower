@@ -9,13 +9,7 @@ function request(params, callback) {
     }
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-            if (!xhttp.responseXML) {
-                setTimeout(function() {
-                    request(params, callback);
-                }, 100); // try again in 0.1s if something went wrong
-            } else {
-                callback(xhttp);
-            }
+            callback(xhttp);
         }
     };
     xhttp.open("POST", "FrontController", true);
@@ -52,5 +46,5 @@ function plant2HTML(plant, noquickview) {
     if (!noquickview) {
         quickview = '<a href="#" class="wave" onclick="quickview(' + id + ')">Xem nhanh</a><div class="d-pb-2"></div>';
     }
-    return '<div id="product-'+ id +'" class="a-product m-5 d-2"><div class="overlay"><div class="center">' + quickview + '<a href="FrontController?action=detail&id=' + id + '" class="wave">So sánh giá</a><div class="d-pb-2"></div><a target="_blank" href="' + link + '" class="wave">Đến trang gốc</a></div></div><div class="preview"><img src="' + image + '" alt="' + name + '"></div><div class="meta"><h4 class="name">' + name + '</h4><span class="price">' + formatPrice(price) + ' vnđ</span><br/><small class="handwriting">' + getDomain(link) + '</small></div></div>';
+    return '<div id="product-'+ id +'" class="a-product m-5 d-2"><div class="overlay"><div class="center">' + quickview + '<a href="FrontController?action=detail&id=' + id + '" class="wave">So sánh giá</a><div class="d-pb-2"></div><a target="_blank" href="' + link + '" class="wave">Đến trang gốc</a></div></div><div class="preview"><img src="' + image + '" alt="' + name + '"></div><div class="meta"><h4 class="name">' + name + '</h4><span class="price">' + formatPrice(price) + ' vnđ</span><br/><small class="domain handwriting">' + getDomain(link) + '</small></div></div>';
 }

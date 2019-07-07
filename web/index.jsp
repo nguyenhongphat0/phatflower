@@ -208,7 +208,7 @@
                 </div>
                 <div class="checkbox">
                     <input type="checkbox" checked="true">
-                    <label>Compatible with 99% browsers that support JS</label>
+                    <label>Compatible with 95% browsers that support JS</label>
                 </div>
                 <div class="checkbox">
                     <input type="checkbox" checked="true">
