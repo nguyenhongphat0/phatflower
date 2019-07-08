@@ -38,8 +38,12 @@ public class XMLUtil {
     
     public static String getDomainFromURL(String url) {
         String domain = url;
-        domain = domain.substring(domain.indexOf("//") + 2);
-        domain = domain.substring(0, domain.indexOf("/"));
+        try {
+            domain = domain.substring(domain.indexOf("//") + 2);
+            domain = domain.substring(0, domain.indexOf("/"));
+        } catch (Exception e) {
+            ErrorHandler.handle(e);
+        }
         return domain;
     }
     

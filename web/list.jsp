@@ -258,10 +258,22 @@
     function fetchMore() {
         summary.description.innerHTML = 'Đang tải thêm sản phẩm...';
         var container = document.getElementById('products-container');
+        var domain = filter.domains[0];
+        if (!domain) {
+            domain = '';
+        }
+        var search = filter.keyword;
+        if (!search) {
+            search = filter.categories[0];
+        }
+        if (!search) {
+            search = '';
+        }
         container.innerHTML = '';
         request({
             action: 'search',
-            search: filter.keyword
+            domain: domain,
+            search: search
         }, function(res) {
             var plants = res.responseXML.getElementsByTagName('plant');
             for (var i = 0; i < plants.length; i++) {

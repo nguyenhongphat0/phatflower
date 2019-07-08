@@ -42,7 +42,7 @@ public class ViewListController extends HttpServlet {
                 dao.hot();
             }
         } else {
-            dao.search(category);
+            dao.search(category, "", "100");
         }
         request.setAttribute("dao", dao);
         request.getRequestDispatcher("list.jsp").forward(request, response);

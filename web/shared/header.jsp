@@ -49,11 +49,12 @@
                                                 }
                                                 request({
                                                     action: 'search',
+                                                    limit: 5,
                                                     search: value
                                                 }, function(res) {
                                                     container.innerHTML = '';
                                                     var plants = res.responseXML.getElementsByTagName('plant');
-                                                    for (var i = 0; i < plants.length && i < 5; i++) {
+                                                    for (var i = 0; i < plants.length; i++) {
                                                         var plant = plants[i];
                                                         var id = plant.querySelector('id').textContent;
                                                         var name = plant.querySelector('name').textContent;

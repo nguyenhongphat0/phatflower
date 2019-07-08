@@ -170,11 +170,15 @@ public class PlantDAO implements Serializable {
         }
     }
     
-    public void search(String name) {
+    public void search(String name, String domain, String limit) {
         try {
             new QueryBuilder()
-                    .prepare("SELECT id, name, link, image, price FROM products WHERE name LIKE ? LIMIT 100")
+                    .prepare("SELECT id, name, link, image, price FROM products"
+                            + " WHERE name LIKE ?"
+                            + " AND link LIKE ?"
+                            + " LIMIT " + limit)
                     .setString(1, "%" + name + "%")
+                    .setString(2, "%" + domain + "%")
                     .executeQuery()
                     .fetch(new QueryBuilder.ResultSetCallback() {
                         @Override

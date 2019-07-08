@@ -42,8 +42,16 @@ public class SearchController extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             String search = XMLUtil.getVietnameseString(request.getParameter("search"));
+            String domain = request.getParameter("domain");
+            if (domain == null) {
+                domain = "";
+            }
+            String limit = request.getParameter("limit");
+            if (limit == null) {
+                limit = "100";
+            }
             PlantDAO dao = new PlantDAO();
-            dao.search(search);
+            dao.search(search, domain, limit);
             JAXBContext jc = JAXBContext.newInstance(Plants.class);
             Marshaller ms = jc.createMarshaller();
             ms.marshal(dao.getPlants(), out);

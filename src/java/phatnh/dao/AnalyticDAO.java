@@ -9,8 +9,6 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
@@ -58,7 +56,7 @@ public class AnalyticDAO implements Serializable {
     
     public void analizeRealTimeViews(PrintWriter writer) {
         String sql = "SELECT time(moment) AS value, count(id) as count FROM analytics "
-                + "WHERE moment >= now() - INTERVAL 1 HOUR "
+                + "WHERE moment >= now() - INTERVAL 10 MINUTE "
                 + "GROUP BY minute(moment) "
                 + "ORDER BY value ASC";
         writeResult(sql, writer);
