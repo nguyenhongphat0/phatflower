@@ -136,6 +136,13 @@ public class AdminController extends HttpServlet {
     private void crawl(HttpServletRequest request, HttpServletResponse response) throws IOException {
         PrintWriter out = response.getWriter();
         String url = request.getParameter("url") + "/";
+        String pagesParam = request.getParameter("pages");
+        int pages;
+        try {
+            pages = Integer.parseInt(pagesParam);
+        } catch (NumberFormatException e) {
+            pages = 1;
+        }
         if (url.startsWith("http://")) {
             url = url.replaceFirst("http://", "");
         }
@@ -143,7 +150,7 @@ public class AdminController extends HttpServlet {
             url = "https://" + url;
         }
         try {
-            FlowerCrawler fc = new FlowerCrawler(getServletContext(), url);
+            FlowerCrawler fc = new FlowerCrawler(getServletContext(), url, pages);
             String result = fc.crawl();
             out.print(result);
         } catch (Exception e) {

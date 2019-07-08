@@ -83,7 +83,7 @@ public class ProductParser extends DefaultHandler {
         if (inserted < count) {
             this.message += " Trong đó có " + inserted + " sản phẩm mới, " + (count - inserted - fail) + " sản phẩm bị trùng, " + fail + " sản phẩm lỗi đã không được thêm vào database.";
         }
-        
+        this.message += "<br/>";
     }
 
     public int getCount() {

@@ -85,6 +85,22 @@ public class PlantDAO implements Serializable {
         }
     }
     
+    public int count() {
+        int count = 0;
+        try {
+            QueryBuilder qb = new QueryBuilder()
+                    .prepare("SELECT count(id) FROM products")
+                    .executeQuery();
+            if (qb.getResultSet().next()) {
+                count = qb.getResultSet().getInt(1);
+            }
+            qb.close();
+        } catch (NamingException | SQLException ex) {
+            ErrorHandler.handle(ex);
+        }
+        return count;
+    }
+    
     public void hot() {
         try {
             new QueryBuilder()
@@ -157,7 +173,7 @@ public class PlantDAO implements Serializable {
     public void search(String name) {
         try {
             new QueryBuilder()
-                    .prepare("SELECT id, name, link, image, price FROM products WHERE name LIKE ?")
+                    .prepare("SELECT id, name, link, image, price FROM products WHERE name LIKE ? LIMIT 100")
                     .setString(1, "%" + name + "%")
                     .executeQuery()
                     .fetch(new QueryBuilder.ResultSetCallback() {
@@ -195,11 +211,21 @@ public class PlantDAO implements Serializable {
         }
     }
     
+    public void warming() {
+        try {
+            new QueryBuilder()
+                    .prepare("UPDATE products SET is_hot = 0 WHERE is_hot = 1")
+                    .executeUpdate()
+                    .close();
+        } catch (NamingException | SQLException e) {
+            ErrorHandler.handle(e);
+        }
+    }
+    
     public int insertAll() {
         int count = 0;
         try {
             QueryBuilder qb = new QueryBuilder();
-            qb.prepare("UPDATE products SET is_hot = 0 WHERE is_hot = 1").executeUpdate();
             for (Plant plant : getPlantList()) {
                 boolean exist = false;
                 qb.prepare("SELECT link FROM products WHERE link = ?")

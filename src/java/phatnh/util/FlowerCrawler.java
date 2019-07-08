@@ -13,42 +13,70 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import phatnh.parser.ProductParser;
 import phatnh.builder.RequestBuilder;
+import phatnh.dao.PlantDAO;
 
 /**
  *
  * @author nguyenhongphat0
  */
 public class FlowerCrawler {
-    private final ServletContext context;
-    private final String url, domain, subdomain;
+    private PlantDAO dao;
+    private ServletContext context;
+    private String url, domain, subdomain, prefix, message = "";
+    private int pages, currentPage = 1;
     
     private static final String CAYVAHOA = "https://cayvahoa.net/";
     private static final String VUONCAYVIET = "https://vuoncayviet.com/";
     private static final String WEBCAYCANH = "https://webcaycanh.com/";
 
-    public FlowerCrawler(ServletContext context, String url) {
+    public FlowerCrawler(ServletContext context, String url, int pages) {
         this.context = context;
         this.url = url;
+        this.pages = pages;
         this.domain = XMLUtil.getDomainFromURL(url);
         this.subdomain = XMLUtil.getSubDomainFromURL(url);
+        while (subdomain.endsWith("/")) {
+            subdomain = subdomain.substring(0, subdomain.length() - 1);
+        }
+        this.prefix = "https://" + domain + "/";
+        this.dao = new PlantDAO();
+        dao.warming();
     }
     
     public String crawl() {
-        String prefix = "https://" + domain + "/";
+        ErrorHandler.log("==> Đang cào " + url);
+        if (pages > 1) {
+            message += "<b>Trang " + currentPage + "</b><br/>";
+        }
         switch (prefix) {
             case CAYVAHOA:
-                return crawlCayVaHoa(subdomain);
+                message += crawlCayVaHoa();
+                url = prefix + subdomain + "/page/" + (++currentPage);
+                break;
             case VUONCAYVIET:
-                return crawlVuonCayViet(subdomain);
+                message += crawlVuonCayViet();
+                currentPage++;
+                if (currentPage <= pages) {
+                    url = prefix + subdomain.substring(0, subdomain.length() - 5) + "-page-" + currentPage + ".html";
+                }
+                break;
             case WEBCAYCANH:
-                return crawlWebCayCanh(subdomain);
+                message += crawlWebCayCanh();
+                url = prefix + subdomain + "/page/" + (++currentPage);
+                break;
             default:
                 return "-1";
         }
+        if (currentPage <= pages) {
+            crawl();
+        } else {
+            message += "<i>Tổng số sản phẩm hiện có trong database: " + dao.count() + "</i>";
+        }
+        ErrorHandler.log("+++ Đã xong ");
+        return message;
     }
     
     public String getXSLPath(String filename) {
@@ -61,7 +89,7 @@ public class FlowerCrawler {
         return realPath + "/WEB-INF/xsd/" + filename;
     }
     
-    public String crawlCayVaHoa(String subdomain) {
+    public String crawlCayVaHoa() {
         String content = new RequestBuilder(url)
                 .go()
                 .match("<body[\\s\\S]*?>[\\s\\S]*?<\\/body>")
@@ -76,7 +104,7 @@ public class FlowerCrawler {
         return process(content);
     }
     
-    public String crawlVuonCayViet(String subdomain) {
+    public String crawlVuonCayViet() {
         String content = new RequestBuilder(url)
                 .go()
                 .match("<body[\\s\\S]*?>[\\s\\S]*?<\\/body>")
@@ -96,7 +124,7 @@ public class FlowerCrawler {
         return process(content);
     }
     
-    public String crawlWebCayCanh(String subdomain) {
+    public String crawlWebCayCanh() {
         String content = new RequestBuilder(url)
                 .go()
                 .match("<body[\\s\\S]*?>[\\s\\S]*?<\\/body>")

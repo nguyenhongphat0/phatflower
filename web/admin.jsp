@@ -126,6 +126,7 @@
                     <h2>Nhập đường dẫn để cào</h2>
                     <form name="crawl">
                         <input type="text" name="url" placeholder="https://cayvahoa.net/hoa-chau"/>
+                        <input type="number" name="pages" placeholder="Số trang tối đa, mặc định: 1"/>
                         <button class="wave" type="submit" value="crawl" name="action">Cào ngay</button>
                     </form>
                     <p>
@@ -163,7 +164,6 @@
                 </div>
                 <div id="logs">
                     <h1>NHẬT KÝ HỆ THỐNG</h1>
-                    <button class="wave" onclick="fetchLogs()">Làm mới</button>
                     <button class="wave" onclick="cleanLogs()">Dọn dẹp log</button>
                     <pre id="logs-container"></pre>
                 </div>
@@ -199,12 +199,13 @@
                 request({
                     action: 'admin',
                     task: 'crawl',
-                    url: document.forms.crawl.url.value
+                    url: document.forms.crawl.url.value,
+                    pages: document.forms.crawl.pages.value
                 }, function(res) {
                     var res = res.responseText;
                     switch (res) {
                         case '-2':
-                            result.innerHTML = 'Đường dẫn không hợp lệ, vui lòng kiểm tra lại!';
+                            result.innerHTML = 'Đường dẫn hoặc số trang không hợp lệ, vui lòng kiểm tra lại!';
                             break;
                         case '-1':
                             result.innerHTML = 'Đường dẫn phải thuộc 1 trong 3 trang "cayvahoa.net", "vuoncayviet.com" hoặc "webcaycanh.com"̣, vui lòng kiểm tra lại!';
@@ -280,12 +281,12 @@
             }
             function fetchLogs() {
                 var container = document.getElementById('logs-container');
-                container.innerHTML = "Đang tải nhật ký hệ thống";
                 request({
                     action: 'admin',
                     task: 'logs'
                 }, function(res) {
                     container.innerHTML = res.responseText;
+                    setTimeout(fetchLogs, 2000);
                 });
             }
             function cleanLogs() {
