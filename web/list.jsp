@@ -22,6 +22,14 @@
             </p>
             <div class="hr"></div>
             <p>
+                <h5>Giá tối đa</h5>
+                <div>
+                    <input id="price-range" type="range" name="price" min="1000" max="1000000" value="1000000" style="width: 100%" onchange="priceChange(this)" oninput="updateMaxPrice(this)">
+                    <div id="price-range-viewer">Không giới hạn</div>
+                </div>
+            </p>
+            <div class="hr"></div>
+            <p>
                 <h5>Trang gốc</h5>
                 <div>
                     <c:forEach items="cayvahoa.net,vuoncayviet.com,webcaycanh.com" var="domain" varStatus="counter">
@@ -61,7 +69,7 @@
             <h5 id="summary-description"></h5>
             <div id="products-container" class="grid">
                 <c:forEach items="${dao.plantList}" var="item">
-                    <div id="product-${item.id}" class="a-product m-5 d-2">
+                    <div id="product-${item.id}" class="a-product m-5 d-2" data-price="${item.price}" data-name="${item.name}" data-domain="${dao.getDomain(item)}">
                         <div class="overlay">
                             <div class="center">
                                 <a class="wave" onclick="quickview(${item.id})">Xem nhanh</a>
@@ -124,12 +132,28 @@
     filter = {
         categories: [],
         domains: [],
-        keyword: ''
+        keyword: '',
+        maxPrice: 1000000
     };
     summary = {
         title: document.getElementById('summary-title'),
         description: document.getElementById('summary-description')
     };
+    function updateMaxPrice(that) {
+        var price = Number(that.value);
+        var viewer = document.getElementById('price-range-viewer');
+        if (price === 1000000) {
+            viewer.innerHTML = 'Không giới hạn';
+            filter.maxPrice = 999999999999;
+        } else {
+            viewer.innerHTML = formatPrice(price) + ' vnđ';
+            filter.maxPrice = price;
+        }
+    }
+    function priceChange(that) {
+        updateMaxPrice(that);
+        filterAll();
+    }
     function addKeywordToFilter() {
         var keyword = document.getElementById('keyword').value;
         filter.keyword = keyword.trim();
@@ -175,7 +199,7 @@
         var length = products.length;
         for (var i = 0; i < length; i++) {
             var product = products[i];
-            var name = product.getElementsByClassName('name')[0].innerHTML.toLowerCase();
+            var name = product.dataset.name.toLowerCase();
             var check = false;
             for (var j = 0; j < filter.categories.length; j++) {
                 var category = filter.categories[j];
@@ -196,7 +220,7 @@
         var length = products.length;
         for (var i = 0; i < length; i++) {
             var product = products[i];
-            var domain = product.getElementsByClassName('domain')[0].innerHTML.toLowerCase();
+            var domain = product.dataset.domain.toLowerCase();
             var check = false;
             for (var j = 0; j < filter.domains.length; j++) {
                 var d = filter.domains[j];
@@ -214,13 +238,25 @@
         var length = products.length;
         for (var i = 0; i < length; i++) {
             var product = products[i];
-            var name = product.getElementsByClassName('name')[0].innerHTML.toLowerCase();
+            var name = product.dataset.name.toLowerCase();
             if (name.indexOf(filter.keyword) === -1) {
                 hide(product);
             }
         }
     }
+    function filterByPrice() {
+        var products = document.querySelectorAll('.a-product');
+        var length = products.length;
+        for (var i = 0; i < length; i++) {
+            var product = products[i];
+            var price = Number(product.dataset.price);
+            if (price > filter.maxPrice) {
+                hide(product);
+            }
+        }
+    }
     function fetchMore() {
+        summary.description.innerHTML = 'Đang tải thêm sản phẩm...';
         var container = document.getElementById('products-container');
         container.innerHTML = '';
         request({
@@ -232,12 +268,10 @@
                 var plant = plants[i];
                 container.innerHTML += plant2HTML(plant);
             }
-            filterByCategory();
-            filterByDomain();
-            countProducts(false);
+            filterAll(true);
         });
     }
-    function countProducts(fetchMoreIfNone) {
+    function countProducts() {
         var count = 0;
         var ids = [];
         var products = document.querySelectorAll('.a-product');
@@ -254,29 +288,30 @@
             summary.description.innerHTML = 'Có ' + count + ' sản phẩm phù hợp';
             document.getElementById('export-ids').value = ids.join(',');
         } else {
-            if (fetchMoreIfNone) {
-                summary.description.innerHTML = 'Đang tải thêm sản phẩm...';
-                fetchMore();
-            } else {
-                summary.description.innerHTML = 'Không tìm thấy sản phẩm nào.';
-            }
+            summary.description.innerHTML = 'Không tìm thấy sản phẩm nào.';
         }
+        return count;
     }
-    function filterAll() {
+    function filterAll(finish) {
         summary.title.innerHTML = 'Kết quả tìm kiếm';
         showAll();
         filterByCategory();
         filterByDomain();
         filterByKeyword();
-        countProducts(true);
-        paginate(1);
+        filterByPrice();
+        var count = countProducts();
+        if (count === 0 && !finish) {
+            fetchMore();
+        } else {
+            paginate(1);
+        }
     }
-    countProducts(true);
+    countProducts();
     pagination = {
         limit: 10,
         page: 1,
         count: 0
-    }
+    };
     function changeLimit(that) {
         pagination.limit = that.value;
         paginate(1);

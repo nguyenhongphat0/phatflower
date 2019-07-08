@@ -26,7 +26,7 @@ function querialize(params) {
 }
 
 function formatPrice(price) {
-    return price.match(/.{1,3}/g).join(',');
+    return (price + '').split('').reverse().join('').match(/.{1,3}/g).reverse().map(function(s) { return s.split('').reverse().join(''); }).join(',');
 }
 
 function getDomain(url) {
@@ -46,5 +46,5 @@ function plant2HTML(plant, noquickview) {
     if (!noquickview) {
         quickview = '<a href="#" class="wave" onclick="quickview(' + id + ')">Xem nhanh</a><div class="d-pb-2"></div>';
     }
-    return '<div id="product-'+ id +'" class="a-product m-5 d-2"><div class="overlay"><div class="center">' + quickview + '<a href="FrontController?action=detail&id=' + id + '" class="wave">So sánh giá</a><div class="d-pb-2"></div><a target="_blank" href="' + link + '" class="wave">Đến trang gốc</a></div></div><div class="preview"><img src="' + image + '" alt="' + name + '"></div><div class="meta"><h4 class="name">' + name + '</h4><span class="price">' + formatPrice(price) + ' vnđ</span><br/><small class="domain handwriting">' + getDomain(link) + '</small></div></div>';
+    return '<div id="product-'+ id +'" class="a-product m-5 d-2" data-price="' + price + '" data-name="' + name + '" data-domain="' + getDomain(link) + '"><div class="overlay"><div class="center">' + quickview + '<a href="FrontController?action=detail&id=' + id + '" class="wave">So sánh giá</a><div class="d-pb-2"></div><a target="_blank" href="' + link + '" class="wave">Đến trang gốc</a></div></div><div class="preview"><img src="' + image + '" alt="' + name + '"></div><div class="meta"><h4 class="name">' + name + '</h4><span class="price">' + formatPrice(price) + ' vnđ</span><br/><small class="domain handwriting">' + getDomain(link) + '</small></div></div>';
 }
