@@ -74,7 +74,7 @@
                     <a onclick="show('analytics'); analizeAll();" class="wave">Tổng quan</a>
                     <a onclick="show('crawl')" class="wave">Cào sản phẩm</a>
                     <a onclick="show('categorize'); fetchCategories();" class="wave">Phân loại sản phẩm</a>
-                    <a onclick="show('logs'); fetchLogs()" class="wave">Nhật ký hệ thống</a>
+                    <a onclick="show('logs');" class="wave">Nhật ký hệ thống</a>
                     <a class="wave logout" href="index.jsp">&lt; Đăng xuất</a>
                 </div>
             </div>
@@ -124,9 +124,13 @@
                 <div id="crawl">
                     <h1>Cào sản phẩm</h1>
                     <h2>Nhập đường dẫn để cào</h2>
+                    <div class="checkbox">
+                        <input id="multipage-crawling" type="checkbox" onclick="toggleMultipageCrawling(this)">
+                        <label for="multipage-crawling">Cào nhiều trang</label>
+                    </div>
                     <form name="crawl">
                         <input type="text" name="url" placeholder="https://cayvahoa.net/hoa-chau"/>
-                        <input type="number" name="pages" placeholder="Số trang tối đa, mặc định: 1"/>
+                        <input class="hidden" type="number" name="pages" placeholder="Số trang tối đa, mặc định: 1"/>
                         <button class="wave" type="submit" value="crawl" name="action">Cào ngay</button>
                     </form>
                     <p>
@@ -192,8 +196,17 @@
                     notification.classList.add('hidden');
                 }, timeout);
             }
+            function toggleMultipageCrawling(that) {
+                if (that.checked) {
+                    document.forms.crawl.querySelector('input[name="pages"]').classList.remove('hidden');
+                } else {
+                    document.forms.crawl.querySelector('input[name="pages"]').classList.add('hidden');
+                    document.forms.crawl.querySelector('input[name="pages"]').value = '';
+                }
+            }
             document.forms.crawl.addEventListener('submit', crawl);
             function crawl(e) {
+                var startTime = performance.now();
                 var result = document.querySelector('#crawl .result');
                 result.innerHTML = "<i>Đang cào sản phẩm...</i>";
                 request({
@@ -214,6 +227,8 @@
                             result.innerHTML = 'Rất tiếc, không cào được sản phẩm nào. Thử lại với trang nào nhiều sản phẩm hơn thử xem!';
                             break;
                         default:
+                            var stopTime = performance.now();
+                            popup('Đã cào xong, thời gian cào: ' + (Math.round((stopTime - startTime)*100/1000)/100) + 's', 2000)
                             result.innerHTML = res + "<div class='d-pt-4'></div><a class='wave' href='FrontController?action=list&hot=true' target='_blank'>Xem các sản phẩm đã cào được</a>";
                             break;
                     }
@@ -235,6 +250,7 @@
                 }, function(res) {
                     result.innerHTML = res.responseText;
                     fetchCategories();
+                    popup(res.responseText, 2000);
                 });
             }
             function updateCategory(that) {
@@ -286,9 +302,9 @@
                     task: 'logs'
                 }, function(res) {
                     container.innerHTML = res.responseText;
-                    setTimeout(fetchLogs, 2000);
                 });
             }
+            setInterval(fetchLogs, 2000);
             function cleanLogs() {
                 request({
                     action: 'admin',
@@ -337,6 +353,7 @@
                     drawLineChart(res, 'daily-view-canvas');
                 });
             }
+            looped = false;
             function analizeRealTimeViews() {
                 request({
                     action: 'admin',
@@ -344,7 +361,10 @@
                 }, function(res) {
                     drawLineChart(res, 'real-time-view-canvas');
                 });
-                setTimeout(analizeRealTimeViews, 1000);
+                if (!looped) {
+                    setInterval(analizeRealTimeViews, 1000);
+                    looped = true;
+                }
             }
             function analizeAll() {
                 analizeRealTimeViews();
