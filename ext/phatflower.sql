@@ -1,7 +1,6 @@
-drop table if exists analytics;
-drop table if exists product_contents;
-drop table if exists products;
-drop table if exists categories;
+drop database if exists phatflower;
+create database phatflower;
+use phatflower;
 create table products (
     id int not null auto_increment,
     name varchar(500),
